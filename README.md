@@ -1,5 +1,3 @@
-# Hackathon Project | Student Performance Hub
-
 The Student Performance Hub 📁 is a comprehensive platform designed to empower students, teachers, and parents by providing tools for academic performance tracking, health management, e-commerce for school supplies, and AI-powered assistance. The platform fosters holistic development by integrating real-time insights, personalized recommendations, and user-friendly tools for everyday needs. 🚀
 
 ## 🚀 Tech Stack
@@ -130,3 +128,5 @@ To run this project:
 - [Daisy/ui](https://daisyui.com/) for beautiful, accessible components
 
 ## 🤝
+
+=======
