@@ -5,13 +5,13 @@ import {
   BookOpen,
   Bot,
   Command,
-  Frame,
-  Map,
-  PieChart,
+  Settings,
+  Bell,
   SquareLibrary,
   SquareTerminal,
   ShoppingBag,
   Stethoscope,
+  MessageSquareText,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -26,6 +26,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 
 const data = {
   user: {
@@ -67,19 +68,19 @@ const data = {
   ],
   projects: [
     {
-      name: "Design Engineering",
+      name: "Messages",
       url: "#",
-      icon: Frame,
+      icon: MessageSquareText,
     },
     {
-      name: "Sales & Marketing",
+      name: "Notifications",
       url: "#",
-      icon: PieChart,
+      icon: Bell,
     },
     {
-      name: "Travel",
+      name: "Setting",
       url: "#",
-      icon: Map,
+      icon: Settings,
     },
   ],
 };
@@ -91,15 +92,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
+              <Link href="/">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary_Clr text-sidebar-primary-foreground ">
+                  <Command className="size-4 " />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Acme Inc</span>
-                  <span className="truncate text-xs">Enterprise</span>
+                  <span className="truncate font-semibold">
+                    Student Performance Hub
+                  </span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
