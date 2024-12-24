@@ -2,6 +2,13 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
 import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
@@ -12,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Bell, Search } from "lucide-react";
 import { ModeToggle } from "@/context/ ModeToggle";
 import { ThemeProvider } from "@/context/theme-provider";
+import { Button } from "@/components/ui/button";
 
 export const metadata = {
   title: "Student Performance Hub Dashboard",
@@ -45,7 +53,7 @@ export default function RootLayout({
                       <Input placeholder="Search" className="" />
                     </BreadcrumbItem>
                     <BreadcrumbItem className="space-x-4 flex items-center">
-                      <Search className="cursor-pointer md:hidden block" />
+                      <SearchIcon />
                       <Bell className="cursor-pointer" />
                       <ModeToggle />
                     </BreadcrumbItem>
@@ -61,3 +69,26 @@ export default function RootLayout({
     </html>
   );
 }
+
+const SearchIcon = () => {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Search className="cursor-pointer md:hidden block" />
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <div className="w-full mt-8">
+          <Input
+            id="username"
+            type="text"
+            placeholder="Search"
+            className="w-full"
+          />
+        </div>
+        <DialogFooter>
+          <Button type="submit">Search</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
