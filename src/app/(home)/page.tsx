@@ -1,9 +1,7 @@
-import React from "react";
-
 const Home = () => {
   return (
     <>
-      <section></section>
+      <section>Home Page</section>
     </>
   );
 };
