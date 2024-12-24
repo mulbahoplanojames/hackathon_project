@@ -4,7 +4,7 @@ import Link from "next/link";
 const SignUp = () => {
   return (
     <>
-      <section className="px-12 w-full py-20">
+      <section className="">
         <Link href="/">
           <Button>Back Home</Button>
         </Link>

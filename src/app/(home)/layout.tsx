@@ -3,6 +3,7 @@ import "../globals.css";
 import { Roboto } from "next/font/google";
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
+import { ThemeProvider } from "@/context/theme-provider";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -27,9 +28,16 @@ export default function RootLayout({
       <body
         className={`${roboto.className} antialiased flex flex-col min-h-screen`}
       >
-        <Navbar />
-        <main className="flex-1 py-24 ">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main className="flex-1 py-24 ">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

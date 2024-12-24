@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/context/theme-provider";
 import "../globals.css";
 
 export const metadata = {
@@ -12,7 +13,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="min-h-screen flex justify-center items-center w-full py-6">
+            {children}
+          </main>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

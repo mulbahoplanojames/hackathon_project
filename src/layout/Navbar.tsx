@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { navLinks } from "@/constant/navData";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/context/ ModeToggle";
 
 const Navbar = () => {
   // State variable to keep track of whether the menu is open or not.
@@ -38,13 +39,16 @@ const Navbar = () => {
 
           <div className="lg:gap-x-6 gap-x-4 flex items-center justify-center">
             <Link href="/login">
-              <Button className="bg-transparent text-white border hover:bg-primary_Clr hover:opacity-80 md:block hidden">
+              <Button className="bg-transparent text-white border dark:border-white hover:bg-primary_Clr hover:opacity-80 md:block hidden">
                 Login
               </Button>
             </Link>
             <Link href="/signup">
-              <Button className="md:block hidden">Create Account</Button>
+              <Button className="md:block hidden bg-white text-text_light">
+                Create Account
+              </Button>
             </Link>
+            <ModeToggle />
             <TbMenu2
               className={`max-lg:block hidden text-3xl cursor-pointer `}
               onClick={() => {
