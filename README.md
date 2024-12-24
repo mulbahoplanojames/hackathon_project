@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hackathon Project | Student Performance Hub
 
-## Getting Started
+The Student Performance Hub 📁 is a comprehensive platform designed to empower students, teachers, and parents by providing tools for academic performance tracking, health management, e-commerce for school supplies, and AI-powered assistance. The platform fosters holistic development by integrating real-time insights, personalized recommendations, and user-friendly tools for everyday needs. 🚀
 
-First, run the development server:
+## 🚀 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework:** [Next.js](https://nextjs.org/) with [React](https://reactjs.org/)
+
+- **Styling:**
+
+  - [Tailwind CSS](https://tailwindcss.com/) for utility-first styling
+  - [shadcn/ui](https://ui.shadcn.com/) for beautiful, accessible components
+  - [Aceternity/ui](https://ui.aceternity.com/) for beautiful, accessible components
+  - [Daisy/ui](https://daisyui.com/) for beautiful, accessible components
+
+- **Additional Technologies:**
+  - JavaScript/TypeScript
+  - Various NPM packages and integrations
+
+## 📁 Repository Structure
+
+This repository is organized to maintain the entire project structure, each demonstrating different asspects of the project.
+
+```
+hackathon_project/
+├── (student)/
+│   ├── dashboard
+│   ├── assignments
+│   ├── study-with-chat
+│   ├── market-palce
+│   ├── view-courses
+│   └── book-doctor
+├── (teacher)/
+│   ├── teacher-dashboard
+│   ├── add-assignments
+│   ├── view-assignments
+│
+├── auth/
+│   ├── login
+│   ├── register
+│   ├── forgot-password
+│   └── authHelpers.js
+├── api/
+│   ├── auth
+│   ├── student
+│   ├── teacher
+│   ├── doctor
+│   └── assignments
+├── components/
+│   ├── Button.js
+│   └──
+├── layout/
+│   ├── navbar
+│   ├── footer
+│   └──
+├── lib/
+│   ├──
+│   └──
+├── utils/
+│   ├──
+│   └──
+├── data/
+│   ├── studentData
+│   ├── teacherData
+│   ├── assignmentData
+│   ├── marketplaceData
+│   ├── coursesData
+│   └── doctorData
+├── constants/
+│   ├──
+│   └──
+├── hooks/
+│   ├──
+│   └──
+├── context/
+│   ├── ThemeContext.js
+│   └──
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run this project:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Navigate to the project directory
 
-## Learn More
+   ```bash
+   cd project-name
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   pnpm install
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Run the development server
 
-## Deploy on Vercel
+   ```bash
+   pnpm dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌟 Features
+
+- **Dashboard:** Interactive UI for students and teachers
+- **AI Helper Interface:** Intuitive and conversational.
+- **Doctor Booking**:
+  - API for scheduling and managing appointments.
+  - Integration with Twilio and Google Calendar.
+- **Marketplace**:
+  - Product management APIs for listings, orders, and transactions.
+  - Payment gateway integration (Stripe/PayPal).
+- **Forms:** Secure and user-friendly forms for booking, shopping, and assignment submissions.
+- Modern and responsive designs
+- Best practices implementation
+- Performance optimized
+- SEO friendly
+- Accessible components using shadcn/ui
+- Clean and maintainable code structure
+
+## 📚 Learning Resources
+
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://reactjs.org/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [shadcn/ui Documentation](https://ui.shadcn.com/)
+- [Aceternity/ui](https://ui.aceternity.com/) for beautiful, accessible components
+- [Daisy/ui](https://daisyui.com/) for beautiful, accessible components
+
+## 🤝
