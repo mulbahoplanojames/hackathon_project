@@ -6,7 +6,7 @@ import Link from "next/link";
 const OurVision = () => {
   return (
     <>
-      <section className="md:px-20 px-4 md:py-12 py-4 grid md:grid-cols-2 grid-cols-1 gap-10 place-items-center">
+      <section className="md:px-20 px-4 md:py-16 py-4 grid md:grid-cols-2 grid-cols-1 gap-10 place-items-center">
         <div className="p-2 w-full">
           <h1 className="md:text-5xl text-4xl font-semibold pb-6 ">
             Our Vision
