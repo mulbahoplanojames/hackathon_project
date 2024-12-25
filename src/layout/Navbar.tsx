@@ -8,44 +8,54 @@ import Link from "next/link";
 import { navLinks } from "@/constant/navData";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/context/ ModeToggle";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   // State variable to keep track of whether the menu is open or not.
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const pathName = usePathname();
+
   return (
     <>
-      <nav className=" flex justify-between items-center py-4 md:px-10 px-4 fixed z-50 w-full top-0 bg-gradient-to-r from-slate-800 via-primary_Clr to-primary_Clr text-white">
+      <nav className=" flex justify-between items-center py-4 md:px-10 px-4 fixed z-50 w-full top-0 backdrop-blur-[18px] backdrop-saturate-[162%] bg-transparent border-b-2 border-primary_Clr dark:border-white">
         <Link
           href="/"
-          className="text-2xl font-bold flex justify-center items-center gap-2  md:w-12 md:h-12 w-10 h-10 rounded-md relative bg-red-500"
+          className="text-2xl font-bold flex justify-center items-center gap-2  md:w-10 md:h-10 w-10 h-10 rounded-md relative bg-red-500"
         >
           <Image src="" alt="logo" className="" fill />
         </Link>
         {/*//! Menu items for larger devices and mapping through the links */}
         <menu className="flex items-center justify-center gap-x-6">
           <ul className="max-lg:hidden">
-            {navLinks.map((navlink) => (
-              <li key={navlink.label} className="inline-block px-8">
-                <Link
-                  href={navlink.path}
-                  className="font-montserrat text-base leading-normal cursor-pointer"
-                >
-                  {navlink.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((navlink) => {
+              const isActive = pathName === navlink.path;
+              return (
+                <li key={navlink.label} className="inline-block px-8">
+                  <Link
+                    href={navlink.path}
+                    className={`font-montserrat text-lg leading-normal  ${
+                      isActive
+                        ? "text-primary_Clr border-b-2 border-primary_Clr"
+                        : ""
+                    }`}
+                  >
+                    {navlink.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </menu>
 
         <div className="lg:gap-x-6 gap-x-4 flex items-center justify-center">
           <Link href="/login">
-            <Button className="bg-transparent text-white border dark:border-white hover:bg-primary_Clr hover:opacity-80 md:block hidden">
+            <Button className="dark:bg-transparent bg-white dark:text-white text-primary_Clr hover:bg-white border dark:border-white border-transparent  hover:opacity-80 md:block hidden">
               Login
             </Button>
           </Link>
           <Link href="/signup">
-            <Button className="md:block hidden bg-white text-text_light">
+            <Button className="md:block hidden bg-white text-primary_Clr hover:opacity-85 hover:bg-white">
               Create Account
             </Button>
           </Link>

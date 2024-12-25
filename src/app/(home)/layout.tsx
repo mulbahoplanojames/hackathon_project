@@ -37,7 +37,7 @@ export default function RootLayout({
         >
           <ScrollProgress />
           <Navbar />
-          <main className="flex-1 py-24 ">{children}</main>
+          <main className="flex-1 w-full">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
