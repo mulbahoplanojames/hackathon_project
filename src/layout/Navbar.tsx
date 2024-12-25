@@ -21,7 +21,7 @@ const Navbar = () => {
       <nav className=" flex justify-between items-center py-4 md:px-10 px-4 fixed z-50 w-full top-0 backdrop-blur-[18px] backdrop-saturate-[162%] bg-transparent border-b-2 border-primary_Clr dark:border-white">
         <Link
           href="/"
-          className="text-2xl font-bold flex justify-center items-center gap-2  md:w-10 md:h-10 w-10 h-10 rounded-md relative bg-red-500"
+          className="text-2xl font-bold flex justify-center items-center gap-2  md:w-10 md:h-10 w-10 h-10 rounded-md relative bg-green-300"
         >
           <Image src="" alt="logo" className="" fill />
         </Link>
