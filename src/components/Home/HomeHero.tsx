@@ -23,8 +23,20 @@ const HomeHero = () => {
             Get Started Now
           </Button>
         </div>
-        <div className="w-full md:w-[90%] bg-yellow- relative  md:h-[380px] h-[300px] rounded-md overflow-hidden">
-          <Image src="/homehero1.png" alt="hero image" fill />
+        <div className="w-full md:w-[90%] bg-yellow- relative md:h-[380px] h-[300px] rounded-md overflow-hidden">
+          {/* Image for larger and medium screens */}
+          <div className="hidden md:block relative w-full h-full">
+            <Image
+              src="/homehero1.png"
+              alt="hero image for large screens"
+              fill
+            />
+          </div>
+
+          {/* Image for smaller screens */}
+          <div className="block md:hidden relative w-full h-full">
+            <Image src="/hero1.png" alt="hero image for small screens" fill />
+          </div>
         </div>
       </div>
     </>
