@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
 import { ThemeProvider } from "@/context/theme-provider";
+import ScrollProgress from "@/components/ui/scroll-progress";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -34,6 +35,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ScrollProgress />
           <Navbar />
           <main className="flex-1 py-24 ">{children}</main>
           <Footer />

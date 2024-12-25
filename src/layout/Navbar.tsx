@@ -23,7 +23,7 @@ const Navbar = () => {
           <Image src="" alt="logo" className="" fill />
         </Link>
         {/*//! Menu items for larger devices and mapping through the links */}
-        <menu className="flex items-center gap-x-6">
+        <menu className="flex items-center justify-center gap-x-6">
           <ul className="max-lg:hidden">
             {navLinks.map((navlink) => (
               <li key={navlink.label} className="inline-block px-8">
@@ -36,27 +36,27 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
-
-          <div className="lg:gap-x-6 gap-x-4 flex items-center justify-center">
-            <Link href="/login">
-              <Button className="bg-transparent text-white border dark:border-white hover:bg-primary_Clr hover:opacity-80 md:block hidden">
-                Login
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button className="md:block hidden bg-white text-text_light">
-                Create Account
-              </Button>
-            </Link>
-            <ModeToggle />
-            <TbMenu2
-              className={`max-lg:block hidden text-3xl cursor-pointer `}
-              onClick={() => {
-                setIsMenuOpen(!isMenuOpen);
-              }}
-            />
-          </div>
         </menu>
+
+        <div className="lg:gap-x-6 gap-x-4 flex items-center justify-center">
+          <Link href="/login">
+            <Button className="bg-transparent text-white border dark:border-white hover:bg-primary_Clr hover:opacity-80 md:block hidden">
+              Login
+            </Button>
+          </Link>
+          <Link href="/signup">
+            <Button className="md:block hidden bg-white text-text_light">
+              Create Account
+            </Button>
+          </Link>
+          <ModeToggle />
+          <TbMenu2
+            className={`max-lg:block hidden text-3xl cursor-pointer `}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          />
+        </div>
       </nav>
 
       {/*//! Responsive menu for smaller devices */}
