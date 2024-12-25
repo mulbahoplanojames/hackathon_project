@@ -1,12 +1,12 @@
-import { LucideIcon } from "lucide-react";
-
 export type NavLinksType = {
   label: string;
   path: string;
 };
 
-export type NavItem = {
+export type HowItWorksType = {
+  id: number;
+  step: string;
   title: string;
-  url: string;
-  icon: LucideIcon;
+  image: string;
+  description: string;
 };
