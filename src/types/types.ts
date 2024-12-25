@@ -19,3 +19,10 @@ export type KeyFeaturesType = {
   title: string;
   description: string;
 };
+
+export type ReviewType = {
+  img: string;
+  name: string;
+  username: string;
+  body: string;
+};

@@ -7,7 +7,7 @@ import { keyFeaturesData } from "@/constant/constants";
 const KeyFeatures = () => {
   return (
     <>
-      <section className="md:px-20 px-4 md:pb-32 pt-4 py-4">
+      <section className="md:px-20 px-4 md:pb-16 pt-4 py-4">
         <Text />
         <h1 className="lg:text-5xl text-4xl pb-5 font-semibold">
           Interactive Dashboard

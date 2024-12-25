@@ -6,7 +6,7 @@ import Image from "next/image";
 const HowItWorks = () => {
   return (
     <>
-      <section className="md:px-20 px-4 md:pb-32 pt-12 py-4">
+      <section className="md:px-20 px-4 md:pb-28 pb-16 pt-12 py-4">
         <h1 className="md:text-5xl text-4xl font-semibold pb-4 text-center">
           How it works
         </h1>
