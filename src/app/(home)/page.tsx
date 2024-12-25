@@ -1,5 +1,6 @@
 import HomeHero from "@/components/Home/HomeHero";
 import HowItWorks from "@/components/Home/HowItWorks";
+import KeyFeatures from "@/components/Home/KeyFeatures";
 import OurVision from "@/components/Home/OurVision";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
         <HomeHero />
         <OurVision />
         <HowItWorks />
+        <KeyFeatures />
       </section>
     </>
   );
