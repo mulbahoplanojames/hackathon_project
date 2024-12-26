@@ -25,7 +25,7 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/teacer-dashboard",
+      url: "/teacher-dashboard",
       icon: SquareTerminal,
     },
     {
