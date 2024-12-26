@@ -25,3 +25,9 @@ export const signupSchema = z.object({
     .string()
     .min(6, { message: "Password must be at least 6 characters long" }),
 });
+
+export const createGroupSchema = z.object({
+  name: z.string().nonempty("Name is required"),
+  description: z.string().nonempty("Description is required"),
+  image: z.string().optional(),
+});

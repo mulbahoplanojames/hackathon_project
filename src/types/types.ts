@@ -46,3 +46,9 @@ export type TeacherDataTypes = {
   module: string;
   rating: string;
 };
+
+export type GroupCardType = {
+  name: string;
+  description: string;
+  image?: string;
+};
