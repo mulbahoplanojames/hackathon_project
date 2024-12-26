@@ -9,11 +9,14 @@ const DashboardHeader = ({ text }: { text: string }) => {
         <div className="bg-neutral-100 md:py-3 md:px-5 flex items-center justify-center gap-2 px-3 py-2 rounded-full shadow-lg">
           <House className="text-gray-400" />
 
-          <a href="" className="hover:text-blue-500 text-base text-gray-400">
+          <a
+            href="/dashboard"
+            className="hover:text-blue-500 text-base text-gray-400"
+          >
             Home
           </a>
           <ChevronRight className="text-gray-400" />
-          <span className="text-base text-black">Dashboard</span>
+          <span className="text-base text-black">{text}</span>
         </div>
       </section>
     </>

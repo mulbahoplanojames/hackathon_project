@@ -38,7 +38,7 @@ export function NavMain({
                   tooltip={item.title}
                   className={`${
                     isActive ? "bg-primary_Clr text-white" : ""
-                  } hover:bg-primary_Clr hover:text-white`}
+                  } hover:bg-[#059678] hover:text-white`}
                 >
                   <Link href={item.url}>
                     <item.icon />
