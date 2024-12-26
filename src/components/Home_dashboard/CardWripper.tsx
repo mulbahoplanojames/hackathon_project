@@ -1,4 +1,4 @@
-import { dashBoardData } from "@/constant/dashBoardData";
+import { dashBoardData } from "@/constant/dashboard-home/dashBoardData";
 import { Card, CardContent } from "../ui/card";
 import NumberTicker from "../ui/number-ticker";
 

@@ -37,3 +37,12 @@ export type DashBoardDataType = {
   bgColor?: string;
   attr?: string;
 };
+
+export type TeacherDataTypes = {
+  id: number;
+  name: string;
+  department: string;
+  email: string;
+  module: string;
+  rating: string;
+};

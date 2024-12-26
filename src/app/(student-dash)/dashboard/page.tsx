@@ -2,6 +2,7 @@ import DashboardHeader from "@/components/dashboard-header";
 import CardsWripper from "@/components/Home_dashboard/CardWripper";
 import { ChartBar1 } from "@/components/Home_dashboard/charts/bar-chart-1";
 import { ChartBar2 } from "@/components/Home_dashboard/charts/bar-chart-2";
+import TeacherTable from "@/components/Home_dashboard/teacher-table";
 
 export default function Page() {
   return (
@@ -18,6 +19,7 @@ export default function Page() {
           <ChartBar1 text="This week performance" />
           <ChartBar2 text="Statistics" />
         </div>
+        <TeacherTable />
       </section>
     </>
   );

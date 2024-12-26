@@ -1,0 +1,77 @@
+import { TeacherDataTypes } from "@/types/types";
+
+export const teachersData: TeacherDataTypes[] = [
+  {
+    id: 1,
+    name: "John Doe",
+    department: "Software Engineering",
+    email: "xyz@email.com",
+    module: "Introduction to Python",
+    rating: "4.5",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    department: "Networking",
+    email: "jane@email.com",
+    module: "Cyber Security",
+    rating: "4.2",
+  },
+  {
+    id: 3,
+    name: "Alice Johnson",
+    department: "Data Science",
+    email: "alice@email.com",
+    module: "Calculus 2",
+    rating: "4.7",
+  },
+  {
+    id: 4,
+    name: "David Brown",
+    department: "International Relations",
+    email: "david@email.com",
+    module: "Introduction to Civil Conflit",
+    rating: "5.0",
+  },
+  {
+    id: 5,
+    name: "Emily Wilson",
+    department: "Law",
+    email: "emily@email.com",
+    module: "Criminal Law",
+    rating: "4.3",
+  },
+  {
+    id: 6,
+    name: "Michael Lee",
+    department: "Finance",
+    email: "michael@email.com",
+    module: "Investment Banking",
+    rating: "4.8",
+  },
+  {
+    id: 7,
+    name: "Emily Wilson",
+    department: "Economics",
+    email: "emily@email.com",
+    module: "Economic Development",
+    rating: "4.3",
+  },
+  {
+    id: 8,
+    name: "Alice Johnson",
+    department: "Civil Engineering",
+    email: "alice@email.com",
+    module: "Structural Engineering",
+    rating: "4.7",
+  },
+  {
+    id: 9,
+
+    name: "Jane Smith",
+    department: "Business Administration",
+    email: "jane@email.com",
+    module: "Introduction to Business",
+    rating: "4.2",
+  },
+];
