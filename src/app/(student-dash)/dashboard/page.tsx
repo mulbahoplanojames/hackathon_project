@@ -1,5 +1,7 @@
 import DashboardHeader from "@/components/dashboard-header";
 import CardsWripper from "@/components/Home_dashboard/CardWripper";
+import { ChartBar1 } from "@/components/Home_dashboard/charts/bar-chart-1";
+import { ChartBar2 } from "@/components/Home_dashboard/charts/bar-chart-2";
 
 export default function Page() {
   return (
@@ -11,17 +13,12 @@ export default function Page() {
           Your progress this week is Awesome. let&apos;s keep it up and get a
           lot of points reward !
         </p>
-
         <CardsWripper />
-      </section>
-      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-10 mt-12 md:px-1">
+          <ChartBar1 text="This week performance" />
+          <ChartBar2 text="Statistics" />
         </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-      </div>
+      </section>
     </>
   );
 }

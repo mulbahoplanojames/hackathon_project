@@ -15,13 +15,13 @@ const CardsWripper = () => {
             <CardContent className="py-3">
               <div className="flex gap-3  flex-col">
                 <div
-                  className="md:w-14 md:h-14 w-16 h-10 rounded-xl  text-white flex justify-center items-center"
+                  className="md:w-14 md:h-14 w-12 h-10 rounded-xl  text-white flex justify-center items-center"
                   style={{ background: `${item.bgColor}` }}
                 >
-                  <item.icon className="size-8" />
+                  <item.icon className="md:size-8 size-6" />
                 </div>
                 <div className="">
-                  <p className="whitespace-pre-wrap  font-bold tracking-tighter text-black dark:text-white text-2xl md:text-3xl pb-1 ">
+                  <p className="whitespace-pre-wrap  font-bold tracking-tighter text-black dark:text-white text-xl md:text-3xl pb-1 ">
                     <NumberTicker value={item.count} /> {item.attr}
                   </p>
                   <p className="md:text-xl text-base pb-1">{item.label}</p>
