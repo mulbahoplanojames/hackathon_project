@@ -47,7 +47,7 @@ const chartConfig = {
 
 export function ChartBar1({ text }: { text: string }) {
   return (
-    <Card className="border-0 ">
+    <Card className="border-0 dark:border dark:border-primary_Clr">
       <CardHeader className="flex flex-row items-center justify-between ">
         <CardTitle>{text}</CardTitle>
         <CardDescription>
