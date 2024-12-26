@@ -26,3 +26,14 @@ export type ReviewType = {
   username: string;
   body: string;
 };
+
+export type DashBoardDataType = {
+  id: number;
+  label: string;
+  icon: LucideIcon;
+  count: number;
+  percentage: string;
+  color: string;
+  bgColor?: string;
+  attr?: string;
+};
