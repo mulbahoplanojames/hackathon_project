@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { teachersData } from "@/constant/dashboard-home/teacherData";
+import { FolderUp } from "lucide-react";
 
 // Define the number of items per page if i forget in the future :)
 const ITEMS_PER_PAGE = 6;
@@ -45,6 +46,29 @@ const TeacherTable = () => {
     setCurrentPage(pageNumber);
   };
 
+  // Converting table to csv and exporting it
+  const handleExport = () => {
+    const csvHeader = "ID,Department,Email Module,Rating,\n";
+    const csvRows = filteredTeachers.map((teacher) =>
+      [
+        teacher.id,
+        teacher.name,
+        teacher.department,
+        teacher.email,
+        teacher.module,
+        teacher.rating,
+      ].join(",")
+    );
+    const csvData = `${csvHeader}${csvRows.join("\n")}`;
+    const blob = new Blob([csvData], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "teacher_data.csv";
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <>
       <section className="bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg mt-12 col-span-4">
@@ -53,13 +77,22 @@ const TeacherTable = () => {
             <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
               Teachers Details
             </h1>
-            <Input
-              type="text"
-              placeholder="Search by name, email, or module..."
-              value={search}
-              onChange={handleSearch}
-              className="w-full sm:max-w-md bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"
-            />
+
+            <div className="flex gap-4">
+              <Input
+                type="text"
+                placeholder="Search by name, email, or module..."
+                value={search}
+                onChange={handleSearch}
+                className="w-full sm:max-w-md bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+              />
+              <Button
+                className="md:text-lg text-sm bg-primary_Clr text-white hover:bg-primary_Clr hover:bg-opacity-80"
+                onClick={handleExport}
+              >
+                Export <FolderUp />
+              </Button>
+            </div>
           </div>
 
           <div className="-mx-4 sm:-mx-6">

@@ -5,6 +5,7 @@ import Navbar from "@/layout/Navbar";
 import Footer from "@/layout/Footer";
 import { ThemeProvider } from "@/context/theme-provider";
 import ScrollProgress from "@/components/ui/scroll-progress";
+import Chat from "@/components/PlatformChatAI";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -27,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} antialiased flex flex-col min-h-screen`}
+        className={`${roboto.className} antialiased flex flex-col min-h-screen relative`}
       >
         <ThemeProvider
           attribute="class"
@@ -38,6 +39,7 @@ export default function RootLayout({
           <ScrollProgress />
           <Navbar />
           <main className="flex-1 w-full">{children}</main>
+          <Chat />
           <Footer />
         </ThemeProvider>
       </body>

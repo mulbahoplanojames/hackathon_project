@@ -74,7 +74,7 @@ const AssignmentTable = () => {
         <div className="p-4 sm:p-6">
           <div className="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
             <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-              Teachers Details
+              Assignment List
             </h1>
             <div className="flex gap-4">
               <Input
@@ -172,7 +172,7 @@ const AssignmentTable = () => {
           {filteredAssignments.length > 0 && (
             <div className="flex items-center justify-between mt-4 px-4">
               <div className="text-sm text-gray-700 dark:text-gray-300">
-                Showing {startIndex + 1} to{" "}
+                Showing {startIndex + 1} to
                 {Math.min(endIndex, filteredAssignments.length)} of{" "}
                 {filteredAssignments.length} teachers
               </div>
