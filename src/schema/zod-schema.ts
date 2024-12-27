@@ -31,3 +31,11 @@ export const createGroupSchema = z.object({
   description: z.string().nonempty("Description is required"),
   image: z.string().optional(),
 });
+
+export const teacherAssignmentSchema = z.object({
+  module: z.string().min(1, "Module name is required"),
+  assignmentDate: z.string().nonempty("Assignment date is required"),
+  dueDate: z.string().nonempty("Due date is required"),
+  classAssignTo: z.string().min(1, "Class assigned to is required"),
+  file: z.instanceof(File).optional(),
+});
