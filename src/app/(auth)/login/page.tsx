@@ -1,7 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
-import {useState} from "react";
+import { useState } from "react";
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -9,20 +10,22 @@ const LogIn = () => {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log('Email', email);
-    console.log('Password', password);
+    console.log("Email", email);
+    console.log("Password", password);
   };
   return (
     <>
-      <section className="flex h-[30rem] w-[60rem] bg-white rounded-[20px] shadow">
-        <div className="w-1/2 p-8 flex flex-col justify-center">
-          <Link href="/">
-            <button></button>
-          </Link>
+      <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white rounded-[20px] shadow">
 
-          <form onSubmit={handleLogin} className="">
-            <h1 className="text-2xl font-bold text-text_light">Login</h1>
-            <h4 className="text-text_light mt-3 w-64">
+        <div className="w-full sm:w-1/2 p-4 sm:p-8 flex flex-col justify-center">
+          <Link href="/" className="mb-4">
+            <Image src="/Left chevron.svg" alt="" width={30} height={20} />
+          </Link>
+          <form onSubmit={handleLogin} className="pl-6">
+            <h1 className="text-4xl sm:text-5xl font-bold text-text_light">
+              Login
+            </h1>
+            <h4 className="text-text_light mt-3 w-full sm:w-64">
               Welcome back, please login to your account
             </h4>
             <div className="mt-4">
@@ -47,7 +50,7 @@ const LogIn = () => {
                 className="block text-sm font-medium text-text_light mt-4"
                 htmlFor="password"
               >
-                Passowrd
+                Password
               </label>
               <input
                 id="password"
@@ -61,9 +64,9 @@ const LogIn = () => {
             <div className="mt-4">
               <a
                 href="#"
-                className="text-sm text-text_light  hover:text-green-800 flex justify-end"
+                className="text-sm text-text_light hover:text-green-800 flex justify-end"
               >
-                Fogot Password
+                Forgot Password
               </a>
             </div>
             <button
@@ -72,7 +75,7 @@ const LogIn = () => {
             >
               Login
             </button>
-            <h3 className="mt-4 text-text_light">
+            <h3 className="mt-4 text-sm text-text_light">
               New user?{" "}
               <a href="#" className="text-green-900">
                 Sign Up
@@ -84,9 +87,9 @@ const LogIn = () => {
           style={{
             background: "linear-gradient(140deg, #064e34 30%, #0eb488 100%)",
           }}
-          className="w-1/2 flex items-start justify-start pt-28 pl-8 rounded-r-[20px]"
+          className="hidden sm:flex w-full sm:w-1/2 items-start justify-start pt-8 sm:pt-28 pl-4 sm:pl-8 rounded-b-[20px] sm:rounded-r-[20px] sm:rounded-bl-none"
         >
-          <h1 className="text-white w-[3rem] text-6xl">Welcome Back</h1>
+          <h1 className="text-white w-56 text-4xl sm:text-6xl">Welcome Back</h1>
         </div>
       </section>
     </>
