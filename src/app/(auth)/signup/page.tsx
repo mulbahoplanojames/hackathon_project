@@ -9,6 +9,7 @@ const SignUp = () => {
           <Button>Back Home</Button>
         </Link>
         <h1 className="text-2xl pt-8">SignUp Page</h1>
+        <h1>Danny</h1>
       </section>
     </>
   );
