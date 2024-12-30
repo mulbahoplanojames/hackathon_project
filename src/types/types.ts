@@ -10,3 +10,17 @@ export type NavItem = {
   url: string;
   icon: LucideIcon;
 };
+
+export type CoursesType = {
+  title: string;
+  date: string;
+  views: string;
+  imageUrl: string;
+  description: string;
+}
+
+export type CoursesPeriodType = {
+  status: string;
+  iconUrl: string;
+  numberOfTime: string;
+}
