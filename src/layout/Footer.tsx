@@ -51,21 +51,21 @@ const Footer = () => {
           <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
             {footerData.map((item, index) => (
               <div key={index} className="space-y-3">
-                <h3 className="uppercase dark:text-gray-900">{item.title}</h3>
+                <h3 className="uppercase text-white">{item.title}</h3>
                 <ul className="space-y-1">
                   {item.links.map((link, index) => (
-                    <li key={index}>
-                      <Link rel="noopener noreferrer" href={link.href}>
-                        {link.name}
-                      </Link>
-                    </li>
+                    <Link href={link.href} key={index} className="block py-2">
+                      {link.name}
+                    </Link>
                   ))}
                 </ul>
               </div>
             ))}
 
             <div className="space-y-3 flex-1">
-              <h3 className="uppercase dark:text-gray-900">Subscribe</h3>
+              <h3 className="uppercase text-white">
+                Subscribe to our newsletter
+              </h3>
               <p className="">
                 Stay updated on our latest features and offerings.
               </p>
