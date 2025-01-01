@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineCancelPresentation } from "react-icons/md";
-import Image from "next/image";
 import Link from "next/link";
 import { navLinks } from "@/constant/navData";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/context/ ModeToggle";
 import { usePathname } from "next/navigation";
+import { PackageCheck } from "lucide-react";
 
 const Navbar = () => {
   // State variable to keep track of whether the menu is open or not.
@@ -21,9 +21,9 @@ const Navbar = () => {
       <nav className=" flex justify-between items-center py-4 md:px-10 px-4 fixed z-50 w-full top-0 backdrop-blur-[18px] backdrop-saturate-[162%] bg-transparent border-b-2 border-primary_Clr dark:border-white">
         <Link
           href="/"
-          className="text-2xl font-bold flex justify-center items-center gap-2  md:w-10 md:h-10 w-10 h-10 rounded-md relative bg-green-300"
+          className="text-xl font-bold flex justify-center items-center gap-2  md:w-10 md:h-10 w-10 h-10 rounded-md relative bg-primary_Clr text-white"
         >
-          <Image src="" alt="logo" className="" fill />
+          <PackageCheck />
         </Link>
         {/*//! Menu items for larger devices and mapping through the links */}
         <menu className="flex items-center justify-center gap-x-6">
