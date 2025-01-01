@@ -102,7 +102,7 @@ const Chat = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.2 }}
-              className="fixed bottom-20 right-12 z-50 w-[95%] md:w-[450px] shadow-xl"
+              className="fixed bottom-20 md:right-12 right-2 z-50 w-[95%] md:w-[450px] shadow-xl"
             >
               <Card>
                 <CardHeader className="flex justify-between flex-row  space-y-0 pb-3">

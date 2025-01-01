@@ -9,7 +9,7 @@ const KeyFeatures = () => {
     <>
       <section className="md:px-20 px-4 md:pb-16 pt-4 py-4">
         <Text />
-        <h1 className="lg:text-5xl text-4xl pb-5 font-semibold">
+        <h1 className="lg:text-5xl text-4xl pb-5 font-semibold  ">
           Interactive Dashboard
         </h1>
         <p className="text-lg pb-8 md:w-1/2 w-full">

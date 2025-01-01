@@ -37,7 +37,7 @@ const StudentAddTask = () => {
   return (
     <Card className="w-full pt-4 col-span-2">
       <CardContent>
-        <h1 className="pb-4 text-lg">Student Todo List Tasks</h1>
+        <h1 className="pb-4 text-lg">Set Custom Goals</h1>
         <div className="flex items-center justify-between mb-4">
           <Input
             type="text"
