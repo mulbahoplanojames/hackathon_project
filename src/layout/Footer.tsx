@@ -1,4 +1,13 @@
-import { Form } from "@/components/ui/form";
+"use client";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { footerData } from "@/data/footerData";
 import { newsLetterSchema } from "@/schema/zod-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,14 +64,32 @@ const Footer = () => {
               </div>
             ))}
 
-            <div className="space-y-3">
+            <div className="space-y-3 flex-1">
               <h3 className="uppercase dark:text-gray-900">Subscribe</h3>
               <p className="">
                 Stay updated on our latest features and offerings.
               </p>
               <div className="flex justify-center space-x-3">
                 <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)}></form>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-8"
+                  >
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input placeholder="shadcn" {...field} />
+                          </FormControl>
+
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button type="submit">Submit</Button>
+                  </form>
                 </Form>
               </div>
               <p className="">
