@@ -52,3 +52,13 @@ export type GroupCardType = {
   description: string;
   image?: string;
 };
+
+type Link = {
+  name: string;
+  href: string;
+};
+
+export type FooterDataType = {
+  title: string;
+  links: Link[];
+};
