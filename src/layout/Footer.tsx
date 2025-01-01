@@ -1,8 +1,26 @@
+import { Form } from "@/components/ui/form";
 import { footerData } from "@/data/footerData";
+import { newsLetterSchema } from "@/schema/zod-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { PackageCheck } from "lucide-react";
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { z } from "zod";
+
+type NewsLetterType = z.infer<typeof newsLetterSchema>;
 
 const Footer = () => {
+  const form = useForm({
+    resolver: zodResolver(newsLetterSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const onSubmit: SubmitHandler<NewsLetterType> = (data) => {
+    console.log(data);
+  };
+
   return (
     <>
       <footer className="px-4 divide-y  text-white bg-primary_Clr border-t-primary_Clr border-2">
@@ -42,11 +60,15 @@ const Footer = () => {
               <p className="">
                 Stay updated on our latest features and offerings.
               </p>
+              <div className="flex justify-center space-x-3">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)}></form>
+                </Form>
+              </div>
               <p className="">
                 By subscribing, you agree to our Privacy Policy and consent to
                 receive updates.
               </p>
-              <div className="flex justify-center space-x-3"></div>
             </div>
           </div>
         </div>

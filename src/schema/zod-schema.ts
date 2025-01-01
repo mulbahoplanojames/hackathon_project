@@ -39,3 +39,7 @@ export const teacherAssignmentSchema = z.object({
   classAssignTo: z.string().min(1, "Class assigned to is required"),
   file: z.instanceof(File).optional(),
 });
+
+export const newsLetterSchema = z.object({
+  email: z.string().email(),
+});
