@@ -15,7 +15,7 @@ const LogIn = () => {
   };
   return (
     <>
-      <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white rounded-[20px] shadow">
+      <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white rounded-[20px] shadow sm:shadow-lg">
 
         <div className="w-full sm:w-1/2 p-4 sm:p-8 flex flex-col justify-center">
           <Link href="/" className="mb-4 w-8">
