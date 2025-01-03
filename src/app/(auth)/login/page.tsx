@@ -3,6 +3,23 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { loginSchema } from "@/schema/zod-schema";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const validateLogin = (loginData: { email: string; password: string }) => {
+  const validationResult = loginSchema.safeParse(loginData);
+  if (!validationResult.success) {
+    console.error(validationResult.error.errors);
+    toast.error(
+      "Validation error: " +
+        validationResult.error.errors.map((e) => e.message).join(", ")
+    );
+    return false;
+  }
+  console.log("Login data is valid...");
+  return true;
+};
 
 const LogIn = () => {
   const [email, setEmail] = useState("");
@@ -10,9 +27,19 @@ const LogIn = () => {
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Email", email);
-    console.log("Password", password);
+    const loginData = { email, password };
+
+    if (!email || !password) {
+      toast.error("Email and password are required.");
+      return;
+    }
+
+    if (validateLogin(loginData)) {
+      console.log("Email", email);
+      console.log("Password", password);
+    }
   };
+
   return (
     <>
       <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white dark:bg-slate-800 rounded-[20px] shadow sm:shadow-lg">
@@ -66,7 +93,7 @@ const LogIn = () => {
             >
               Login
             </button>
-            <h3 className="mt-4 text-sm text-text_light">
+            <h3 className="mt-4 text-sm">
               New user?{" "}
               <a href="#" className="text-green-900">
                 Sign Up
@@ -83,6 +110,7 @@ const LogIn = () => {
           <h1 className="text-white w-56 text-4xl sm:text-6xl">Welcome Back</h1>
         </div>
       </section>
+      <ToastContainer />
     </>
   );
 };

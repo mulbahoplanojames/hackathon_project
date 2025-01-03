@@ -1,9 +1,9 @@
 import Image from "next/image";
-import {cards} from "@/data/doctorData";
+import { cards } from "@/data/doctorData";
 import { doctorData } from "@/data/doctorData";
+import Link from "next/link";
 
 const BookDoctors = () => {
-  
   return (
     <>
       <h1 className="text-[25px] font-semibold px-10 py-6">Book Doctor</h1>
@@ -27,17 +27,16 @@ const BookDoctors = () => {
           />
         </div>
       </div>
-
       <div className="mt-8">
-        <h1 className="text-[35px] font-semibold w-full text-center md:text-left px-8 py-4">
+        <h1 className="text-[35px] font-semibold w-full text-center sm:text-left sm:ml-0 px-8 py-4">
           Weekly Reports
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 px-4 justify-evenly">
+        <div className="flex flex-wrap justify-center gap-4 px-4">
           {cards.map((card, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-md w-full max-w-[12rem] h-auto text-center border border-solid mx-auto"
+              className="bg-white dark:bg-slate-800 p-4 rounded-lg shadow-md w-full max-w-[12rem] h-auto text-center border border-solid mx-[2rem]"
             >
               <div className="flex justify-center items-center">
                 <Image
@@ -56,16 +55,16 @@ const BookDoctors = () => {
           ))}
         </div>
       </div>
-
-      <div>
-        <h1 className="text-[35px] font-semibold w-full text-center md:text-left px-8 mt-8">
+      
+      <div className="mt-8">
+        <h1 className="text-[35px] font-semibold w-full text-center sm:ml-0 md:text-left px-8 py-4">
           Doctors
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-[2rem] justify-center">
+        <div className="flex flex-wrap justify-center gap-8 px-[2rem]">
           {doctorData.map((doctor, index) => (
             <div
               key={index}
-              className="bg-white dark:bg-slate-800 rounded-[20px] overflow-hidden shadow-lg border border-gray-200 dark:border-slate-800 w-full sm:w-[15rem] md:w-auto h-[25rem] m-4"
+              className="bg-white dark:bg-slate-800 rounded-[20px] overflow-hidden shadow-lg border border-gray-200 dark:border-slate-800 w-full sm:w-[20rem] h-[25rem] m-4"
             >
               <Image
                 src={doctor.Image}
@@ -77,12 +76,14 @@ const BookDoctors = () => {
               <div className="p-4 flex flex-col items-start mt-4">
                 <h1 className="text-xl font-semibold">{doctor.titile}</h1>
                 <h2 className="text-primary_Clr mt-2">{doctor.description}</h2>
-                <p className=" text-gray-500 dark:text-white w-[17rem] mt-2">
+                <p className="text-gray-500 dark:text-white w-[17rem] mt-2">
                   Commodo qui nulla ipsum ea cupidatat sit aliquip dolor.
                 </p>
-                <button className="bg-[#064e3b] text-white text-[12px] px-[3rem] py-2 rounded-[5px] mt-4">
-                  Book Appointment
-                </button>
+                <Link href="/bookingForm">
+                  <button className="bg-[#064e3b] text-white text-[12px] px-[3rem] py-2 rounded-[5px] mt-4">
+                    Book Appointment
+                  </button>
+                </Link>
               </div>
             </div>
           ))}
