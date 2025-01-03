@@ -1,4 +1,6 @@
-export const footerData = [
+import { FooterDataType } from "@/types/types";
+
+export const footerData:FooterDataType[] = [
   {
     title: "Resourses",
     links: [
