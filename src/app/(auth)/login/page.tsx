@@ -45,7 +45,7 @@ const LogIn = () => {
       <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white dark:bg-slate-800 rounded-[20px] shadow sm:shadow-lg">
         <div className="w-full sm:w-1/2 p-4 sm:p-8 flex flex-col justify-center">
           <Link href="/" className="mb-4 w-8">
-            <Image src="/Left chevron.svg" alt="" width={30} height={20} />
+            <Image src="/Left_chevron.svg" alt="" width={30} height={20} />
           </Link>
           <form onSubmit={handleLogin} className="pl-6">
             <h1 className="text-4xl sm:text-5xl font-bold">Login</h1>
