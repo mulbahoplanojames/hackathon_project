@@ -15,24 +15,18 @@ const LogIn = () => {
   };
   return (
     <>
-      <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white rounded-[20px] shadow sm:shadow-lg">
-
+      <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white dark:bg-slate-800 rounded-[20px] shadow sm:shadow-lg">
         <div className="w-full sm:w-1/2 p-4 sm:p-8 flex flex-col justify-center">
           <Link href="/" className="mb-4 w-8">
             <Image src="/Left chevron.svg" alt="" width={30} height={20} />
           </Link>
           <form onSubmit={handleLogin} className="pl-6">
-            <h1 className="text-4xl sm:text-5xl font-bold text-text_light">
-              Login
-            </h1>
-            <h4 className="text-text_light mt-3 w-full sm:w-64">
+            <h1 className="text-4xl sm:text-5xl font-bold">Login</h1>
+            <h4 className="mt-3 w-full sm:w-64">
               Welcome back, please login to your account
             </h4>
             <div className="mt-4">
-              <label
-                className="block text-sm font-medium text-text_light"
-                htmlFor="email"
-              >
+              <label className="block text-sm font-medium" htmlFor="email">
                 Email
               </label>
               <input
@@ -41,13 +35,13 @@ const LogIn = () => {
                 value={email}
                 placeholder="your@email.com"
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary_Clr focus:border-primary_Clr sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-black rounded-md shadow-sm focus:outline-none focus:ring-primary_Clr focus:border-primary_Clr sm:text-sm"
               />
             </div>
 
             <div>
               <label
-                className="block text-sm font-medium text-text_light mt-4"
+                className="block text-sm font-medium mt-4"
                 htmlFor="password"
               >
                 Password
@@ -58,14 +52,11 @@ const LogIn = () => {
                 value={password}
                 placeholder="Enter your password"
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary_Clr focus:border-primary_Clr sm:text-sm"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-black rounded-md shadow-sm focus:outline-none focus:ring-primary_Clr focus:border-primary_Clr sm:text-sm"
               />
             </div>
-            <div className="mt-4">
-              <a
-                href="#"
-                className="text-sm text-text_light hover:text-green-800 flex justify-end"
-              >
+            <div className="mt-4 flex justify-end">
+              <a href="#" className="text-sm w-[7rem]">
                 Forgot Password
               </a>
             </div>

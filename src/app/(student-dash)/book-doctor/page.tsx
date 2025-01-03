@@ -76,11 +76,11 @@ const BookDoctors = () => {
               />
               <div className="p-4 flex flex-col items-start mt-4">
                 <h1 className="text-xl font-semibold">{doctor.titile}</h1>
-                <h2 className="text-primary_Clr dark:text-violet-800 mt-2">{doctor.description}</h2>
+                <h2 className="text-primary_Clr mt-2">{doctor.description}</h2>
                 <p className=" text-gray-500 dark:text-white w-[17rem] mt-2">
                   Commodo qui nulla ipsum ea cupidatat sit aliquip dolor.
                 </p>
-                <button className="bg-[#064e3b] dark:bg-slate-700 dark:hover:bg-slate-500 text-white text-[12px] px-[3rem] py-2 rounded-[5px] mt-4">
+                <button className="bg-[#064e3b] text-white text-[12px] px-[3rem] py-2 rounded-[5px] mt-4">
                   Book Appointment
                 </button>
               </div>

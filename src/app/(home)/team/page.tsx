@@ -1,27 +1,28 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
-interface TeamMember {
-  imageUrl: string;
-}
-
-const teamMembers: TeamMember[] = [
+const teamMembers = [
   {
-    imageUrl: "/Image 22.svg",
+    image: "/Image 22.svg",
   },
   {
-    imageUrl: "/Image 21.svg",
+    image: "/Image 21.svg",
   },
   {
-    imageUrl: "/Image 23.svg",
+    image: "/Image 23.svg",
   },
 ];
 
-const Card: React.FC<TeamMember> = ({ imageUrl }) => {
+interface CardProps {
+  image: string;
+}
+
+const Card = ({ image }: CardProps) => {
   return (
-    <div className="bg-white rounded-[20px] overflow-hidden shadow-lg border border-gray-200 w-[23rem] h-[30rem] m-4 md:w-[20rem] sm:w-[18rem]">
+    <div className="bg-white dark:bg-slate-800 rounded-[20px] overflow-hidden shadow-lg border border-gray-200 dark:border-slate-800 w-[23rem] h-[30rem] m-4 md:w-[20rem] sm:w-[18rem] mx-[2rem]">
       <Image
-        src={imageUrl}
+        src={image}
         alt=""
         width={80}
         height={300}
@@ -46,26 +47,40 @@ const Card: React.FC<TeamMember> = ({ imageUrl }) => {
   );
 };
 
-const Team: React.FC = () => {
+const CardList = () => {
   return (
-    <section className="relative w-full h-full">
-      <div className="relative">
-        <Image src="/Rectangle 14.svg" alt="team" width={2500} height={800} />
-        <div className="absolute inset-0 flex flex-col items-start justify-center px-4 sm:pl-12 text-white bg-black bg-opacity-50 m-0">
-          <h1 className="text-3xl sm:text-5xl md:text-9xl mb-4 text-white">
+    <div className="flex justify-center  p-4 mt-8">
+      <div className="flex flex-wrap justify-center">
+        {teamMembers.map((member, index) => (
+          <Card key={index} image={member.image} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const Team = () => {
+  return (
+    <>
+      <div className="w-full bg-[url('/Rectangle_14.svg')] bg-cover bg-center bg-no-repeat ">
+        <div className="w-full h-full backdrop-brightness-50 bg-black/30 px-10 py-48 ">
+          <h1 className="text-3xl sm:text-5xl md:text-9xl mb-4 sm:w-[32rem] text-white">
             Our Team
           </h1>
-          <p className="text-sm sm:text-lg md:text-xl mb-6 sm:w-[32rem]">
+          <p className="text-sm  text-white sm:text-lg md:text-xl mb-6 sm:w-[32rem]">
             Generate Lorem Ipsum Placeholder text for use in your graphic, print
             and web layouts, and discover plugins for your favorite writing,
             design and blogging tools. Explore the origins, history and meaning
             of the famous passage,
           </p>
+          <Link href="/auth/signup">
           <button className="bg-[#65a30d] text-white py-2 px-4 rounded-lg">
             Create Account
           </button>
+          </Link>
         </div>
       </div>
+
       <div className="text-center mt-8">
         <h1 className="text-[4rem]">Our Team</h1>
         <p className="text-[1.2rem] text-[#9095a0] w-[39rem] mx-auto mt-4">
@@ -73,14 +88,8 @@ const Team: React.FC = () => {
           pariatur ad ex velit do Lorem reprehenderit.
         </p>
       </div>
-      <div className="flex justify-center p-4 mt-8">
-        <div className="flex flex-wrap justify-center">
-          {teamMembers.map((member, index) => (
-            <Card key={index} {...member} />
-          ))}
-        </div>
-      </div>
-    </section>
+      <CardList />
+    </>
   );
 };
 
