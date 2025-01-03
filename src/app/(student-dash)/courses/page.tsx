@@ -28,7 +28,7 @@ const Courses = () => {
       </section>
       <div className="lg:p-10 sm:p-6 max-sm:p-6 md:p-8 pt-0">
         <h1 className="text-3xl font-[600] py-6">Popular Courses</h1>
-        <div className="grid auto-rows-min gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
+        <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
           {CoursesData.map((course, index) => {
             return (
               <CoursesCards
@@ -36,7 +36,7 @@ const Courses = () => {
                 imageUrl={course.imageUrl}
                 title={course.title}
                 description={course.description}
-                date={course.title}
+                date={course.date}
                 views={course.views}
               />
             );
@@ -45,7 +45,7 @@ const Courses = () => {
       </div>
       <div className="lg:p-10 pt-0 sm:p-6 max-sm:p-6 md:p-8">
         <h1 className="text-3xl font-[600] py-6">Ongoing Courses</h1>
-        <div className="grid auto-rows-min gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
+        <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
           {CoursesData.map((course, index) => {
             return (
               <CoursesCards
@@ -53,7 +53,7 @@ const Courses = () => {
                 imageUrl={course.imageUrl}
                 title={course.title}
                 description={course.description}
-                date={course.title}
+                date={course.date}
                 views={course.views}
               />
             );

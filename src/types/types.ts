@@ -24,3 +24,24 @@ export type CoursesPeriodType = {
   iconUrl: string;
   numberOfTime: string;
 }
+
+export type basicDestailsType = {
+  heading: string;
+  details: string;
+}
+
+export type footerLinksType = {
+  heading: string;
+  link1: string;
+  link2: string;
+  link3: string;
+  link4: string;
+  locateLink1: string;
+  locateLink2: string;
+  locateLink3: string;
+  locateLink4: string;
+}
+
+export type TrustCompanysType = {
+  ImageUrl: string;
+}
