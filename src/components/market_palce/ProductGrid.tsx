@@ -4,6 +4,9 @@ import { productTabData } from "@/data/marketplaceData";
 import { useEffect, useState } from "react";
 import ProductTabar from "./ProductTabar";
 import { client } from "@/sanity/lib/client";
+import ProductCard from "./ProductCard";
+import NoProductAvailable from "./NoProductAvailable";
+import { Products } from "../../../sanity.types";
 
 const ProductGrid = () => {
   const [selectedTab, setSelectedTab] = useState(productTabData[0].label || "");
@@ -20,7 +23,7 @@ const ProductGrid = () => {
       try {
         const response = await client.fetch(query, params);
         setProducts(await response);
-        console.log(await response);
+        // console.log(await response);
 
         setLoading(false);
       } catch (error) {
@@ -46,14 +49,14 @@ const ProductGrid = () => {
           <>
             {products.length ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12 w-full">
-                {products.map((product) => (
+                {products.map((product: Products) => (
                   <div key={product._id}>
-                    {/* <ProductCard product={product} /> */}
+                    <ProductCard product={product} />
                   </div>
                 ))}
               </div>
             ) : (
-            //   <NoProductAvailable selectedTab={selectedTab} />
+              <NoProductAvailable selectedTab={selectedTab} />
             )}
           </>
         )}
