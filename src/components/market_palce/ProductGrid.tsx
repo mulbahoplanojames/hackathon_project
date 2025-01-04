@@ -37,18 +37,18 @@ const ProductGrid = () => {
 
   return (
     <>
-      <section className="mt-10 flex flex-col items-center md:px-20 px-4 md:pb-24 pt-6 py-8 w-full">
+      <section className="mt-10 flex flex-col items-center  md:pb-24 pt-6 py-8 w-full">
         <ProductTabar
           selectedTab={selectedTab}
           onSelectedTab={setSelectedTab}
         />
 
         {loading ? (
-          <div className="py-12 text-xl">Product Loading...</div>
+          <div className="py-12 text-xl">Products Loading...</div>
         ) : (
           <>
             {products.length ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-12 w-full">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-12 w-full">
                 {products.map((product: Products) => (
                   <div key={product._id}>
                     <ProductCard product={product} />

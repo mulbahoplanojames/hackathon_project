@@ -19,8 +19,8 @@ const ProductTabar: React.FC<HomeProductTabarProps> = ({
             <button
               key={tab?.label}
               onClick={() => onSelectedTab(tab?.label)}
-              className={`border border-black px-4 py-1.5  md:px-6 md:py-2 rounded-full hover:bg-black hover:text-white ${
-                selectedTab === tab?.label && "bg-black text-white"
+              className={`border border-primary_Clr px-4 py-1.5  md:px-6 md:py-2 rounded-full hover:bg-primary_Clr hover:text-white ${
+                selectedTab === tab?.label && "bg-primary_Clr text-white"
               }`}
             >
               {tab?.label}

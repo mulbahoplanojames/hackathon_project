@@ -13,7 +13,7 @@ const AddToCardButton = ({ product, className }: AddToCardButtonProps) => {
   const itemCount = 0;
   return (
     <>
-      <div className="w-full ">
+      <div className="w-full px-1">
         {itemCount ? (
           <div className="w-full text-sm">
             <div className="flex items-center justify-between py-1">
@@ -28,7 +28,13 @@ const AddToCardButton = ({ product, className }: AddToCardButtonProps) => {
             </div>
           </div>
         ) : (
-          <Button disabled={isoutOfStock} className={(cn("w-full"), className)}>
+          <Button
+            disabled={isoutOfStock}
+            className={cn(
+              "w-full bg-transparent border border-primary_Clr text-primary_Clr hover:bg-primary_Clr hover:text-white",
+              className
+            )}
+          >
             Add To Cart
           </Button>
         )}

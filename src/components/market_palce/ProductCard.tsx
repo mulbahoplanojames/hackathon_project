@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Products } from "../../../sanity.types";
@@ -15,10 +14,10 @@ import AddToCardButton from "./AddToCartButton";
 const ProductCard = ({ product }: { product: Products }) => {
   return (
     <>
-      <section className="md:pt-10 pt-8">
-        <Card className="">
-          <CardContent className="">
-            <CardHeader>
+      <section className="pt-3">
+        <Card className="w-full">
+          <CardContent className="p-0 w-full pb-2">
+            <CardHeader className="bg-gray-200 group">
               {product?.images && (
                 <Link href={`/product/${product?.slug?.current}`}>
                   <div className="relative h-60 w-full overflow-hidden rounded-xl">
@@ -26,16 +25,19 @@ const ProductCard = ({ product }: { product: Products }) => {
                       src={urlFor(product.images[0]).url()}
                       alt="Product Image"
                       fill
+                      className="group-hover:scale-110 transition-transform duration-300"
                     />
                   </div>
                 </Link>
               )}
             </CardHeader>
-            <CardDescription>
-              <p>{product?.name}</p>
-              <p>{product?.intro}</p>
+            <CardDescription className="py-2 px-1">
+              <p className="truncate font-semibold pb-1.5 text-lg text-black">
+                {product?.name}
+              </p>
+              <p className="pb-1 text-black text-base"> {product?.intro}</p>
               <PriceView
-                className="text-lg"
+                className="text-lg "
                 price={product?.price}
                 discount={product?.discount}
               />
