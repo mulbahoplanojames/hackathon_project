@@ -19,7 +19,7 @@ const ProductCard = ({ product }: { product: Products }) => {
           <CardContent className="p-0 w-full pb-2">
             <CardHeader className="bg-gray-200 group">
               {product?.images && (
-                <Link href={`/product/${product?.slug?.current}`}>
+                <Link href={`/market-place/product/${product?.slug?.current}`}>
                   <div className="relative h-60 w-full overflow-hidden rounded-xl">
                     <Image
                       src={urlFor(product.images[0]).url()}
