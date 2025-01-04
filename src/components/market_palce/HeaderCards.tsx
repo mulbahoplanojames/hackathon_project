@@ -8,7 +8,10 @@ const HeaderCards = () => {
       <section className="mt-4">
         <div className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-2  gap-4">
           {marketplaceHeaderCardData.map((card) => (
-            <Card key={card.id} className="rounded-3xl p-4">
+            <Card
+              key={card.id}
+              className="rounded-3xl p-4 hover:scale-110 transition-all duration-300 ease-in"
+            >
               <div className="w-10 h-10  bg-black rounded-full p-1 flex items-center justify-center mb-2">
                 {card.icon && <card.icon className=" text-white" />}
               </div>
