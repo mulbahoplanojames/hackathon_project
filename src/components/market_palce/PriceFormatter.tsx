@@ -7,7 +7,7 @@ interface PriceFormatterProps {
 
 const PriceFormatter = ({ amount, className }: PriceFormatterProps) => {
   const formattedPrice = new Number(amount).toLocaleString("en-US", {
-    currency: "USD",
+    currency: "RWF",
     style: "currency",
     minimumFractionDigits: 2,
   });

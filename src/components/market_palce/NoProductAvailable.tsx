@@ -13,7 +13,7 @@ const NoProductAvailable = ({
     <>
       <section
         className={cn(
-          "flex flex-col items-center justify-center py-10 min-h-80 w-full bg-slate-100 text-center mt-12 rounded-md",
+          "flex flex-col items-center justify-center py-10 min-h-64 w-full bg-primary_Clr text-white text-center mt-12 rounded-md",
           className
         )}
       >
@@ -22,7 +22,7 @@ const NoProductAvailable = ({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-2xl font-bold ">
+          <h1 className="text-2xl font-bold pb-3">
             No Product avaliable in {selectedTab}
           </h1>
         </motion.div>
@@ -30,14 +30,15 @@ const NoProductAvailable = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
+          className="pb-3"
         >
-          We&apos;re sorry, but there are no products available in {selectedTab}
-          at the moment .
+          We&apos;re sorry, but there are no products available in{" "}
+          <span className="font-semibold">{selectedTab}</span> at the moment .
         </motion.p>
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 0.5, repeat: Infinity }}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 pb-3"
         >
           <Loader2 className="animate-spin" />
           <span>We are restocking the products</span>
