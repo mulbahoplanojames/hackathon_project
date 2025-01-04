@@ -22,7 +22,7 @@ const SingleProductPage = async ({
   //   console.log(product);
 
   return (
-    <section className="md:px-20 px-4 md:pt-12 pt-8 flex flex-col gap-10 md:flex-row">
+    <section className="md:px-20 px-4 md:pt-12 pt-8 flex flex-col gap-10 md:flex-row pb-12">
       {product?.images && <ImagesView images={product.images} />}
       <div className="w-full md:w-1/2 flex flex-col gap-5">
         <h2 className="text-3xl md:text-3xl font-bold pb-2">{product?.name}</h2>

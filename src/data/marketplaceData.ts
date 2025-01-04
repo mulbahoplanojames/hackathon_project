@@ -32,17 +32,16 @@ export const marketplaceHeaderCardData: MarketplaceHeaderCardType[] = [
 ];
 
 export const productTabData = [
+  { label: "Books" },
+  { label: "Computers" },
+  { label: "Mouse" },
+  { label: "Keyboard" },
   { label: "Tshirt" },
   { label: "Jackets" },
   { label: "Pants" },
-  { label: "Hoodie" },
+  { label: "Hoodies" },
   { label: "Shorts" },
   { label: "Shoes" },
   { label: "Bags" },
   { label: "Caps" },
-  { label: "Books" },
-  { label: "Computer" },
-  { label: "Mouse" },
-  { label: "Keyboard" },
-  { label: "Book" },
 ];

@@ -36,7 +36,7 @@ const ImagesView = ({ images = [] }: ImagesViewProps) => {
             exit={{ opacity: 0 }}
             key={activeImage._key}
             transition={{ duration: 0.5 }}
-            className="w-full max-h-[550px] min-h-[540px] overflow-hidden border-2 border-black rounded-s-md group"
+            className="w-full max-h-[490px] min-h-[460px] overflow-hidden border-2 border-black rounded-s-md group"
           >
             <Image
               src={urlFor(activeImage).url()}
@@ -48,7 +48,7 @@ const ImagesView = ({ images = [] }: ImagesViewProps) => {
             />
           </motion.div>
         </AnimatePresence>
-        <div className="grid grid-cols-5 gap-6 h-20 md:h-28">
+        <div className="grid grid-cols-5 gap-4 h-20 ">
           {images.map((image) => (
             <button
               className={`border rounded-md overflow-hidden ${activeImage._key === image._key ? "ring-1 ring-black" : ""}`}

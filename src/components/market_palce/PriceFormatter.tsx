@@ -13,7 +13,7 @@ const PriceFormatter = ({ amount, className }: PriceFormatterProps) => {
   });
 
   return (
-    <span className={(cn("text-sm text-black"), className)}>
+    <span className={cn("text-sm text-black truncate", className)}>
       {formattedPrice}
     </span>
   );
