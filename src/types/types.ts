@@ -62,3 +62,11 @@ export type FooterDataType = {
   title: string;
   links: Link[];
 };
+
+export type MarketplaceHeaderCardType = {
+  id: number;
+  title: string;
+  count: number | string;
+  image?: string;
+  icon?: LucideIcon;
+};
