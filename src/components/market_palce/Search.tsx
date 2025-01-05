@@ -81,12 +81,14 @@ const SearchBar = () => {
               ) : products.length ? (
                 <div className="">
                   {products.map((product: Products) => (
-                    <Link
+                    <div
                       className="flex items-center p-1 border-b-black border last:border-b-0 gap-2 md:gap-4"
                       key={product._id}
-                      href={`/product/${product?.slug?.current}`}
                     >
-                      <div className="w-20 h-20 md:h-24 md:w-24 flex-shrink-0 overflow-hidden rounded-md">
+                      <Link
+                        className="w-20 h-20 md:h-24 md:w-24 flex-shrink-0 overflow-hidden rounded-md"
+                        href={`/product/${product?.slug?.current}`}
+                      >
                         {product?.images && (
                           <Image
                             width={200}
@@ -96,8 +98,11 @@ const SearchBar = () => {
                             className="w-full h-full object-cover"
                           />
                         )}
-                      </div>
-                      <div className="flex-grow py-3 px-5">
+                      </Link>
+                      <Link
+                        href={`/product/${product?.slug?.current}`}
+                        className="flex-grow py-3 px-5"
+                      >
                         <p className="font-semibold md:text-lg text-sm text-slate-700 line-clamp-1 ">
                           {product?.name}
                         </p>
@@ -109,11 +114,11 @@ const SearchBar = () => {
                           discount={product?.discount}
                           className="text-lg "
                         />
-                      </div>
+                      </Link>
                       <div className="w-60 mt-5">
                         <AddToCardButton product={product} className="w-full" />
                       </div>
-                    </Link>
+                    </div>
                   ))}
                 </div>
               ) : (

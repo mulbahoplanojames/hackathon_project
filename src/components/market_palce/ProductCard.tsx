@@ -17,10 +17,10 @@ const ProductCard = ({ product }: { product: Products }) => {
       <section className="pt-3">
         <Card className="w-full">
           <CardContent className="p-0 w-full pb-2">
-            <CardHeader className="bg-gray-200 group">
+            <CardHeader className="bg-gray-200 group p-3">
               {product?.images && (
                 <Link href={`/market-place/product/${product?.slug?.current}`}>
-                  <div className="relative h-60 w-full overflow-hidden rounded-xl">
+                  <div className="relative h-48 w-full overflow-hidden rounded-xl">
                     <Image
                       src={urlFor(product.images[0]).url()}
                       alt="Product Image"
@@ -35,7 +35,9 @@ const ProductCard = ({ product }: { product: Products }) => {
               <p className="truncate font-semibold pb-1.5 text-lg text-black">
                 {product?.name}
               </p>
-              <p className="pb-1 text-black text-base"> {product?.intro}</p>
+              <p className="pb-1 text-black text-base truncate">
+                {product?.intro}
+              </p>
               <PriceView
                 className="text-lg "
                 price={product?.price}

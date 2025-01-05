@@ -1,10 +1,13 @@
 import DashboardHeader from "@/components/dashboard-header";
+import CartIcon from "@/components/market_palce/CartIcon";
 import HeaderCards from "@/components/market_palce/HeaderCards";
 import ProductGrid from "@/components/market_palce/ProductGrid";
 import SearchBar from "@/components/market_palce/Search";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ListOrdered } from "lucide-react";
+import Link from "next/link";
+import { Toaster } from "react-hot-toast";
 
 const MarketPlace = () => {
   return (
@@ -14,9 +17,26 @@ const MarketPlace = () => {
         <HeaderCards />
         <Text />
         <ProductGrid />
-        <div className="bg-primary_Clr text-white w-40 h-10 rounded-md fixed top-[21rem] right-8 flex justify-center items-center gap-4 ">
+        <div className="bg-primary_Clr text-white w-40 h-10 rounded-full fixed top-[21rem] right-8 flex justify-center items-center gap-6 ">
           <SearchBar />
+          <CartIcon />
+          <Link href="/market-place/orders" className="cursor-pointer relative">
+            <ListOrdered className="w-6 h-6" />
+            <span className="absolute -top-1 -right-1 h-3.5 w-3.5 bg-black text-white text-xs font-semibold rounded-full flex justify-center items-center">
+              0
+            </span>
+          </Link>
         </div>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "black",
+              color: "#fff",
+            },
+          }}
+        />
       </section>
     </>
   );
