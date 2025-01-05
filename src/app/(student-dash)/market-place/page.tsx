@@ -1,6 +1,7 @@
 import DashboardHeader from "@/components/dashboard-header";
 import HeaderCards from "@/components/market_palce/HeaderCards";
 import ProductGrid from "@/components/market_palce/ProductGrid";
+import SearchBar from "@/components/market_palce/Search";
 import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
@@ -13,7 +14,9 @@ const MarketPlace = () => {
         <HeaderCards />
         <Text />
         <ProductGrid />
-        <div className="bg-primary_Clr text-white w-40 h-10 rounded-full fixed top-[21rem] right-8"></div>
+        <div className="bg-primary_Clr text-white w-40 h-10 rounded-md fixed top-[21rem] right-8 flex justify-center items-center gap-4 ">
+          <SearchBar />
+        </div>
       </section>
     </>
   );
