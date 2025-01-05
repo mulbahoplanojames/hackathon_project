@@ -1,23 +1,26 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import api from "@/lib/axios";
-import { AuthResponseType, LoginRequestType } from "@/types/auth";
+import type { AuthResponseType, RegisterRequestType } from "@/types/auth";
 import axios from "axios";
+import api from "@/lib/axios";
 
 export async function POST(request: Request) {
   try {
-    const body: LoginRequestType = await request.json();
+    const body: RegisterRequestType = await request.json();
 
-    const response = await api.post<AuthResponseType>("/api/auth/login", body);
+    const response = await api.post<AuthResponseType>(
+      "/api/auth/register",
+      body
+    );
 
-    if (response.status === 200) {
+    if (response.status === 201) {
       // Store the JWT token in an HTTP-only cookie
       const cookieStore = cookies();
       cookieStore.set("token", response.data.access_token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
-        maxAge: 60 * 60 * 24, // 1 day
+        maxAge: 60 * 60 * 24 * 7, // 1 week
         path: "/",
       });
 
@@ -25,18 +28,18 @@ export async function POST(request: Request) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { access_token, ...safeData } = response.data;
 
-      return NextResponse.json(safeData, { status: 200 });
+      return NextResponse.json(safeData, { status: 201 });
     }
 
     return NextResponse.json(
-      { message: "Authentication failed" },
-      { status: 401 }
+      { message: "Registration failed" },
+      { status: 400 }
     );
   } catch (error) {
     if (axios.isAxiosError(error)) {
       return NextResponse.json(
         {
-          message: error.response?.data?.message || "Authentication failed",
+          message: error.response?.data?.message || "Registration failed",
           errors: error.response?.data?.errors,
         },
         { status: error.response?.status || 500 }
