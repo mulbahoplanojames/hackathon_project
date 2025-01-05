@@ -37,7 +37,7 @@ const ProductGrid = () => {
 
   return (
     <>
-      <section className="mt-10 flex flex-col items-center  md:pb-24 pt-6 py-8 w-full">
+      <section className="mt-10 flex flex-col items-center  md:pb-24  pb-8 w-full">
         <ProductTabar
           selectedTab={selectedTab}
           onSelectedTab={setSelectedTab}
