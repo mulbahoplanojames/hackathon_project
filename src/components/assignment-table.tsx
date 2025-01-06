@@ -44,13 +44,13 @@ const AssignmentTable = () => {
   // Converting table to csv and exporting it
   const handleExport = () => {
     const csvHeader = "ID,Module,Assignment Date,Submission Date,File\n";
-    const csvRows = filteredAssignments.map((teacher) =>
+    const csvRows = filteredAssignments.map((assignment) =>
       [
-        teacher.id,
-        teacher.module,
-        teacher.assignDate,
-        teacher.dueDate,
-        teacher.file,
+        assignment.id,
+        assignment.module,
+        assignment.assignDate,
+        assignment.dueDate,
+        assignment.file,
       ].join(",")
     );
     const csvData = `${csvHeader}${csvRows.join("\n")}`;
@@ -124,31 +124,36 @@ const AssignmentTable = () => {
                   </TableHeader>
                   <TableBody>
                     {currentTeachers.length > 0 ? (
-                      currentTeachers.map((teacher) => (
+                      currentTeachers.map((assignment) => (
                         <TableRow
-                          key={teacher.id}
+                          key={assignment.id}
                           className="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                          onClick={() =>
+                            alert(
+                              `Assignment ID: ${assignment.id}. Assignment Module: ${assignment.module}`
+                            )
+                          }
                         >
                           <TableCell className="sticky left-0 bg-gray-50 dark:bg-gray-900 py-3 px-4 whitespace-nowrap">
-                            {teacher.id}
+                            {assignment.id}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {teacher.module}
+                            {assignment.module}
                           </TableCell>
 
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {teacher.assignDate}
+                            {assignment.assignDate}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {teacher.dueDate}
+                            {assignment.dueDate}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
                             <a
-                              href={teacher.file || "#"}
-                              download={teacher.file}
+                              href={assignment.file || "#"}
+                              download={assignment.file}
                               className="text-green-600 hover:underline"
                             >
-                              {teacher.file}
+                              {assignment.file}
                             </a>
                           </TableCell>
                         </TableRow>

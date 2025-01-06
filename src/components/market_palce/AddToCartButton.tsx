@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Products } from "../../../sanity.types";
 import { Button } from "@/components/ui/button";
