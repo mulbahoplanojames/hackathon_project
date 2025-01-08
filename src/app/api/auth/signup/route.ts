@@ -1,46 +1,65 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { createAxiosInstance } from "@/lib/axios";
-import { fetchCsrfToken } from "@/lib/csrfTokenFetch";
-
-// Axios instance
-const axiosInstance = createAxiosInstance();
 
 export async function POST(request: NextRequest) {
+  const { firstName, lastName, email, password, rollNumber, phone } =
+    await request.json();
+  console.log({
+    firstName,
+    lastName,
+    email,
+    password,
+    rollNumber,
+    phone,
+  });
   try {
-    const userData = await request.json();
+    // Make registration request
+    const registerResponse = await axios.post(
+      "http://localhost:8000/register",
+      {
+        firstName,
+        lastName,
+        email,
+        password,
+        rollNumber,
+        phone,
+      }
+    );
 
-    // Fetch CSRF token
-    const csrfToken = await fetchCsrfToken();
-    if (!csrfToken) {
+    // Get token from request header and store in cookies
+    const token = request.headers.get("Authorization");
+    if (token) {
+      const response = NextResponse.json(
+        { message: "Token received" },
+        { status: 200 }
+      );
+      response.cookies.set("token", token);
+      return response;
+    } else {
       return NextResponse.json(
-        { error: "Failed to fetch CSRF token" },
-        { status: 500 }
+        { error: "Token not found in request headers" },
+        { status: 400 }
       );
     }
 
-    // Make registration request
-    const registerResponse = await axiosInstance.post("/register", userData, {
-      headers: {
-        "X-XSRF-TOKEN": csrfToken, // Add CSRF token to headers
-      },
-    });
-
+    // Ensure the response data is correctly formatted
     return NextResponse.json(registerResponse.data, { status: 201 });
   } catch (error) {
-    console.error(
-      "Registration failed:",
-      axios.isAxiosError(error) ? error.response?.data : error.message
-    );
+    console.error("Registration failed:", (error as Error).message);
+
+    // More detailed error handling
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status || 500;
+      const message = error.response?.data?.message || "Internal Server Error";
+      return NextResponse.json({ status, message }, { status });
+    }
+
     return NextResponse.json(
       {
-        error: axios.isAxiosError(error)
-          ? error.response?.data?.message || "Registration failed"
-          : error.message || "Unknown error",
+        status: 500,
+        message: "Internal Server Error",
       },
-      {
-        status: axios.isAxiosError(error) ? error.response?.status || 500 : 500,
-      }
+      { status: 500 }
     );
   }
 }

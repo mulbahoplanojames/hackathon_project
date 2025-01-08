@@ -4,12 +4,12 @@ export interface LoginRequestType {
 }
 
 export interface RegisterRequestType {
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
+  rollNumber: string;
   email: string;
+  phone: string;
   password: string;
-  // password_confirmation: string;
-  // role?: "student" | "teacher" | "admin";
 }
 
 export interface AuthResponseType {
