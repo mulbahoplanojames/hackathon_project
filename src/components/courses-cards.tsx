@@ -21,12 +21,12 @@ export const CoursesCards = (props: CoursesType) => {
 
 export const CoursePeriodCard = (props: CoursesPeriodType) => {
   return (
-    <div className='border-2 rounded-2xl px-2 py-4 dark:bg-sidebar'>
-        <article className='flex gap-2 items-center '>
-            <Image src={props.iconUrl} alt={props.status} width={80} height={80}/>
-            <h1 className='text-xl sm:text-2xl font-[600]'>{props.status}</h1>
+    <div className='border-2 rounded-2xl px-2 mobile:py-3 py-4 dark:bg-sidebar flex flex-col max-sm:items-center'>
+        <article className='sm:flex sm:items-center grid justify-items-center block '>
+            <Image src={props.iconUrl} alt={props.status} width={0} height={0} className="w-[80px]"/>
+            <h1 className='text-[1.1rem] sm:text-2xl font-[600]'>{props.status}</h1>
         </article>
-        <h1 className='text-2xl font-[600] pl-5'>{props.numberOfTime}</h1>
+        <h1 className='text-2xl font-[600] text-center sm:text-left pt-2 sm:pl-5'>{props.numberOfTime}</h1>
     </div>
   )
 }

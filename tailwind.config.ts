@@ -10,6 +10,9 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+		screens: {
+			mobile: {'max':'435px'},
+		},
   		colors: {
   			primary_Clr: '#064E3B',
   			text_light: '#0f0f17',

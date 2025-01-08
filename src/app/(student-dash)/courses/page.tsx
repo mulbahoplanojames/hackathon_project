@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const Courses = () => {
   return (
     <>
-      <h1 className="text-2xl px-10 py-2">Courses</h1>
+      <h1 className="text-4xl px-6 py-2">Courses</h1>
       <CoursesPeriod/>
       <PopularCoursesCards/>
       <OnlineCoursesCards/>
@@ -17,13 +17,13 @@ export default Courses;
 
 function CoursesPeriod(){
   return(
-    <section className="lg:p-10 sm:p-6 max-sm:p-6 md:p-8 pt-0">
+    <section className="lg:p-10 p-6 md:p-8">
       <div className='pb-12'>
-        <h1 className='text-6xl max-sm:text-5xl'>Hi, <span className='text-[#118264]'>Student!</span></h1>
-        <h1 className='text-6xl max-sm:text-5xl'>What do you want</h1>
-        <h1 className='text-6xl max-sm:text-5xl'>to <span className='text-[#118264]'>learn</span> today</h1>
+        <h1 className='mobile:text-[2rem] text-5xl sm:text-6xl'>Hi, <span className='text-[#118264]'>Student!</span></h1>
+        <h1 className='mobile:text-[2rem] text-5xl sm:text-6xl'>What do you want</h1>
+        <h1 className='mobile:text-[2rem] text-5xl sm:text-6xl'>to <span className='text-[#118264]'>learn</span> today</h1>
       </div>
-      <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 '>
+      <div className='grid gap-4 xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 '>
         {
           CoursesPeriodData.map((course, index) => {
             return (
@@ -42,7 +42,7 @@ function CoursesPeriod(){
 
 function PopularCoursesCards(){
   return(
-    <article className="lg:p-10 pt-0 sm:p-6 max-sm:p-6 md:p-8">
+    <article className="lg:p-10 pt-0 p-6 md:p-8">
       <h1 className="text-3xl font-[600] py-6">Popular Courses</h1>
       <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
         {PopularCoursesData.map((course, index) => {
@@ -66,7 +66,7 @@ function PopularCoursesCards(){
 
 function OnlineCoursesCards(){
   return(
-    <article className="lg:p-10 pt-0 sm:p-6 max-sm:p-6 md:p-8">
+    <article className="lg:p-10 pt-0 p-6 md:p-8">
       <h1 className="text-3xl font-[600] py-6">Online Courses</h1>
       <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
         {OnlineCoursesData.map((course, index) => {
