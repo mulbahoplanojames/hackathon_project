@@ -1,112 +1,158 @@
 "use client";
+import { z } from "zod";
 import Link from "next/link";
-import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { bookingSchema } from "@/schema/zod-schema";
 import "react-toastify/dist/ReactToastify.css";
-
+import {
+  Form,
+  FormItem,
+  FormLabel,
+  FormField,
+  FormControl,
+} from "@/components/ui/form";
+import { resolve } from "path";
 const BookingForm = () => {
-  const [selectedValue, setSelectedValue] = useState("Select Doctor");
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedValue(event.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    toast.success("Booking Complete.....", {
-      onClose: () => {
-        window.location.href="/";
-      },
-    });
+  const form = useForm<z.infer<typeof bookingSchema>>({
+    resolver: zodResolver(bookingSchema),
+    defaultValues: {
+      Your_Name: "",
+      Prefered_Date: 0,
+      Preferred_Time: 0,
+      Doctor_Name: "",
+    },
+  });
+  const onSubmit = async (data: z.infer<typeof bookingSchema>) => {
+    console.log(data);
   };
 
   return (
-    <div className="p-6 rounded-lg shadow-lg bg-white dark:bg-slate-800 w-full max-w-[80rem] h-auto mx-auto">
-      <h1 className="text-start text-2xl font-bold mb-6">
+    <div className="py-[6rem] px-[2rem] rounded-lg shadow-lg bg-white dark:bg-sidebar w-full max-w-[80rem]">
+      <h1 className="text-start text-2xl font-bold mb-12">
         Book an Appointment
       </h1>
-      <form
-        className="flex flex-col space-y-4 border-2 border-black p-4 rounded-lg"
-        onSubmit={handleSubmit}
-      >
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-          <div className="flex flex-col flex-1">
-            <label htmlFor="name" className="font-semibold mt-4 text-[1.2rem]">
-              Your Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Enter your name"
-              className="p-3 border border-gray-300 dark:border-none rounded-[12px] mt-4 outline-none"
-            />
-          </div>
-          <div className="flex flex-col flex-1">
-            <label
-              htmlFor="date"
-              className="font-semibold ml-0 md:ml-[1.5rem] mt-4 text-[1.2rem]"
-            >
-              Preferred Date
-            </label>
-            <input
-              type="text"
-              id="date"
-              name="date"
-              placeholder="Enter your preferred date"
-              className="p-3 mt-4 ml-0 md:ml-[1.5rem] border border-gray-300 dark:border-none rounded-[12px] outline-none"
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-          <div className="flex flex-col flex-1">
-            <label htmlFor="time" className="font-semibold mt-6 text-[1.2rem]">
-              Preferred Time
-            </label>
-            <input
-              type="text"
-              id="time"
-              name="time"
-              placeholder="Enter your preferred time"
-              className="p-3 border border-gray-300 dark:border-none rounded-[12px] mt-4 mb-0 md:mb-12 outline-none"
-            />
-          </div>
-          <div className="flex flex-col flex-1">
-            <label
-              htmlFor="doctor"
-              className="font-semibold mt-6 ml-0 md:ml-[1.5rem] text-[1.2rem]"
-            >
-              Doctor Name
-            </label>
-            <select
-              id="mySelect"
-              value={selectedValue}
-              onChange={handleChange}
-              className="p-[.85rem] border border-gray-300 dark:border-none rounded-[12px] mt-4 ml-0 md:ml-[1.5rem] outline-none"
-            >
-              <option value="" className="text-gray-300">
-                Select a doctor
-              </option>
-              <option value="Dr. John Doe">Dr. John Doe</option>
-              <option value="Dr. Jane Doe">Dr. Jane Doe</option>
-              <option value="Dr. Alex Smith">Dr. Alex Smith</option>
-              <option value="Dr. Emily Clark">Dr. Emily Clark</option>
-              <option value="Dr. Michael Brown">Dr. Michael Brown</option>
-              <option value="Dr. Sarah Johnson">Dr. Sarah Johnson</option>
-            </select>
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          className="py-[.7rem] bg-primary_Clr text-white rounded-[18px] w-full md:w-[28rem] mt-[3rem]"
+      <Form {...form}>
+        <form
+          className="flex flex-col space-y-4 border-2 border-black py-12 px-8 rounded-lg"
+          onSubmit={form.handleSubmit(onSubmit)}
         >
-          Book an Appointment now
-        </button>
-      </form>
+          <div className="grid md:grid-cols-2 md:gap-16 gap-4 mb-8">
+            <FormField
+              name="Your_Name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    htmlFor=""
+                    className="font-semibold mt-4 col-span-1 text-[1.2rem]"
+                  >
+                    Your Name
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter your Name"
+                      className="h-12 rounded-2xl dark:bg-black"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-      <ToastContainer />
+            <FormField
+              name="Your_Name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    htmlFor=""
+                    className="font-semibold mt-4 text-[1.2rem]"
+                  >
+                    Preferred Date
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter a preferred date"
+                      className="h-12 rounded-2xl dark:bg-black"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="grid md:grid-cols-2 md:gap-16 gap-4">
+            <FormField
+              name="Your_Name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel
+                    htmlFor=""
+                    className="font-semibold col-span-1 mt-4 text-[1.2rem]"
+                  >
+                    Preferred Time
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Give a preferred time"
+                      className="h-12 rounded-2xl dark:bg-black"
+                      {...field}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              name="Your_Name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem className="block">
+                  <FormLabel
+                    htmlFor=""
+                    className="font-semibold block text-[1.2rem]"
+                  >
+                    {" "}
+                    Doctors Name
+                  </FormLabel>
+                  <FormControl>
+                    <select
+                      id="mySelect"
+                      className="w-full border px-2 h-12 rounded-2xl dark:bg-black"
+                    >
+                      <option value="" className="text-gray-300">
+                        Select a doctor
+                      </option>
+                      <option value="Dr. John Doe">Dr. John Doe</option>
+                      <option value="Dr. Jane Doe">Dr. Jane Doe</option>
+                      <option value="Dr. Alex Smith">Dr. Alex Smith</option>
+                      <option value="Dr. Emily Clark">Dr. Emily Clark</option>
+                      <option value="Dr. Michael Brown">
+                        Dr. Michael Brown
+                      </option>
+                      <option value="Dr. Sarah Johnson">
+                        Dr. Sarah Johnson
+                      </option>
+                    </select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <button
+            type="submit"
+            className="py-[.7rem] bg-primary_Clr text-white rounded-[18px] w-full md:w-[28rem]"
+          >
+            Book an Appointment now
+          </button>
+        </form>
+      </Form>
     </div>
   );
 };

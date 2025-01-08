@@ -1,12 +1,22 @@
-import Image from "next/image";
-import path from "path";
-
-export const cards = [
-  { title: "Total Books", booking: "8" },
-  { title: "Appointments", booking: "3" },
-  { title: "Unread Messages", booking: "13" },
-  { title: "Doctors", booking: "6" },
+export const ReportsData = [
+  {
+    description: "Total Books",
+    booking: 8
+  },
+  {
+    description: "Appointments",
+    booking: 3
+  },
+  {
+    description: "Unread Messages",
+    booking: 13
+  },
+  {
+    description: "Doctors",
+    booking: 6
+  },
 ];
+
 export const doctorData = [
   {
     Image: "Image 24.svg",

@@ -11,14 +11,16 @@ export type NavItem = {
   icon: LucideIcon;
 };
 
-export type footerLinksType = {
-  heading: string;
-  link1: string;
-  link2: string;
-  link3: string;
-  link4: string;
-  locateLink1: string;
-  locateLink2: string;
-  locateLink3: string;
-  locateLink4: string;
-};
+export type DoctorsCardsType = {
+  title: string;
+  description: string;
+  imageSrc: string;
+}
+
+export type ReportCardsType = {
+  description: string;
+  booking: number;
+}
+export type TeamMembersType = {
+  image: string;
+}

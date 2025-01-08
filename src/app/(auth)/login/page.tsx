@@ -1,105 +1,108 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { z } from "zod";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schema/zod-schema";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const validateLogin = (loginData: { email: string; password: string }) => {
-  const validationResult = loginSchema.safeParse(loginData);
-  if (!validationResult.success) {
-    console.error(validationResult.error.errors);
-    toast.error(
-      "Validation error: " +
-        validationResult.error.errors.map((e) => e.message).join(", ")
-    );
-    return false;
-  }
-  console.log("Login data is valid...");
-  return true;
-};
+import {
+  Form,
+  FormItem,
+  FormLabel,
+  FormField,
+  FormControl,
+} from "@/components/ui/form";
+import { resolve } from "path";
 
 const LogIn = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (event: React.FormEvent) => {
-    event.preventDefault();
-    const loginData = { email, password };
-
-    if (!email || !password) {
-      toast.error("Email and password are required.");
-      return;
-    }
-
-    if (validateLogin(loginData)) {
-      console.log("Email", email);
-      console.log("Password", password);
-    }
-  };
-
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
+    console.log(data);
+  }
   return (
     <>
-      <section className="flex flex-col sm:flex-row h-auto sm:h-[35rem] w-full sm:w-[60rem] bg-white dark:bg-slate-800 rounded-[20px] shadow sm:shadow-lg">
-        <div className="w-full sm:w-1/2 p-4 sm:p-8 flex flex-col justify-center">
-          <Link href="/" className="mb-4 w-8">
+      <section className="flex flex-col sm:flex-row h-auto sm:h-[38rem] w-full sm:w-[70rem] bg-white dark:bg-sidebar rounded-[20px] shadow sm:shadow-lg">
+        <div className="w-full sm:w-[60%] p-8 md:p-12 flex flex-col justify-center">
+          <Link href="/" className="mb-4  w-8">
             <Image src="/Left_chevron.svg" alt="" width={30} height={20} />
           </Link>
-          <form onSubmit={handleLogin} className="pl-6">
-            <h1 className="text-4xl sm:text-5xl font-bold">Login</h1>
-            <h4 className="mt-3 w-full sm:w-64">
-              Welcome back, please login to your account
-            </h4>
-            <div className="mt-4">
-              <label className="block text-sm font-medium" htmlFor="email">
-                Email
-              </label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                placeholder="your@email.com"
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-black rounded-md shadow-sm focus:outline-none focus:ring-primary_Clr focus:border-primary_Clr sm:text-sm"
+          <h1 className="text-4xl sm:text-5xl font-bold">Login</h1>
+          <h4 className="mt-3 text-[20px]">
+            Welcome back, please <br/>login to your account
+          </h4>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
+              <FormField
+                name="email"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel
+                      htmlFor="email"
+                      className="text-[25px] font-semibold"
+                    >
+                      Email
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Enter your email"
+                        className="h-12 rounded-2xl"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
               />
-            </div>
-
-            <div>
-              <label
-                className="block text-sm font-medium mt-4"
-                htmlFor="password"
+              <FormField
+                name="password"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel
+                      htmlFor="password"
+                      className="block text-[25px] font-semibold pt-4"
+                    >
+                      Password
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="Enter your password"
+                        className="h-12 rounded-2xl"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <div className="mt-4 flex justify-end">
+                <Link href="#" className="text-[20px]">
+                    Forgot Password
+                </Link>
+              </div>
+              <button
+                type="submit"
+                className="mt-4 w-full bg-primary_Clr text-[20px] text-white py-2 rounded-2xl"
               >
-                Password
-              </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                placeholder="Enter your password"
-                onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-black rounded-md shadow-sm focus:outline-none focus:ring-primary_Clr focus:border-primary_Clr sm:text-sm"
-              />
-            </div>
-            <div className="mt-4 flex justify-end">
-              <a href="#" className="text-sm w-[7rem]">
-                Forgot Password
-              </a>
-            </div>
-            <button
-              type="submit"
-              className="mt-4 w-full bg-primary_Clr text-white px-4 py-2 rounded-md"
-            >
-              Login
-            </button>
-            <h3 className="mt-4 text-sm">
-              New user?{" "}
-              <a href="#" className="text-green-900">
-                Sign Up
-              </a>
-            </h3>
-          </form>
+                Login
+              </button>
+              <h3 className="mt-4 text-[20px]">
+                New user?{" "}
+                <a href="#" className="text-green-900 dark:text-green-700">
+                  Sign Up
+                </a>
+              </h3>
+            </form>
+          </Form>
         </div>
         <div
           style={{
@@ -110,7 +113,6 @@ const LogIn = () => {
           <h1 className="text-white w-56 text-4xl sm:text-6xl">Welcome Back</h1>
         </div>
       </section>
-      <ToastContainer />
     </>
   );
 };
