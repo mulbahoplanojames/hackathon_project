@@ -4,7 +4,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components//ui/button";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -12,7 +11,7 @@ const EmptyCart = () => {
   return (
     <>
       <section className="flex items-center justify-center w-full md:py-20 py-16">
-        <Card className="w-full max-w-md text-center md:p-6 p-4">
+        <Card className="w-full max-w-md text-center md:p-6 p-4 dark:bg-white">
           <CardHeader className="h-48 bg-black rounded-md mb-3 relative p-0">
             <Image
               src="/Shopping_Cart.png"
@@ -21,7 +20,7 @@ const EmptyCart = () => {
               className="object-contain"
             />
           </CardHeader>
-          <CardTitle className="text-2xl font-bold pb-3">
+          <CardTitle className="text-2xl font-bold pb-3 text-black">
             Your cart feel lonely
           </CardTitle>
           <CardDescription className="flex flex-col gap-4">

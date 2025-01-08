@@ -41,16 +41,16 @@ const QuantityButton = ({ product, className }: QuantityButtonProps) => {
         <Button
           variant="outline"
           size="icon"
-          className="w-5 h-5"
+          className="w-5 h-5 dark:text-white"
           onClick={removeItemFromCart}
         >
           <Minus />
         </Button>
-        <span>{itemCount}</span>
+        <span className="">{itemCount}</span>
         <Button
           variant="outline"
           size="icon"
-          className="w-5 h-5"
+          className="w-5 h-5 dark:text-white"
           onClick={addToCart}
         >
           <Plus />

@@ -45,12 +45,12 @@ const CartPage = () => {
 
   return (
     <>
-      <section className="px-4 py-6 bg-slate-100">
+      <section className="px-4 py-6 ">
         {cartProducts.length ? (
           <>
-            <div className="flex items-center gap-2 text-xl">
+            <div className="flex items-center gap-2 text-xl  dark:text-white">
               <ShoppingBag />
-              <h1 className=" font-bold">Your Shopping Cart</h1>
+              <h1 className=" font-bold ">Your Shopping Cart</h1>
             </div>
             <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-10 mt-10">
               <div className="lg:col-span-2 border rounded-md bg-white p-4 ">
@@ -58,10 +58,10 @@ const CartPage = () => {
                   const itemCount = getItemCount(product.product._id);
                   return (
                     <div
-                      className="flex border-b last:border-b-0 gap-8 bg-green-300 justify-between items-center"
+                      className="flex border-b last:border-b-0 gap-8  justify-between items-center"
                       key={product?.product._id}
                     >
-                      <div className="flex flex-1 items-center h-36 md:h-44 bg-yellow-300 gap-1">
+                      <div className="flex flex-1 items-center h-36 md:h-44  gap-1">
                         {product.product.images && (
                           <Link
                             href={`/product/${product?.product?.slug?.current}`}
@@ -77,7 +77,7 @@ const CartPage = () => {
                             />
                           </Link>
                         )}
-                        <div className="h-full flex flex-1 flex-col items-start justify-between py-1 bg-pink-500">
+                        <div className="h-full flex flex-1 flex-col items-start justify-between py-1 text-black">
                           <div className="space-y-1">
                             <h2 className="font-semibold line-clamp-1">
                               {product?.product?.name}
@@ -131,7 +131,10 @@ const CartPage = () => {
                             }
                             className="text-lg font-bold"
                           />
-                          <QuantityButton product={product?.product} />
+                          <QuantityButton
+                            product={product?.product}
+                            className="text-black"
+                          />
                         </div>
                       </div>
                     </div>
@@ -145,7 +148,7 @@ const CartPage = () => {
                   Reset Cart
                 </Button>
               </div>
-              <div className="lg:col-span-1  md:inline-block bg-white border rounded-md p-4 h-fit">
+              <div className="lg:col-span-1  md:inline-block bg-white border rounded-md p-4 h-fit text-black">
                 <h2 className="text-xl font-bold pb-4">Order Summary</h2>
                 <div className="space-y-2 mb-2">
                   <div className="flex justify-between items-center">
@@ -168,7 +171,8 @@ const CartPage = () => {
                   />
                 </div>
                 <Button
-                  className="w-full tracking-wide rounded-full font-semibold my-3"
+                  className="w-full tracking-wide rounded-full font-semibold my-3 dark:bg-black dark:text-white"
+                  variant="default"
                   size="lg"
                 >
                   Proceed to Checkout
