@@ -11,6 +11,20 @@ export type NavItem = {
   icon: LucideIcon;
 };
 
+
+export type DoctorsCardsType = {
+  title: string;
+  description: string;
+  imageSrc: string;
+}
+
+export type ReportCardsType = {
+  description: string;
+  booking: number;
+}
+export type TeamMembersType = {
+  image: string;
+
 export type CoursesType = {
   title: string;
   date: string;
