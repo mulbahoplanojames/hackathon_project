@@ -1,53 +1,19 @@
-export const footerLinksData = [
-    {
-        heading: 'Resources',
-        locateLink1: '',
-        link1: 'Academic Support',
-        locateLink2: '',
-        link2: 'Health Support',
-        locateLink3: '',
-        link3: 'E-Commerce',
-        locateLink4: '',
-        link4: 'Community Engagement',
-    },{
-        heading: 'Company',
-        locateLink1: '/about',
-        link1: 'About Us',
-        locateLink2: '',
-        link2: 'Careers',
-        locateLink3: '',
-        link3: 'Contact',
-        locateLink4: '',
-        link4: 'Blog',
-    },{
-        heading: 'Support',
-        locateLink1: '',
-        link1: 'Privacy Policy',
-        locateLink2: '',
-        link2: 'Terms of use',
-        locateLink3: '',
-        link3: 'Help Center',
-        locateLink4: '',
-        link4: 'Feedback',
-    },
-]
-
 export const BasicDetailsData = [
     {
-        heading: 'Heading 1',
-        details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae labore voluptates quo nihil.'
+        heading: 'Innovation',
+        details: 'We are pioneers in our field, constantly exploring new ideas and pushing boundaries.'
     },
     {
-        heading: 'Heading 2',
-        details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae labore voluptates quo nihil.'
+        heading: 'Customer-Centric',
+        details: 'Our clients are at the heart of everything we do. We are committed to delivering value and exceeding expectations.'
     },
     {
-        heading: 'Heading 3',
-        details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae labore voluptates quo nihil.'
+        heading: 'Expertise',
+        details: 'Our team consists of industry experts who bring a wealth of knowledge and experience to each project.'
     },
     {
-        heading: 'Heading 3',
-        details: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae labore voluptates quo nihil.'
+        heading: 'Integrity',
+        details: 'We operate with the highest level of integrity, ensuring transparency, honesty, and ethical conduct in all our endeavors.'
     }
 ]
 
@@ -55,5 +21,13 @@ export const TrustCompanysData = [
     {ImageUrl: '/aboutUs/framer.png'},
     {ImageUrl: '/aboutUs/dropbox.png'},
     {ImageUrl: '/aboutUs/medium.png'},
-    {ImageUrl: '/aboutUs/webflow.png'}
+    {ImageUrl: '/aboutUs/webflow.png'},
+    {ImageUrl: '/aboutUs/framer.png'},
+    {ImageUrl: '/aboutUs/dropbox.png'},
+    {ImageUrl: '/aboutUs/medium.png'},
+    {ImageUrl: '/aboutUs/webflow.png'},
+    {ImageUrl: '/aboutUs/framer.png'},
+    {ImageUrl: '/aboutUs/dropbox.png'},
+    {ImageUrl: '/aboutUs/medium.png'},
+    {ImageUrl: '/aboutUs/webflow.png'},
 ]
