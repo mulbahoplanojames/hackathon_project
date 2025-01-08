@@ -32,14 +32,14 @@ const ProductCard = ({ product }: { product: Products }) => {
               )}
             </CardHeader>
             <CardDescription className="py-2 px-1">
-              <p className="truncate font-semibold pb-1.5 text-lg text-black">
+              <p className="truncate font-semibold pb-1.5 text-lg text-black dark:text-white">
                 {product?.name}
               </p>
-              <p className="pb-1 text-black text-base truncate">
+              <p className="pb-1 text-black dark:text-white text-base truncate">
                 {product?.intro}
               </p>
               <PriceView
-                className="text-lg "
+                className="text-lg  text-black dark:text-white"
                 price={product?.price}
                 discount={product?.discount}
               />

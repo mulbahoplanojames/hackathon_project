@@ -1,12 +1,13 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 
-// I am creating this instance of axios to make requests to the Laravel backend
-const api = axios.create({
-  baseURL: process.env.LARAVEL_API_URL,
-  headers: {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  },
-});
-
-export default api;
+export const createAxiosInstance = (): AxiosInstance => {
+  return axios.create({
+    baseURL: "http://localhost:8000",
+    withCredentials: true,
+    withXSRFToken: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+};

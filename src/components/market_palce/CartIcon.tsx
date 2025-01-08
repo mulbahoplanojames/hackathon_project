@@ -10,7 +10,7 @@ const CartIcon = () => {
 
   return (
     <>
-      <Link href="/cart" className="cursor-pointer relative">
+      <Link href="/market-place/cart" className="cursor-pointer relative">
         <ShoppingBag className="w-6 h-6" />
         <span className="absolute -top-1 -right-1 h-3.5 w-3.5 bg-black text-white text-xs font-semibold rounded-full flex justify-center items-center">
           {items.length ? items.length : 0}

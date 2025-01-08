@@ -8,8 +8,8 @@ export interface RegisterRequestType {
   lastname: string;
   email: string;
   password: string;
-  password_confirmation: string;
-  role?: "student" | "teacher" | "admin";
+  // password_confirmation: string;
+  // role?: "student" | "teacher" | "admin";
 }
 
 export interface AuthResponseType {

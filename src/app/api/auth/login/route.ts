@@ -1,51 +1,37 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import api from "@/lib/axios";
-import { AuthResponseType, LoginRequestType } from "@/types/auth";
-import axios from "axios";
+// import { cookies } from "next/headers";
+import { LoginRequestType } from "@/types/auth";
+import { createAxiosInstance } from "@/lib/axios";
+import { fetchCsrfToken } from "@/lib/csrfTokenFetch";
+
+// Axios instance
+const axiosInstance = createAxiosInstance();
 
 export async function POST(request: Request) {
   try {
     const body: LoginRequestType = await request.json();
 
-    const response = await api.post<AuthResponseType>("/api/auth/login", body);
-
-    if (response.status === 200) {
-      // Store the JWT token in an HTTP-only cookie
-      const cookieStore = cookies();
-      cookieStore.set("token", response.data.access_token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAge: 60 * 60 * 24, // 1 day
-        path: "/",
-      });
-
-      // Preventing the token from being sent to the backend in the response for security
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { access_token, ...safeData } = response.data;
-
-      return NextResponse.json(safeData, { status: 200 });
-    }
-
-    return NextResponse.json(
-      { message: "Authentication failed" },
-      { status: 401 }
-    );
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
+    // Fetch CSRF token
+    const csrfToken = await fetchCsrfToken();
+    if (!csrfToken) {
       return NextResponse.json(
-        {
-          message: error.response?.data?.message || "Authentication failed",
-          errors: error.response?.data?.errors,
-        },
-        { status: error.response?.status || 500 }
+        { error: "CSRF token mismatch" },
+        { status: 419 }
       );
     }
 
+    // Make login request
+    const loginResponse = await axiosInstance.post("/login", body, {
+      headers: {
+        "X-XSRF-TOKEN": csrfToken, // Add CSRF token to headers
+      },
+    });
+
+    return NextResponse.json(loginResponse.data, { status: 201 });
+  } catch (error) {
     return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
+      { error: (error as Error).message || "Invalid credentials" },
+      { status: 401 }
     );
   }
 }
