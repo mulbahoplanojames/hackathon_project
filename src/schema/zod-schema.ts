@@ -16,9 +16,10 @@ export const bookingSchema = z.object({
     .number()
     .min(3, { message: "Please enter this information" }),
   Doctor_Name: z.string().min(3, { message: "Please enter this information" }),
+});
+
 export const NewsLetterSchema = z.object({
   email: z.string().email(),
-
 });
 
 export const signupSchema = z.object({

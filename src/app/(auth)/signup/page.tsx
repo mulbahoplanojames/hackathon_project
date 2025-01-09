@@ -1,4 +1,3 @@
-
 "use client";
 
 import { z } from "zod";
@@ -33,7 +32,7 @@ const SignUp = () => {
 
   const onSubmit = (data: z.infer<typeof signupSchema>) => {
     console.log(data);
-  }
+  };
 
   return (
     <>
@@ -44,19 +43,26 @@ const SignUp = () => {
               <Image src="/Left chevron.svg" alt="" width={30} height={30} />
             </button>
           </Link>
-          <h1 className="text-5xl pt-3 pb-4 font-[900]">SignUp</h1>
+          <h1 className="text-4xl pt-3 pb-4 font-[900]">SignUp</h1>
           <p className="pb-6">Create your account with Performance Hub</p>
           <Form {...form}>
-            <form className="flex flex-col space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+            <form
+              className="flex flex-col space-y-4"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   name="firstName"
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xl font-[600]">First Name</FormLabel>
+                      <FormLabel>First Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="First Name" {...field} className="h-12 rounded-2xl"/>
+                        <Input
+                          placeholder="First Name"
+                          {...field}
+                          className="h-10"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -67,9 +73,13 @@ const SignUp = () => {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xl font-[600]">Last Name</FormLabel>
+                      <FormLabel>Last Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="First Name" {...field} className="h-12 rounded-2xl"/>
+                        <Input
+                          placeholder="First Name"
+                          {...field}
+                          className="h-10"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -82,9 +92,13 @@ const SignUp = () => {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xl font-[600]">Email</FormLabel>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input placeholder="First Name" {...field} className="h-12 rounded-2xl"/>
+                        <Input
+                          placeholder="First Name"
+                          {...field}
+                          className="h-10"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -97,9 +111,13 @@ const SignUp = () => {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xl font-[600]">Roll Number</FormLabel>
+                      <FormLabel>Roll Number</FormLabel>
                       <FormControl>
-                        <Input placeholder="Roll Number" {...field} className="h-12 rounded-2xl"/>
+                        <Input
+                          placeholder="Roll Number"
+                          {...field}
+                          className="h-10"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -110,39 +128,49 @@ const SignUp = () => {
                   control={form.control}
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-xl font-[600]">Number</FormLabel>
+                      <FormLabel>Number</FormLabel>
                       <FormControl>
-                        <Input placeholder="Number" {...field} className="h-12 rounded-2xl"/>
+                        <Input
+                          placeholder="Number"
+                          {...field}
+                          className="h-10"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-              </div> 
+              </div>
               <div>
                 <FormField
-                    name="password"
-                    control={form.control}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-xl font-[600]">Password</FormLabel>
-                        <FormControl>
-                          <Input type='password' placeholder="Password" {...field} className="h-12 rounded-2xl"/>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  name="password"
+                  control={form.control}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          {...field}
+                          className="h-10"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
-              <aside className="flex gap-2 pb-3 pt-1 text-xl justify-end">
+              <aside className="flex gap-2 pb-3 pt-1 text-lg justify-end">
                 <p>Have an account?</p>
-                <Link href="/login">
-                  <button className="border-none bg-none text-[#064E3B]">
-                    Login
-                  </button>
+                <Link href="/login" className="text-[#064E3B]">
+                  Login
                 </Link>
               </aside>
-              <Button type="submit" className="bg-[#064E3B] text-xl rounded-2xl h-12 dark:text-white dark:hover:text-black">
+              <Button
+                type="submit"
+                className="bg-[#064E3B] text-xl rounded-xl h-12 dark:text-white dark:hover:text-black"
+              >
                 SignUp
               </Button>
             </form>

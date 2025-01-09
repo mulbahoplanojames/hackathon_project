@@ -1,11 +1,9 @@
-
 "use client";
 import { z } from "zod";
 import Link from "next/link";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schema/zod-schema";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,10 +13,10 @@ import {
   FormLabel,
   FormField,
   FormControl,
+  FormMessage,
 } from "@/components/ui/form";
-import { resolve } from "path";
 
-const LogIn = () => {
+const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -28,7 +26,7 @@ const LogIn = () => {
   });
   const onSubmit = async (data: z.infer<typeof loginSchema>) => {
     console.log(data);
-  }
+  };
   return (
     <>
       <section className="flex flex-col sm:flex-row h-auto sm:h-[38rem] w-full sm:w-[70rem] bg-white dark:bg-sidebar rounded-[20px] shadow sm:shadow-lg">
@@ -36,30 +34,29 @@ const LogIn = () => {
           <Link href="/" className="mb-4  w-8">
             <Image src="/Left_chevron.svg" alt="" width={30} height={20} />
           </Link>
-          <h1 className="text-4xl sm:text-5xl font-bold">Login</h1>
+          <h2 className="text-3xl sm:text-5xl font-bold">Login</h2>
           <h4 className="mt-3 text-[20px]">
-            Welcome back, please <br/>login to your account
+            Welcome back, please login to your account
           </h4>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="mt-4">
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="mt-4 space-y-6"
+            >
               <FormField
                 name="email"
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel
-                      htmlFor="email"
-                      className="text-[25px] font-semibold"
-                    >
-                      Email
-                    </FormLabel>
+                    <FormLabel htmlFor="email">Email</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter your email"
-                        className="h-12 rounded-2xl"
+                        className="h-10"
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -68,39 +65,36 @@ const LogIn = () => {
                 control={form.control}
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel
-                      htmlFor="password"
-                      className="block text-[25px] font-semibold pt-4"
-                    >
-                      Password
-                    </FormLabel>
+                    <FormLabel htmlFor="password">Password</FormLabel>
                     <FormControl>
                       <Input
                         type="password"
                         placeholder="Enter your password"
-                        className="h-12 rounded-2xl"
+                        className="h-10 "
                         {...field}
                       />
                     </FormControl>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
-              <div className="mt-4 flex justify-end">
-                <Link href="#" className="text-[20px]">
-                    Forgot Password
-                </Link>
+              <div className=" flex justify-end">
+                <Link href="#">Forgot Password</Link>
               </div>
               <button
                 type="submit"
-                className="mt-4 w-full bg-primary_Clr text-[20px] text-white py-2 rounded-2xl"
+                className="mt-2 w-full bg-primary_Clr text-white py-2 rounded-xl"
               >
                 Login
               </button>
-              <h3 className="mt-4 text-[20px]">
-                New user?{" "}
-                <a href="#" className="text-green-900 dark:text-green-700">
+              <h3>
+                New user? &nbsp;
+                <Link
+                  href="/signup"
+                  className="text-green-900 dark:text-green-700"
+                >
                   Sign Up
-                </a>
+                </Link>
               </h3>
             </form>
           </Form>
