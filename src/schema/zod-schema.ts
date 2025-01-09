@@ -8,14 +8,14 @@ export const loginSchema = z.object({
 });
 
 export const bookingSchema = z.object({
-  Your_Name: z.string().min(3, { message: "Please enter this information" }),
-  Prefered_Date: z
-    .number()
+  yourName: z.string().min(3, { message: "Please enter this information" }),
+  preferredDate: z.coerce
+    .date()
+    .min(new Date(), { message: "Please enter a valid date" }),
+  preferredTime: z
+    .string()
     .min(3, { message: "Please enter this information" }),
-  Preferred_Time: z
-    .number()
-    .min(3, { message: "Please enter this information" }),
-  Doctor_Name: z.string().min(3, { message: "Please enter this information" }),
+  doctorName: z.string().min(3, { message: "Please enter this information" }),
 });
 
 export const NewsLetterSchema = z.object({

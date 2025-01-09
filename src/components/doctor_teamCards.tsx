@@ -47,7 +47,7 @@ const DoctorsCard: React.FC<DoctorsCardsType> = ({
         <p className="text-gray-500 dark:text-white w-[17rem] text-base mt-1">
           Commodo qui nulla ipsum ea cupidatat sit aliquip dolor.
         </p>
-        <Link href="/bookingForm">
+        <Link href="/book-doctor/booking-form">
           <button className="bg-[#064e3b] text-white text-[16px] px-[3rem] py-2 rounded-[5px] mt-4">
             Book Appointment
           </button>
