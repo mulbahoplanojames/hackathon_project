@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
-import { toJSON } from "flatted";
 
 export async function POST(request: NextRequest) {
   const { firstName, lastName, email, password, rollNumber, phone } =
@@ -20,7 +19,9 @@ export async function POST(request: NextRequest) {
     );
 
     // get the token from the response header and store in cookies
-    const token = registerResponse.headers["authorization"];
+    const cookies = registerResponse.headers["set-cookie"];
+    const token = cookies ? cookies[0]?.split(";")[0].split("=")[1] : null;
+
     if (token) {
       const response = NextResponse.json(
         { message: "Token received" },
@@ -28,6 +29,8 @@ export async function POST(request: NextRequest) {
       );
       response.cookies.set("token", token, {
         httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7, // 7 days
       });
       return response;
@@ -39,7 +42,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Ensure the response data is correctly formatted
-    return NextResponse.json(toJSON(registerResponse), { status: 201 });
+    return NextResponse.json(registerResponse.data, { status: 201 });
   } catch (error) {
     console.error("Registration failed:", (error as Error).message);
 

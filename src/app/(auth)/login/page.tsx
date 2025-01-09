@@ -15,8 +15,9 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -27,7 +28,7 @@ const Login = () => {
     },
   });
 
-  // const router = useRouter();
+  const router = useRouter();
 
   const onHandleLoginSubmit = async (data: z.infer<typeof loginSchema>) => {
     // console.log(data);
@@ -38,9 +39,11 @@ const Login = () => {
       });
       console.log("Response from the login form success block", response);
 
-      // if (response.status === 200) {
-      //   router.push("/");
-      // }
+      if (response.status === 200 || response.status === 201) {
+        form.reset();
+        toast.success("Login successfully");
+        router.push("/dashboard");
+      }
 
       form.reset();
 
@@ -130,6 +133,7 @@ const Login = () => {
         >
           <h1 className="text-white w-56 text-4xl sm:text-6xl">Welcome Back</h1>
         </div>
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
       </section>
     </>
   );

@@ -15,7 +15,9 @@ export async function POST(request: Request) {
     });
 
     // get the token from the response header and store in cookies
-    const token = loginResponse.headers["authorization"];
+    const cookies = loginResponse.headers["set-cookie"];
+    const token = cookies ? cookies[0]?.split(";")[0].split("=")[1] : null;
+
     if (token) {
       const response = NextResponse.json(
         { message: "Token received" },
@@ -23,19 +25,16 @@ export async function POST(request: Request) {
       );
       response.cookies.set("token", token, {
         httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
         maxAge: 60 * 60 * 24 * 7, // 7 days
       });
       return response;
     } else {
       return NextResponse.json(
-        { error: "Token not received" },
-        { status: 401 }
+        { error: "Token not found in request headers" },
+        { status: 400 }
       );
-    }
-
-    // redirect to the home page if login is successful
-    if (loginResponse.status === 201) {
-      return NextResponse.redirect(new URL("/", request.url));
     }
 
     // Return the login response

@@ -17,6 +17,8 @@ import {
   FormField,
 } from "@/components/ui/form";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -30,6 +32,8 @@ const SignUp = () => {
       password: "",
     },
   });
+
+  const router = useRouter();
 
   // sending the data to my local route endpoint server before sending to the backend server
   const onSubmit = async (data: z.infer<typeof signupSchema>) => {
@@ -45,7 +49,13 @@ const SignUp = () => {
         password,
       });
       console.log("Response from the sign form", response);
-      form.reset();
+
+      if (response.status === 200 || response.status === 201) {
+        form.reset();
+        toast.success("Account created successfully");
+        router.push("/dashboard");
+      }
+
       return response;
     } catch (error) {
       console.log(
@@ -202,6 +212,7 @@ const SignUp = () => {
             Create Your Account
           </h1>
         </div>
+        <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
       </section>
     </>
   );
