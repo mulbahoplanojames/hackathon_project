@@ -26,14 +26,17 @@ export async function POST(request: NextRequest) {
       }
     );
 
-    // Get token from request header and store in cookies
-    const token = request.headers.get("Authorization");
+    // get the token from the response header and store in cookies
+    const token = registerResponse.headers["authorization"];
     if (token) {
       const response = NextResponse.json(
         { message: "Token received" },
-        { status: 200 }
+        { status: 201 }
       );
-      response.cookies.set("token", token);
+      response.cookies.set("token", token, {
+        httpOnly: true,
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      });
       return response;
     } else {
       return NextResponse.json(
