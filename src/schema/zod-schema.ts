@@ -7,6 +7,20 @@ export const loginSchema = z.object({
     .min(6, { message: "Password must be at least 6 characters long" }),
 });
 
+export const bookingSchema = z.object({
+  Your_Name: z.string().min(3, { message: "Please enter this information" }),
+  Prefered_Date: z
+    .number()
+    .min(3, { message: "Please enter this information" }),
+  Preferred_Time: z
+    .number()
+    .min(3, { message: "Please enter this information" }),
+  Doctor_Name: z.string().min(3, { message: "Please enter this information" }),
+export const NewsLetterSchema = z.object({
+  email: z.string().email(),
+
+});
+
 export const signupSchema = z.object({
   firstName: z
     .string()
