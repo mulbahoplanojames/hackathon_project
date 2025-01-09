@@ -15,6 +15,8 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
+// import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -24,9 +26,30 @@ const Login = () => {
       password: "",
     },
   });
-  const onSubmit = async (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
+
+  // const router = useRouter();
+
+  const onHandleLoginSubmit = async (data: z.infer<typeof loginSchema>) => {
+    // console.log(data);
+    try {
+      const response = await axios.post("/api/auth/login", {
+        email: data.email,
+        password: data.password,
+      });
+      console.log("Response from the login form success block", response);
+
+      // if (response.status === 200) {
+      //   router.push("/");
+      // }
+
+      form.reset();
+
+      return response;
+    } catch (error) {
+      console.error("Login failed from the login catch block:", error);
+    }
   };
+
   return (
     <>
       <section className="flex flex-col sm:flex-row h-auto sm:h-[38rem] w-full sm:w-[70rem] bg-white dark:bg-sidebar rounded-[20px] shadow sm:shadow-lg">
@@ -40,7 +63,7 @@ const Login = () => {
           </h4>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              onSubmit={form.handleSubmit(onHandleLoginSubmit)}
               className="mt-4 space-y-6"
             >
               <FormField

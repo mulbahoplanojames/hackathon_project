@@ -16,6 +16,7 @@ import {
   FormMessage,
   FormField,
 } from "@/components/ui/form";
+import axios from "axios";
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -30,8 +31,28 @@ const SignUp = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof signupSchema>) => {
-    console.log(data);
+  // sending the data to my local route endpoint server before sending to the backend server
+  const onSubmit = async (data: z.infer<typeof signupSchema>) => {
+    const { firstName, lastName, email, rollNumber, phoneNumber, password } =
+      data;
+    try {
+      const response = await axios.post("/api/auth/signup", {
+        firstName,
+        lastName,
+        email,
+        rollNumber,
+        phone: phoneNumber,
+        password,
+      });
+      console.log("Response from the sign form", response);
+      form.reset();
+      return response;
+    } catch (error) {
+      console.log(
+        "Registration failed from the signup form catch request :",
+        error
+      );
+    }
   };
 
   return (

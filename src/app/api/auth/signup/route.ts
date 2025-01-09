@@ -1,19 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+import { toJSON } from "flatted";
 
 export async function POST(request: NextRequest) {
   const { firstName, lastName, email, password, rollNumber, phone } =
     await request.json();
-  console.log({
-    firstName,
-    lastName,
-    email,
-    password,
-    rollNumber,
-    phone,
-  });
+
   try {
-    // Make registration request
     const registerResponse = await axios.post(
       "http://localhost:8000/register",
       {
@@ -46,11 +39,10 @@ export async function POST(request: NextRequest) {
     }
 
     // Ensure the response data is correctly formatted
-    return NextResponse.json(registerResponse.data, { status: 201 });
+    return NextResponse.json(toJSON(registerResponse), { status: 201 });
   } catch (error) {
     console.error("Registration failed:", (error as Error).message);
 
-    // More detailed error handling
     if (axios.isAxiosError(error)) {
       const status = error.response?.status || 500;
       const message = error.response?.data?.message || "Internal Server Error";
