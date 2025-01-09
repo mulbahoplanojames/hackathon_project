@@ -1,3 +1,4 @@
+
 import Image from "next/image";
 import { ReportsData, doctorData } from "@/data/doctorData";
 import { DoctorsCard, ReportsCards } from "@/components/doctor_teamCards";

@@ -1,52 +1,31 @@
-import { AppSidebar } from "@/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import { Separator } from "@/components/ui/separator";
-import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
-} from "@/components/ui/sidebar";
+import DashboardHeader from "@/components/dashboard-header";
+import { ChartPieWorkHours } from "../components/pie-chart-1";
+import GroupCards from "../components/group-cards";
+import AddTask from "../components/add-task";
+import Courses from "../components/course";
 
-export default function Page() {
+export default function TeacherDashboard() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
-          <div className="flex items-center gap-2 px-4">
-            <SidebarTrigger className="-ml-1" />
-            <Separator orientation="vertical" className="mr-2 h-4" />
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem className="hidden md:block">
-                  <BreadcrumbLink href="#">
-                    Building Your Application
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator className="hidden md:block" />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-            <div className="aspect-video rounded-xl bg-muted/50" />
-          </div>
-          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+    <section className="p-4 pt-3">
+      <DashboardHeader text="Teacher Dashboard" />
+      <div className=" w-full h-fit">
+        <h1 className=" text-3xl  pb-3  pt-2">Welcome Back, Mr. James</h1>
+        <p className="pb-2 text-lg ">
+          Your students completed <span className="text-red-700">80%</span> of
+          their tasks.{" "}
+        </p>
+        <p className="pb-3 text-lg ">
+          Progress is <span className="text-red-700"> very good !</span>
+        </p>
+      </div>
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-10 mt-8 md:px-1">
+        <ChartPieWorkHours />
+        <GroupCards />
+      </div>
+      <div className="grid md:grid-cols-3 place-items-center grid-cols-1 gap-10 mt-8 md:px-1">
+        <AddTask />
+        <Courses />
+      </div>
+    </section>
   );
 }

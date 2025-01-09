@@ -20,6 +20,7 @@ import { Bell, Search } from "lucide-react";
 import { ModeToggle } from "@/context/ ModeToggle";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Button } from "@/components/ui/button";
+import DashFooter from "@/layout/DashFooter";
 
 export const metadata = {
   title: "Student Performance Hub Dashboard",
@@ -44,7 +45,7 @@ export default function RootLayout({
           <SidebarProvider>
             <AppSidebar />
             <SidebarInset>
-              <header className="flex h-16 shrink-0 items-center gap-2">
+              <header className="flex h-16 shrink-0 items-center gap-2 bg-primary_Clr text-white sticky inset-0 z-40">
                 <div className="flex items-center gap-2 px-4 w-full ">
                   <SidebarTrigger className="-ml-1" />
                   <Separator orientation="vertical" className="mr-2 h-4" />
@@ -62,6 +63,7 @@ export default function RootLayout({
               </header>
 
               {children}
+              <DashFooter />
             </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>

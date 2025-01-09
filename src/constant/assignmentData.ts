@@ -1,0 +1,51 @@
+export const assignmentData = [
+  {
+    id: 1,
+    module: "Introduction to Python",
+    assignDate: "10 May 2024",
+    dueDate: "20 May 2024",
+    file: "Assignment 1",
+  },
+  {
+    id: 2,
+    module: "Java Programming",
+    assignDate: "16 May 2024",
+    dueDate: "26 May 2024",
+    file: "Assignment 2",
+  },
+  {
+    id: 3,
+    module: "Data Structures",
+    assignDate: "20 May 2024",
+    dueDate: "30 May 2024",
+    file: "Assignment 3",
+  },
+  {
+    id: 4,
+    module: "Web Development",
+    assignDate: "25 May 2024",
+    dueDate: "05 June 2024",
+    file: "Assignment 4",
+  },
+  {
+    id: 5,
+    module: "Database Management",
+    assignDate: "30 May 2024",
+    dueDate: "10 June 2024",
+    file: "Assignment 5",
+  },
+  {
+    id: 6,
+    module: "JavaScript Programming ",
+    assignDate: "05 June 2024",
+    dueDate: "15 June 2024",
+    file: "Assignment 6",
+  },
+  {
+    id: 7,
+    module: "React JS",
+    assignDate: "10 June 2024",
+    dueDate: "20 June 2024",
+    file: "Assignment 7",
+  },
+];

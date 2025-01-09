@@ -1,3 +1,4 @@
+
 "use client";
 import { z } from "zod";
 import Link from "next/link";
@@ -117,4 +118,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Login;

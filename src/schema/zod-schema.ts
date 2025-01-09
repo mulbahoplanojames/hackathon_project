@@ -39,3 +39,21 @@ export const signupSchema = z.object({
     .string()
     .min(6, { message: "Password must be at least 6 characters long" }),
 });
+
+export const createGroupSchema = z.object({
+  name: z.string().nonempty("Name is required"),
+  description: z.string().nonempty("Description is required"),
+  image: z.string().optional(),
+});
+
+export const teacherAssignmentSchema = z.object({
+  module: z.string().min(1, "Module name is required"),
+  assignmentDate: z.string().nonempty("Assignment date is required"),
+  dueDate: z.string().nonempty("Due date is required"),
+  classAssignTo: z.string().min(1, "Class assigned to is required"),
+  file: z.instanceof(File).optional(),
+});
+
+export const newsLetterSchema = z.object({
+  email: z.string().email(),
+});
