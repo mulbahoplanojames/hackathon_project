@@ -1,10 +1,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { DoctorsCardsType, ReportCardsType, TeamMembersType } from "@/types/types";
+import {
+  DoctorsCardsType,
+  ReportCardsType,
+  TeamMembersType,
+} from "@/types/types";
+import { Card } from "./ui/card";
 
-
-const ReportsCards: React.FC <ReportCardsType> = ({ description, booking }) => {
+const ReportsCards: React.FC<ReportCardsType> = ({ description, booking }) => {
   return (
     <div className="grid grid-rows-1 py-8 justify-items-center rounded-[15px] overflow-hidden dark:bg-sidebar shadow-md">
       <Image
@@ -21,11 +25,15 @@ const ReportsCards: React.FC <ReportCardsType> = ({ description, booking }) => {
     </div>
   );
 };
-export {ReportsCards}
+export { ReportsCards };
 
-const DoctorsCard: React.FC<DoctorsCardsType> = ({ title, description, imageSrc }) => {
+const DoctorsCard: React.FC<DoctorsCardsType> = ({
+  title,
+  description,
+  imageSrc,
+}) => {
   return (
-    <div className="grid grid-rows-1 rounded-[15px] max-w-[500px] overflow-hidden dark:bg-sidebar shadow-md">
+    <Card className="grid grid-rows-1 rounded-[15px] max-w-[500px] overflow-hidden dark:bg-sidebar shadow-md">
       <Image
         src={imageSrc}
         alt=""
@@ -33,10 +41,10 @@ const DoctorsCard: React.FC<DoctorsCardsType> = ({ title, description, imageSrc 
         height={0}
         className="w-full max-w-[600px]"
       />
-      <div className="p-4 flex flex-col items-start mt-4">
-        <h1 className="text-[24px] font-semibold">{title}</h1>
-        <h2 className="text-primary_Clr text-xl mt-2">{description}</h2>
-        <p className="text-gray-500 dark:text-white w-[17rem] text-xl mt-2">
+      <div className="p-2 flex flex-col items-start ">
+        <h1 className="text-[20px] font-semibold">{title}</h1>
+        <h2 className="text-primary_Clr text-lg mt-1">{description}</h2>
+        <p className="text-gray-500 dark:text-white w-[17rem] text-base mt-1">
           Commodo qui nulla ipsum ea cupidatat sit aliquip dolor.
         </p>
         <Link href="/bookingForm">
@@ -45,11 +53,11 @@ const DoctorsCard: React.FC<DoctorsCardsType> = ({ title, description, imageSrc 
           </button>
         </Link>
       </div>
-    </div>
+    </Card>
   );
 };
-  
-export {DoctorsCard}
+
+export { DoctorsCard };
 
 const OurTeamCard = ({ image }: TeamMembersType) => {
   return (
@@ -79,4 +87,4 @@ const OurTeamCard = ({ image }: TeamMembersType) => {
     </div>
   );
 };
-export {OurTeamCard}
+export { OurTeamCard };
