@@ -1,29 +1,46 @@
 import Image from "next/image";
 import { CoursesType, CoursesPeriodType } from "@/types/types";
+import { Card } from "./ui/card";
+import { format, isValid, parseISO } from "date-fns";
 
 export const CoursesCards = (props: CoursesType) => {
+  const formatDate = (dateString: string) => {
+    try {
+      if (!dateString) return "Date unavailable";
+
+      const date = parseISO(dateString);
+
+      if (!isValid(date)) {
+        return "Invalid date";
+      }
+
+      return format(date, "MMMM dd, yyyy");
+    } catch (error) {
+      console.error("Date formatting error:", error);
+      return "Invalid date format";
+    }
+  };
   return (
-    <div className="bg-[#fff] p-2 rounded-2xl shadow-lg grid grid-rows-[1.5fr] max-w-[600px] dark:bg-sidebar">
+    <Card className="p-2 rounded-lg shadow-lg ">
       <div className="pb-2">
         <Image
-          src={props.imageUrl}
+          src="courses/course_1.svg"
           alt={props.title}
           width={0}
           height={0}
           style={{ width: "100%", maxWidth: "600px", height: "auto" }}
         />
       </div>
-      <div className="p-2">
+      <div>
         <h3 className="text-blue-500 text-lg pb-2">{props.title}</h3>
-        <h1 className="text-xl font-[600] pb-2">{props.description}</h1>
+        <h1 className="text-sm pb-2">{props.description.slice(0, 100)}</h1>
         <aside className="flex justify-between py-2 gap-4">
-          <p className="text-l text-[#8a8a8a]">{props.date}</p>
-          <p className="text-base flex items-center justify-center text-[#8a8a8a] bg-[#ddd] dark:bg-[#333] rounded-3xl px-2">
-            {props.views}
+          <p className="text-l text-[#8a8a8a]">
+            {formatDate(props.created_at)}
           </p>
         </aside>
       </div>
-    </div>
+    </Card>
   );
 };
 

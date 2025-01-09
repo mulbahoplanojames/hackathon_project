@@ -1,14 +1,11 @@
-import {
-  OnlineCoursesData,
-  PopularCoursesData,
-  CoursesPeriodData,
-} from "@/data/coursesData";
+import { OnlineCoursesData, CoursesPeriodData } from "@/data/coursesData";
 import {
   CoursesCards,
   CoursePeriodCard,
 } from "../../../components/courses-cards";
 import { Button } from "@/components/ui/button";
 import DashboardHeader from "@/components/dashboard-header";
+import AllCourses from "@/components/courses/AllCourses";
 
 const Courses = () => {
   return (
@@ -16,7 +13,7 @@ const Courses = () => {
       <section className="p-4 pt-3">
         <DashboardHeader text="Courses" />
         <CoursesPeriod />
-        <PopularCoursesCards />
+        <AllCourses />
         <OnlineCoursesCards />
       </section>
     </>
@@ -55,33 +52,6 @@ function CoursesPeriod() {
   );
 }
 
-function PopularCoursesCards() {
-  return (
-    <article className="md:py-14 py-8">
-      <h1 className="text-3xl font-[600] py-6">Popular Courses</h1>
-      <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
-        {PopularCoursesData.map((course, index) => {
-          return (
-            <CoursesCards
-              key={index}
-              imageUrl={course.imageUrl}
-              title={course.title}
-              description={course.description}
-              date={course.date}
-              views={course.views}
-            />
-          );
-        })}
-      </div>
-      <section className="flex justify-center items-center pt-8">
-        <Button className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg">
-          Load More Course
-        </Button>
-      </section>
-    </article>
-  );
-}
-
 function OnlineCoursesCards() {
   return (
     <article className="md:py-14 py-8">
@@ -94,8 +64,7 @@ function OnlineCoursesCards() {
               imageUrl={course.imageUrl}
               title={course.title}
               description={course.description}
-              date={course.date}
-              views={course.views}
+              created_at={course.created_at}
             />
           );
         })}

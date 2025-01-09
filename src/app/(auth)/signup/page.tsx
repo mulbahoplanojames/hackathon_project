@@ -48,7 +48,7 @@ const SignUp = () => {
         phone: phoneNumber,
         password,
       });
-      console.log("Response from the sign form", response);
+      // console.log("Response from the sign form", response);
 
       if (response.status === 200 || response.status === 201) {
         form.reset();
