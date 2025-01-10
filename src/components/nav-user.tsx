@@ -18,6 +18,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { deleteCookie } from "cookies-next";
 
 export function NavUser({
   user,
@@ -78,7 +79,12 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => {
+                deleteCookie("token");
+                window.location.reload();
+              }}
+            >
               <LogOut />
               Log out
             </DropdownMenuItem>
