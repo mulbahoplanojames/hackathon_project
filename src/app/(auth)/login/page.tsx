@@ -37,7 +37,7 @@ const Login = () => {
         email: data.email,
         password: data.password,
       });
-      // console.log("Response from the login form success block", response);
+      console.log("Response from the login form success block", response);
 
       if (response.status === 200 || response.status === 201) {
         form.reset();

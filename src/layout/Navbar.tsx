@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { TbMenu2 } from "react-icons/tb";
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import Link from "next/link";
@@ -9,23 +9,17 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/context/ ModeToggle";
 import { usePathname } from "next/navigation";
 import { PackageCheck } from "lucide-react";
-import { getToken } from "@/lib/getToken";
-import UserProfile from "@/components/UserProfile";
+import { hasCookie, getCookie } from "cookies-next";
 
 const Navbar = () => {
   // State variable to keep track of whether the menu is open or not.
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [token, setToken] = useState<string | undefined>(undefined);
-  const pathName = usePathname();
-  // console.log(token);
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      const token = await getToken();
-      setToken(token);
-    };
-    fetchToken();
-  }, []);
+  console.log("Testing the cookie", hasCookie("token"));
+
+  const token = getCookie("token");
+  console.log("Token", token);
+  const pathName = usePathname();
 
   return (
     <>
@@ -60,25 +54,16 @@ const Navbar = () => {
         </menu>
 
         <div className="lg:gap-x-6 gap-x-4 flex items-center justify-center">
-          {token ? (
-            <>
-              <UserProfile />
-            </>
-          ) : (
-            <>
-              <Link href="/login">
-                <Button className="dark:bg-transparent bg-white dark:text-white text-primary_Clr hover:bg-white border dark:border-white border-transparent  hover:opacity-80 md:block hidden">
-                  Login
-                </Button>
-              </Link>
-              <Link href="/signup">
-                <Button className="md:block hidden bg-white text-primary_Clr hover:opacity-85 hover:bg-white">
-                  Create Account
-                </Button>
-              </Link>
-            </>
-          )}
-
+          <Link href="/login">
+            <Button className="dark:bg-transparent bg-white dark:text-white text-primary_Clr hover:bg-white border dark:border-white border-transparent  hover:opacity-80 md:block hidden">
+              Login
+            </Button>
+          </Link>
+          <Link href="/signup">
+            <Button className="md:block hidden bg-white text-primary_Clr hover:opacity-85 hover:bg-white">
+              Create Account
+            </Button>
+          </Link>
           <ModeToggle />
           <TbMenu2
             className={`max-lg:block hidden text-3xl cursor-pointer `}

@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 // import { cookies } from "next/headers";
 import { LoginRequestType } from "@/types/auth";
 import axios from "axios";
-// import { toJSON, stringify } from "flatted";
-
+import { setCookie } from "cookies-next";
 export async function POST(request: Request) {
   try {
     const { email, password }: LoginRequestType = await request.json();
@@ -23,12 +22,13 @@ export async function POST(request: Request) {
         { message: "Token received" },
         { status: 201 }
       );
-      response.cookies.set("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-      });
+      // response.cookies.set("token", token, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === "production",
+      //   sameSite: "lax",
+      //   maxAge: 60 * 60 * 24 * 7, // 7 days
+      // });
+      setCookie("token", token, { req: request, res: response });
       return response;
     } else {
       return NextResponse.json(

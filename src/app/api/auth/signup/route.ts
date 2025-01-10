@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+import { setCookie } from "cookies-next";
 
 export async function POST(request: NextRequest) {
   const { firstName, lastName, email, password, rollNumber, phone } =
@@ -27,12 +28,13 @@ export async function POST(request: NextRequest) {
         { message: "Token received" },
         { status: 201 }
       );
-      response.cookies.set("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
-        maxAge: 60 * 60 * 24 * 7, // 7 days
-      });
+      // response.cookies.set("token", token, {
+      //   httpOnly: true,
+      //   secure: process.env.NODE_ENV === "production",
+      //   sameSite: "lax",
+      //   maxAge: 60 * 60 * 24 * 7, // 7 days
+      // });
+      setCookie("token", token, { req: request, res: response });
       return response;
     } else {
       return NextResponse.json(

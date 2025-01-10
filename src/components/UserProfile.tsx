@@ -1,6 +1,4 @@
-import React from "react";
-
-const UserProfile = () => {
+const UserProfile = async () => {
   return (
     <>
       <div className="dropdown dropdown-end">
@@ -18,7 +16,7 @@ const UserProfile = () => {
         </div>
         <ul
           tabIndex={0}
-          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+          className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-white"
         >
           <li>
             <a className="justify-between">
