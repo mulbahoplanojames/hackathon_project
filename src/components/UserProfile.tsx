@@ -1,4 +1,7 @@
-const UserProfile = async () => {
+"use client";
+import Image from "next/image";
+import { deleteCookie } from "cookies-next";
+const UserProfile = () => {
   return (
     <>
       <div className="dropdown dropdown-end">
@@ -7,10 +10,11 @@ const UserProfile = async () => {
           role="button"
           className="btn btn-ghost btn-circle avatar"
         >
-          <div className="w-10 rounded-full">
-            <img
+          <div className="w-10 rounded-full border border-black">
+            <Image
               alt="Tailwind CSS Navbar component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+              src="/Cybersecurity.png"
+              fill
             />
           </div>
         </div>
@@ -28,7 +32,14 @@ const UserProfile = async () => {
             <a>Settings</a>
           </li>
           <li>
-            <a>Logout</a>
+            <span
+              onClick={() => {
+                deleteCookie("token");
+                window.location.reload();
+              }}
+            >
+              Logout
+            </span>
           </li>
         </ul>
       </div>

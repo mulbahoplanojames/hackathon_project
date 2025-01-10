@@ -1,4 +1,4 @@
-"use clirnt";
+"use client";
 
 import { navLinks } from "@/constant/navData";
 import Link from "next/link";
