@@ -21,6 +21,7 @@ import { ModeToggle } from "@/context/ ModeToggle";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Button } from "@/components/ui/button";
 import DashFooter from "@/layout/DashFooter";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Student Performance Hub Dashboard",
@@ -67,6 +68,7 @@ export default function RootLayout({
             </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>
+        <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
       </body>
     </html>
   );

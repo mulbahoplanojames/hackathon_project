@@ -3,9 +3,10 @@ import {
   Dialog,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 import { useState } from "react";
@@ -28,18 +29,19 @@ import {
   FileUploaderContent,
   FileUploaderItem,
 } from "@/components/ui/file-upload";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
-  name_8763415415: z.string(),
+  assignmentFile: z.string(),
 });
 
 export function SubmitAssignments() {
   const [files, setFiles] = useState<File[] | null>(null);
 
   const dropZoneConfig = {
-    maxFiles: 5,
+    maxFiles: 1,
     maxSize: 1024 * 1024 * 4,
-    multiple: true,
+    multiple: false,
   };
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,11 +50,7 @@ export function SubmitAssignments() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+      toast.success("Assignment submitted successfully");
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -67,14 +65,12 @@ export function SubmitAssignments() {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
+        <DialogTitle>Submit Assignment</DialogTitle>
         <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 max-w-3xl mx-auto py-10"
-          >
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
             <FormField
               control={form.control}
-              name="name_8763415415"
+              name="assignmentFile"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Select File</FormLabel>
@@ -98,7 +94,7 @@ export function SubmitAssignments() {
                             &nbsp; or drag and drop
                           </p>
                           <p className="text-xs text-gray-500 dark:text-gray-400">
-                            SVG, PNG, JPG or GIF
+                            PDF, SVG, PNG, JPG
                           </p>
                         </div>
                       </FileInput>
