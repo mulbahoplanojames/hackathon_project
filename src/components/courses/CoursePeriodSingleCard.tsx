@@ -5,7 +5,7 @@ import NumberTicker from "../ui/number-ticker";
 export const CoursePeriodCard = (props: CoursesPeriodType) => {
   return (
     <div className="border-2 rounded-2xl px-2 mobile:py-3 py-4 dark:bg-sidebar flex flex-col max-sm:items-center">
-      <article className="sm:flex sm:items-center grid justify-items-center block ">
+      <article className="sm:flex sm:items-center grid justify-items-center ">
         <Image
           src={props.iconUrl}
           alt={props.status}
