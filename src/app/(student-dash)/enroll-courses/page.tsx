@@ -1,7 +1,14 @@
+import EnrolledCourses from "@/components/courses/EnrollCourses";
 import React from "react";
 
 const EnrollCoursesPage = () => {
-  return <div>EnrollCoursesPage</div>;
+  return (
+    <>
+      <EnrolledCourses />
+    </>
+  );
 };
 
 export default EnrollCoursesPage;
+
+// api/courses/user/{id}
