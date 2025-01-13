@@ -23,6 +23,10 @@ export const categoryType = defineType({
       type: "text",
     }),
     defineField({
+      name: "brand",
+      type: "text",
+    }),
+    defineField({
       name: "image",
       title: "Category Image",
       type: "image",
