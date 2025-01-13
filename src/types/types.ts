@@ -96,7 +96,7 @@ export type CoursesType = {
 export type CoursesPeriodType = {
   status: string;
   iconUrl: string;
-  numberOfTime: string;
+  numberOfTime: number;
 };
 
 export type basicDestailsType = {
@@ -107,5 +107,3 @@ export type basicDestailsType = {
 export type TrustCompanysType = {
   ImageUrl: string;
 };
-
-

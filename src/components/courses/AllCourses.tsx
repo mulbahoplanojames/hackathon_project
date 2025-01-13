@@ -1,8 +1,8 @@
 import React from "react";
-import { CoursesCards } from "../courses-cards";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { CoursesType } from "@/types/types";
+import { CoursesCard } from "./CourseCard";
 
 const getAllCourses = async () => {
   try {
@@ -25,7 +25,7 @@ const AllCourses = async () => {
         <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
           {courses.map((course: CoursesType) => {
             return (
-              <CoursesCards
+              <CoursesCard
                 key={course.title}
                 imageUrl={course.imageUrl}
                 id={course.id}
