@@ -28,6 +28,7 @@ const AllCourses = async () => {
               <CoursesCards
                 key={course.title}
                 imageUrl={course.imageUrl}
+                id={course.id}
                 title={course.title}
                 description={course.description}
                 created_at={course.created_at}

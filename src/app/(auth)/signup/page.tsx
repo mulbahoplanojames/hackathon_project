@@ -19,6 +19,7 @@ import {
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signupSchema>>({
@@ -53,6 +54,7 @@ const SignUp = () => {
       if (response.status === 200 || response.status === 201) {
         form.reset();
         toast.success("Account created successfully");
+        revalidatePath("/");
         router.push("/dashboard");
       }
 

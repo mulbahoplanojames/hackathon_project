@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { deleteCookie } from "cookies-next";
+import Link from "next/link";
 const UserProfile = () => {
   return (
     <>
@@ -29,7 +30,7 @@ const UserProfile = () => {
             </a>
           </li>
           <li>
-            <a>Settings</a>
+            <Link href="/dashboard">Dashboard</Link>
           </li>
           <li>
             <span

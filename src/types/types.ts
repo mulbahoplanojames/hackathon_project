@@ -86,6 +86,7 @@ export type TeamMembersType = {
 };
 
 export type CoursesType = {
+  id: string;
   title: string;
   created_at: string;
   imageUrl: string;
@@ -106,3 +107,5 @@ export type basicDestailsType = {
 export type TrustCompanysType = {
   ImageUrl: string;
 };
+
+

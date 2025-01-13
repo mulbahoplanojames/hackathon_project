@@ -61,6 +61,7 @@ function OnlineCoursesCards() {
           return (
             <CoursesCards
               key={index}
+              id={course.id}
               imageUrl={course.imageUrl}
               title={course.title}
               description={course.description}
