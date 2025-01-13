@@ -46,9 +46,19 @@ const data = {
       icon: BookOpen,
     },
     {
-      title: "View Courses",
-      url: "/courses",
+      title: "Courses",
+      url: "#",
       icon: SquareLibrary,
+      items: [
+        {
+          title: "View All Courses",
+          url: "/courses",
+        },
+        {
+          title: "View Enroll Courses",
+          url: "/enroll-courses",
+        },
+      ],
     },
     {
       title: "Study With Chat",

@@ -3,6 +3,8 @@ import Image from "next/image";
 import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 const UserProfile = () => {
+  // const token = getCookie("token");
+  // console.log(token);
   return (
     <>
       <div className="dropdown dropdown-end">

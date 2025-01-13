@@ -31,7 +31,7 @@ const Login = () => {
   const router = useRouter();
 
   const onHandleLoginSubmit = async (data: z.infer<typeof loginSchema>) => {
-    // console.log(data);
+    console.log(data);
     try {
       const response = await axios.post("/api/auth/login", {
         email: data.email,
@@ -42,7 +42,7 @@ const Login = () => {
       if (response.status === 200 || response.status === 201) {
         form.reset();
         toast.success("Login successfully");
-        router.push("/dashboard");
+        // router.push("/dashboard");
       }
 
       form.reset();

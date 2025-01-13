@@ -28,6 +28,9 @@ export async function POST(request: Request) {
       //   sameSite: "lax",
       //   maxAge: 60 * 60 * 24 * 7, // 7 days
       // });
+      const data = loginResponse.data;
+      console.log(data);
+      setCookie("user", data, { req: request, res: response });
       setCookie("token", token, { req: request, res: response });
       return response;
     } else {
