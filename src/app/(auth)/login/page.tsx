@@ -42,7 +42,7 @@ const Login = () => {
       if (response.status === 200 || response.status === 201) {
         form.reset();
         toast.success("Login successfully");
-        // router.push("/dashboard");
+        router.push("/dashboard");
       }
 
       form.reset();

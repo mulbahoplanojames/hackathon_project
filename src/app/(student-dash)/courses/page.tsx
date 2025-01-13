@@ -36,7 +36,7 @@ function CoursesPeriod() {
           to <span className="text-[#118264]">learn</span> today
         </h1>
       </div>
-      <div className="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 ">
+      {/* <div className="grid gap-4 xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 ">
         {CoursesPeriodData.map((course, index) => {
           return (
             <CoursePeriodCard
@@ -47,7 +47,7 @@ function CoursesPeriod() {
             />
           );
         })}
-      </div>
+      </div> */}
     </section>
   );
 }

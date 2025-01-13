@@ -7,25 +7,16 @@ import MenuLinks from "./MenuLinks";
 import UserProfile from "@/components/UserProfile";
 import { Button } from "@/components/ui/button";
 import { getCookie } from "cookies-next";
-import { useEffect } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const token = getCookie("token");
-  // console.log("Token", token);
-
-  // useEffect(() => {
-  //   if (token) {
-  //     axios
-  //       .get("http://localhost:8000/api/auth-user", {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       })
-  //       .then((response) => console.log("User info:", response))
-  //       .catch((error) => console.log("Error fetching user info:", error));
-  //   }
-  // }, [token]);
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const token = getCookie("token");
+    if (token) {
+      setToken(token);
+    }
+  }, [token]);
 
   return (
     <>

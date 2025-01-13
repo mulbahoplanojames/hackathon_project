@@ -38,6 +38,7 @@ const UserProfile = () => {
             <span
               onClick={() => {
                 deleteCookie("token");
+                deleteCookie("user");
                 window.location.reload();
               }}
             >
