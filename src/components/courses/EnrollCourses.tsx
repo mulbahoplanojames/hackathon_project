@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { CoursesType } from "@/types/types";
-import { CoursesCard } from "./CourseCard";
 import { getCookie } from "cookies-next";
+import { EnrolledCoursesCard } from "./EnrolledCourseCard";
 
 const user = getCookie("user");
 const currentUser = user ? JSON.parse(user as string) : null;
@@ -40,11 +40,11 @@ const EnrolledCourses = () => {
 
   return (
     <>
-      <section className="md:py-14 py-8">
-        <h1 className="text-3xl font-[600] py-6">Popular Courses</h1>
+      <section className="p-4 pt-3">
+        <h1 className="text-3xl font-[600] py-6">Enrolled Courses</h1>
         <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
           {courses.slice(0, visibleCourses).map((course: CoursesType) => (
-            <CoursesCard
+            <EnrolledCoursesCard
               key={course.title}
               imageUrl={course.imageUrl}
               id={course.id}
