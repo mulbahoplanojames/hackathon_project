@@ -12,13 +12,16 @@ const currentUser = user ? JSON.parse(user as string) : null;
 
 const getAllCourses = async () => {
   try {
-    const response = await axios.get(`/api/courses/user/${currentUser?.id}`, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    const response = await axios.get(
+      `http://localhost:8000/api/courses/user/${currentUser?.id}`,
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
     const data = await response.data;
-    console.log("Courses Data:", data);
+    // console.log("Courses Data:", data);
 
     return data;
   } catch (error) {

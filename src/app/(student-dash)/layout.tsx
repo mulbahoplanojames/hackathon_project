@@ -22,6 +22,7 @@ import { ThemeProvider } from "@/context/theme-provider";
 import { Button } from "@/components/ui/button";
 import DashFooter from "@/layout/DashFooter";
 import { Toaster } from "react-hot-toast";
+import ReactQueryProvider from "@/context/ReactQueryProvider";
 
 export const metadata = {
   title: "Student Performance Hub Dashboard",
@@ -35,42 +36,44 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <SidebarProvider>
-            <AppSidebar />
-            <SidebarInset>
-              <header className="flex h-16 shrink-0 items-center gap-2 bg-primary_Clr text-white sticky inset-0 z-40">
-                <div className="flex items-center gap-2 px-4 w-full ">
-                  <SidebarTrigger className="-ml-1" />
-                  <Separator orientation="vertical" className="mr-2 h-4" />
-                  <Breadcrumb className="w-full flex md:justify-between justify-end items-center gap-6">
-                    <BreadcrumbItem className="hidden md:block w-[50%]">
-                      <Input placeholder="Search" className="" />
-                    </BreadcrumbItem>
-                    <BreadcrumbItem className="space-x-4 flex items-center">
-                      <SearchIcon />
-                      <Bell className="cursor-pointer" />
-                      <ModeToggle />
-                    </BreadcrumbItem>
-                  </Breadcrumb>
-                </div>
-              </header>
+    <ReactQueryProvider>
+      <html lang="en">
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <SidebarProvider>
+              <AppSidebar />
+              <SidebarInset>
+                <header className="flex h-16 shrink-0 items-center gap-2 bg-primary_Clr text-white sticky inset-0 z-40">
+                  <div className="flex items-center gap-2 px-4 w-full ">
+                    <SidebarTrigger className="-ml-1" />
+                    <Separator orientation="vertical" className="mr-2 h-4" />
+                    <Breadcrumb className="w-full flex md:justify-between justify-end items-center gap-6">
+                      <BreadcrumbItem className="hidden md:block w-[50%]">
+                        <Input placeholder="Search" className="" />
+                      </BreadcrumbItem>
+                      <BreadcrumbItem className="space-x-4 flex items-center">
+                        <SearchIcon />
+                        <Bell className="cursor-pointer" />
+                        <ModeToggle />
+                      </BreadcrumbItem>
+                    </Breadcrumb>
+                  </div>
+                </header>
 
-              {children}
-              <DashFooter />
-            </SidebarInset>
-          </SidebarProvider>
-        </ThemeProvider>
-        <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
-      </body>
-    </html>
+                {children}
+                <DashFooter />
+              </SidebarInset>
+            </SidebarProvider>
+          </ThemeProvider>
+          <Toaster position="bottom-right" toastOptions={{ duration: 3000 }} />
+        </body>
+      </html>
+    </ReactQueryProvider>
   );
 }
 

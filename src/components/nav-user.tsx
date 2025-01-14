@@ -19,6 +19,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { deleteCookie, getCookie } from "cookies-next";
+import { UpdateUserProfles } from "./UpdateUserProfile";
 
 export function NavUser() {
   const { isMobile } = useSidebar();
@@ -90,6 +91,9 @@ export function NavUser() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
+      </SidebarMenuItem>
+      <SidebarMenuItem>
+        <UpdateUserProfles />
       </SidebarMenuItem>
     </SidebarMenu>
   );
