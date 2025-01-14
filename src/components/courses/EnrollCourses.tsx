@@ -1,69 +1,96 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import axios from "axios";
 import { CoursesType } from "@/types/types";
 import { getCookie } from "cookies-next";
 import { EnrolledCoursesCard } from "./EnrolledCourseCard";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Skeleton } from "../ui/skeleton";
 
 const user = getCookie("user");
 const currentUser = user ? JSON.parse(user as string) : null;
 
-const getAllCourses = async () => {
-  try {
-    const response = await axios.get(
-      `http://localhost:8000/api/courses/user/${currentUser?.id}`,
-      {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      }
-    );
-    const data = await response.data;
-    // console.log("Courses Data:", data);
-
-    return data;
-  } catch (error) {
-    console.log("Error fetching courses:", error);
-  }
+const fetchCourses = async (limit: number, lastVisibleCourseId?: string) => {
+  const response = await axios.get(
+    `http://localhost:8000/api/courses/user/${currentUser?.id}?limit=${limit}${lastVisibleCourseId ? `&lastVisibleCourse=${lastVisibleCourseId}` : ""}`,
+    {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  );
+  const data = await response.data;
+  return data;
 };
 
 const EnrolledCourses = () => {
-  const [courses, setCourses] = useState<CoursesType[]>([]);
-  const [visibleCourses, setVisibleCourses] = useState<number>(8);
+  const {
+    data: courses,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["enroll-courses", currentUser?.id],
+    queryFn: () => fetchCourses(8),
+  });
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const allCourses = await getAllCourses();
-      setCourses(allCourses);
-    };
-    fetchCourses();
-  }, []);
+  const queryClient = useQueryClient();
 
-  const loadMoreCourses = () => {
-    setVisibleCourses((prevVisibleCourses) => prevVisibleCourses + 4);
+  const loadMoreCourses = async () => {
+    const lastVisibleCourse = courses?.[courses.length - 1];
+    const nextCourses = await fetchCourses(4, lastVisibleCourse?.id);
+    queryClient.setQueryData(
+      ["courses", currentUser?.id],
+      [...(courses || []), ...nextCourses]
+    );
   };
+
+  if (isLoading) {
+    return (
+      <section className="pb-5 p-4 pt-3">
+        <Skeleton className="h-[30px] w-[250px] rounded-xl mb-4" />
+        <div className="grid auto-rows-min gap-8 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
+          {Array.from({ length: 8 }, (_, index) => (
+            <div key={index}>
+              <Skeleton className="h-[150px] w-[250px] rounded-xl" />
+              <div className="space-y-3 mt-4">
+                <Skeleton className="h-4 w-[170px]" />
+                <Skeleton className="h-4 w-[200px]" />
+                <Skeleton className="h-4 w-[170px]" />
+                <Skeleton className="h-6 w-[250px]" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="pb-5 p-4 pt-3 h-52 flex items-center justify-center">
+        <p className="text-red-500 text-lg">Error loading enrolled courses</p>
+      </section>
+    );
+  }
 
   return (
     <>
       <section className="p-4 pt-3">
         <h1 className="text-3xl font-[600] py-6">Enrolled Courses</h1>
         <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
-          {courses
-            ?.slice(0, visibleCourses)
-            .map((course: CoursesType) => (
-              <EnrolledCoursesCard
-                key={course?.title}
-                imageUrl={course?.imageUrl}
-                id={course?.id}
-                title={course?.title}
-                description={course?.description}
-                created_at={course?.created_at}
-              />
-            ))}
+          {courses?.map((course: CoursesType) => (
+            <EnrolledCoursesCard
+              key={course?.title}
+              imageUrl={course?.imageUrl}
+              id={course?.id}
+              title={course?.title}
+              description={course?.description}
+              created_at={course?.created_at}
+            />
+          ))}
         </div>
-        {visibleCourses < courses?.length && (
+        {courses?.length >= 8 && (
           <section className="flex justify-center items-center pt-8">
             <Button
               className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"

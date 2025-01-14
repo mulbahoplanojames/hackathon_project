@@ -10,5 +10,3 @@ const EnrollCoursesPage = () => {
 };
 
 export default EnrollCoursesPage;
-
-// api/courses/user/{id}
