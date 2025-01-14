@@ -1,7 +1,6 @@
 import { CoursesType } from "@/types/types";
 import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
-import { Button } from "../ui/button";
 import { formatDate } from "@/lib/formatDate";
 import Image from "next/image";
 
@@ -31,7 +30,6 @@ export const EnrolledCoursesCard = (props: CoursesType) => {
             </aside>
           </div>
         </Link>
-        <Button className="w-full">Enroll</Button>
       </CardContent>
     </Card>
   );

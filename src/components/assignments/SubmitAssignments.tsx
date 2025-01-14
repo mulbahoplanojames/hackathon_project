@@ -6,51 +6,52 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+
+import toast from "react-hot-toast";
+import { Input } from "../ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { CloudUpload, Paperclip } from "lucide-react";
-import {
-  FileInput,
-  FileUploader,
-  FileUploaderContent,
-  FileUploaderItem,
-} from "@/components/ui/file-upload";
-import toast from "react-hot-toast";
+} from "../ui/form";
 
 const formSchema = z.object({
-  assignmentFile: z.string(),
+  file: z.any().refine((file) => file instanceof File, {
+    message: "Please select a valid file",
+  }),
 });
 
-export function SubmitAssignments() {
-  const [files, setFiles] = useState<File[] | null>(null);
-
-  const dropZoneConfig = {
-    maxFiles: 1,
-    maxSize: 1024 * 1024 * 4,
-    multiple: false,
-  };
+export function SubmitAssignments({ assignmentId }: { assignmentId: string }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    defaultValues: {
+      file: undefined,
+    },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast.success("Assignment submitted successfully");
+      const formData = new FormData();
+      formData.append("file", values.file);
+
+      const response = await fetch("http://localhost:8000/api/assignments", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        toast.success("Assignment submitted successfully");
+      } else {
+        toast.error("Failed to submit the form. Please try again.");
+      }
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -69,52 +70,28 @@ export function SubmitAssignments() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
             <FormField
+              name="file"
               control={form.control}
-              name="assignmentFile"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Select File</FormLabel>
+                  <FormLabel>Upload Assignment File</FormLabel>
                   <FormControl>
-                    <FileUploader
-                      value={files}
-                      onValueChange={setFiles}
-                      dropzoneOptions={dropZoneConfig}
-                      className="relative bg-background rounded-lg p-2"
-                    >
-                      <FileInput
-                        id="fileInput"
-                        className="outline-dashed outline-1 outline-slate-500"
-                      >
-                        <div className="flex items-center justify-center flex-col p-8 w-full ">
-                          <CloudUpload className="text-gray-500 w-10 h-10" />
-                          <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">
-                              Click to upload
-                            </span>
-                            &nbsp; or drag and drop
-                          </p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">
-                            PDF, SVG, PNG, JPG
-                          </p>
-                        </div>
-                      </FileInput>
-                      <FileUploaderContent>
-                        {files &&
-                          files.length > 0 &&
-                          files.map((file, i) => (
-                            <FileUploaderItem key={i} index={i}>
-                              <Paperclip className="h-4 w-4 stroke-current" />
-                              <span>{file.name}</span>
-                            </FileUploaderItem>
-                          ))}
-                      </FileUploaderContent>
-                    </FileUploader>
+                    <Input
+                      type="file"
+                      accept=".pdf,.docx,.doc"
+                      className="file-input"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          field.onChange(e.target.files[0]);
+                        }
+                      }}
+                    />
                   </FormControl>
-                  <FormDescription>Select a file to upload.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
+
             <DialogFooter>
               <Button type="submit">Submit</Button>
             </DialogFooter>

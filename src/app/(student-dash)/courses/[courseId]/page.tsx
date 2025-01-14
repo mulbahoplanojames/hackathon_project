@@ -70,7 +70,7 @@ const SingleCoursePage = async ({
                 <p className="py-2">
                   {assignment.status ? "Submitted" : "Not Submitted"}
                 </p>
-                <SubmitAssignments />
+                <SubmitAssignments assignmentId={assignment?.id.toString()} />
               </CardContent>
             </Card>
           ))}

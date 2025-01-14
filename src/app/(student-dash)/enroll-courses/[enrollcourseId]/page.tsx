@@ -36,18 +36,19 @@ const fetchCourse = async (id: string) => {
 const SingleCoursePage = async ({
   params,
 }: {
-  params: { courseId: string };
+  params: { enrollcourseId: string };
 }) => {
-  const course = await fetchCourse(params.courseId);
+  const course = await fetchCourse(params.enrollcourseId);
   // console.log(course);
 
   return (
     <>
       <section className="px-6 py-8">
-        <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
+        <h1>Enrolled Courses {params.enrollcourseId}</h1>
+        {/* <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
           <Image
             src="/courses/course_1.svg"
-            alt={course.title}
+            alt={"course.title"}
             fill
             className="w-full h-full object-cover"
           />
@@ -78,7 +79,7 @@ const SingleCoursePage = async ({
               </CardContent>
             </Card>
           ))}
-        </div>
+        </div> */}
       </section>
     </>
   );
