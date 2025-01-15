@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -72,7 +72,7 @@ const SignUp = () => {
       <section className="grid grid-row-2 lg:grid-cols-2 lg:w-[1020px] xl:w-[1200px] w-[700px]  rounded-2xl overflow-hidden shadow-xl dark:bg-[#000]">
         <aside className="justify-center px-10 py-10 max-sm:px-5 col-span-1">
           <Link href="/">
-              <Image src="/Left chevron.svg" alt="" width={30} height={30} />
+              {/* <Image src="/Left chevron.svg" alt="" width={30} height={30} /> */}
           </Link>
           <h1 className="text-4xl pt-3 pb-4 font-[900]">SignUp</h1>
           <p className="pb-6">Create your account with Performance Hub</p>
