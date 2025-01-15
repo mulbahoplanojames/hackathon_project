@@ -22,7 +22,12 @@ const getAllCourses = async (limit: number, lastVisibleCourseId?: string) => {
 
 const AllCourses = () => {
   const queryClient = useQueryClient();
-  const { data: courses = [], isLoading } = useQuery({
+  const {
+    data: courses = [],
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
     queryKey: ["all-courses", { limit: 8 }],
     queryFn: () => getAllCourses(8),
   });
@@ -51,6 +56,20 @@ const AllCourses = () => {
             </div>
           ))}
         </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="pb-5 p-4 pt-3 h-52 flex items-center justify-center">
+        <p className="text-red-500 text-2xl">Error loading enrolled courses</p>
+        <Button
+          className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"
+          onClick={() => refetch()}
+        >
+          Retry
+        </Button>
       </section>
     );
   }

@@ -58,3 +58,28 @@ export const teacherAssignmentSchema = z.object({
 export const newsLetterSchema = z.object({
   email: z.string().email(),
 });
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ACCEPTED_FILE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+];
+
+export const fileUploadSchema = z.object({
+  file: z
+    .instanceof(File)
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine(
+      (file) => ACCEPTED_FILE_TYPES.includes(file.type),
+      "Only image, PDF, Word and PowerPoint formats are supported."
+    ),
+});
+
+export type FileUploadSchemaType = z.infer<typeof fileUploadSchema>;

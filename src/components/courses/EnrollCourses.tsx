@@ -29,6 +29,7 @@ const EnrolledCourses = () => {
     data: courses,
     error,
     isLoading,
+    refetch,
   } = useQuery({
     queryKey: ["enroll-courses", currentUser?.id],
     queryFn: () => fetchCourses(8),
@@ -69,7 +70,13 @@ const EnrolledCourses = () => {
   if (error) {
     return (
       <section className="pb-5 p-4 pt-3 h-52 flex items-center justify-center">
-        <p className="text-red-500 text-lg">Error loading enrolled courses</p>
+        <p className="text-red-500 text-2xl">Error loading enrolled courses</p>
+        <Button
+          className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"
+          onClick={() => refetch()}
+        >
+          Retry
+        </Button>
       </section>
     );
   }

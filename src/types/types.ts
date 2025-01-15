@@ -107,3 +107,13 @@ export type basicDestailsType = {
 export type TrustCompanysType = {
   ImageUrl: string;
 };
+
+export interface FileUploadResponse {
+  success: boolean;
+  message: string;
+  fileUrl?: string;
+}
+
+export interface FileUploadError {
+  message: string;
+}

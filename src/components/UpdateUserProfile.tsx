@@ -6,104 +6,96 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Button } from "@/components/ui/button";
-
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { getCookie } from "cookies-next";
-import axios from "axios";
 
-const formSchema = z.object({
-  file: z.any().refine((file) => file instanceof File, {
-    message: "Please select a valid file",
-  }),
-});
+import { useFileUpload } from "@/lib/useFileUpload";
+import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 
-export function UpdateUserProfles() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      file: undefined,
-    },
-  });
-
-  const user = getCookie("user");
-  const currentUser = user ? JSON.parse(user as string) : null;
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values.file);
-
-    try {
-      const response = await axios.post(
-        `http://localhost:8000/api/profile/store/${currentUser?.id}`,
-        {
-          file: values.file,
-        }
-      );
-
-      console.log("Response from the Update Profile form", response.data);
-
-      if (response.status === 200 || response.status === 201) {
-        toast.success("Profile updated successfully");
-      } else {
-        toast.error("Failed to submit the form. Please try again.");
-      }
-    } catch (error) {
-      console.error("Form submission error", error);
-      toast.error("Failed to submit the form. Please try again.");
-    }
-  }
+export function UpdateUserProfile() {
+  const { form, onSubmit, isUploading, uploadResult, error } = useFileUpload();
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <span>Update Profile</span>
+        <Button className="w-full bg-primary_Clr text-white opacity-80 hover:bg-primary_Clr">
+          Update Profile
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogTitle>Update Profile</DialogTitle>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
             <FormField
-              name="file"
               control={form.control}
+              name="file"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Upload Assignment File</FormLabel>
+                  <FormLabel>Image File</FormLabel>
                   <FormControl>
                     <Input
                       type="file"
                       accept="image/*"
-                      className="file-input"
+                      disabled={isUploading}
                       onChange={(e) => {
-                        if (e.target.files && e.target.files[0]) {
-                          field.onChange(e.target.files[0]);
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          field.onChange(file);
                         }
                       }}
                     />
                   </FormControl>
+                  <FormDescription>
+                    Select an image file to upload (max 5MB, .jpg, .jpeg, .png,
+                    or .webp)
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <DialogFooter>
-              <Button type="submit">Submit</Button>
+              <Button type="submit" disabled={isUploading}>
+                {isUploading ? "Uploading..." : "Upload"}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
+
+        {uploadResult && (
+          <Alert className="mt-4">
+            <AlertTitle>Success</AlertTitle>
+            <AlertDescription>
+              {uploadResult.message}
+              {uploadResult.fileUrl && (
+                <a
+                  href={uploadResult.fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block mt-2 text-blue-500 hover:underline"
+                >
+                  View uploaded file
+                </a>
+              )}
+            </AlertDescription>
+          </Alert>
+        )}
+
+        {error && (
+          <Alert variant="destructive" className="mt-4">
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>{error.message}</AlertDescription>
+          </Alert>
+        )}
       </DialogContent>
     </Dialog>
   );
