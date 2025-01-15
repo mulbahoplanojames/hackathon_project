@@ -10,16 +10,20 @@ const currentUser = user ? JSON.parse(user as string) : null;
 export async function uploadFile(file: File): Promise<FileUploadResponse> {
   const formData = new FormData();
   formData.append("file", file);
+  console.log(formData);
+  console.log(file);
 
   try {
     const response = await axios.post(
-      `http://localhost:8000/api/profile/store/${currentUser?.id}`,
+      `http://localhost:8000/api/profile-image/store/${currentUser?.id}`,
       {
         file: formData,
       },
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          "Accept-Encoding": "gzip, deflate, br",
+          Accept: "*/*",
         },
       }
     );
