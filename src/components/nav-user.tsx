@@ -25,8 +25,8 @@ export function NavUser() {
   const { isMobile } = useSidebar();
 
   const user = getCookie("user");
-  console.log(user);
   const currentUser = user ? JSON.parse(user as string) : null;
+  console.log(currentUser?.avater);
 
   return (
     <SidebarMenu>
@@ -39,11 +39,7 @@ export function NavUser() {
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage
-                  src={
-                    currentUser?.avatar
-                      ? "http://localhost:8000/storage/uploaded_files/JpdmKdL3WuwaAZuzpkgGcrE6yJtBZL5DYq6oknlw.jpg"
-                      : "user.jpg"
-                  }
+                  src={currentUser?.avater ? currentUser?.avater : "user.jpg"}
                   alt={currentUser?.firstName}
                 />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
