@@ -7,7 +7,6 @@ import StudentAddTask from "@/components/Home_dashboard/student-add-task";
 import TeacherTable from "@/components/Home_dashboard/teacher-table";
 import WebinarCard from "@/components/Home_dashboard/webinar-card";
 import WelcomeUser from "@/components/Home_dashboard/WelcomeUser";
-import Test from "@/components/Test";
 
 export default function Page() {
   return (
@@ -15,7 +14,6 @@ export default function Page() {
       <section className="p-4 pt-3">
         <DashboardHeader text="Dashboard" />
         <WelcomeUser />
-        <Test />
         <CardsWripper />
         <div className="grid md:grid-cols-2 grid-cols-1 gap-10 mt-12 md:px-1">
           <ChartBar1 text="This week performance" />

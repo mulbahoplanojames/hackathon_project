@@ -13,9 +13,10 @@ export async function uploadFile(file: File): Promise<FileUploadResponse> {
   console.log(formData);
   console.log(file);
 
+
   try {
     const response = await axios.post(
-      `http://localhost:8000/storeProfile/${currentUser?.id}`,
+      `http://localhost:8000/api/profile-image/store/${currentUser?.id}`,
       {
         file,
       },
@@ -27,9 +28,14 @@ export async function uploadFile(file: File): Promise<FileUploadResponse> {
       }
     );
 
+
+
+
     if (response.status !== 200) {
       throw new Error("File upload failed");
     }
+
+
 
     console.log(response);
 
