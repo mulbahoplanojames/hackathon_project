@@ -54,8 +54,8 @@ const SignUp = () => {
       if (response.status === 200 || response.status === 201) {
         form.reset();
         toast.success("Account created successfully");
-        revalidatePath("/");
         router.push("/dashboard");
+        revalidatePath("/");
       }
 
       return response;
@@ -72,9 +72,7 @@ const SignUp = () => {
       <section className="grid grid-row-2 lg:grid-cols-2 lg:w-[1020px] xl:w-[1200px] w-[700px]  rounded-2xl overflow-hidden shadow-xl dark:bg-[#000]">
         <aside className="justify-center px-10 py-10 max-sm:px-5 col-span-1">
           <Link href="/">
-            <button className="border-none bg-none">
               <Image src="/Left chevron.svg" alt="" width={30} height={30} />
-            </button>
           </Link>
           <h1 className="text-4xl pt-3 pb-4 font-[900]">SignUp</h1>
           <p className="pb-6">Create your account with Performance Hub</p>
