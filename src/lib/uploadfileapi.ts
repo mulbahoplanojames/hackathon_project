@@ -15,15 +15,14 @@ export async function uploadFile(file: File): Promise<FileUploadResponse> {
 
   try {
     const response = await axios.post(
-      `http://localhost:8000/api/profile-image/store/${currentUser?.id}`,
+      `http://localhost:8000/storeProfile/${currentUser?.id}`,
       {
-        file: formData,
+        file,
       },
       {
         headers: {
           "Content-Type": "multipart/form-data",
-          "Accept-Encoding": "gzip, deflate, br",
-          Accept: "*/*",
+          "X-Requested-With": "XMLHttpRequest",
         },
       }
     );
@@ -31,6 +30,8 @@ export async function uploadFile(file: File): Promise<FileUploadResponse> {
     if (response.status !== 200) {
       throw new Error("File upload failed");
     }
+
+    console.log(response);
 
     return await response.data;
   } catch (error) {

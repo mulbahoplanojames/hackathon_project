@@ -25,6 +25,7 @@ export function NavUser() {
   const { isMobile } = useSidebar();
 
   const user = getCookie("user");
+  console.log(user);
   const currentUser = user ? JSON.parse(user as string) : null;
 
   return (
@@ -37,7 +38,14 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={"user.jpg"} alt={currentUser?.firstName} />
+                <AvatarImage
+                  src={
+                    currentUser?.avatar
+                      ? "http://localhost:8000/storage/uploaded_files/JpdmKdL3WuwaAZuzpkgGcrE6yJtBZL5DYq6oknlw.jpg"
+                      : "user.jpg"
+                  }
+                  alt={currentUser?.firstName}
+                />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
