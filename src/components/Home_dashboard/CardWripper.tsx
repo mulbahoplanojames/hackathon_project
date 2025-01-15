@@ -5,7 +5,7 @@ import NumberTicker from "../ui/number-ticker";
 const CardsWripper = () => {
   return (
     <>
-      <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 grid-cols-2 gap-4 md:mt-6 mt-3">
+      <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 grid-cols-2 gap-4 md:mt-6 mt-3">
         {dashBoardData.map((item) => (
           <Card
             key={item.id}
