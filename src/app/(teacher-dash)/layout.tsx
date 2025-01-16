@@ -15,6 +15,7 @@ import { ThemeProvider } from "@/context/theme-provider";
 import DashFooter from "@/layout/DashFooter";
 import { TeacherAppSidebar } from "./components/teacher-app-sidebar";
 import ReactQueryProvider from "@/context/ReactQueryProvider";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Student Performance Hub Dashboard",
@@ -60,6 +61,7 @@ export default function TeacherDashboardLayout({
               </SidebarInset>
             </SidebarProvider>
           </ThemeProvider>
+          <Toaster position="bottom-right" />
         </body>
       </html>
     </ReactQueryProvider>

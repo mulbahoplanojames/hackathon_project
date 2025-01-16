@@ -30,6 +30,7 @@ import {
 import { teacherAssignmentSchema } from "@/schema/zod-schema";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { redirect } from "next/navigation";
 
 type AssignmentFormValues = z.infer<typeof teacherAssignmentSchema>;
 interface AddAssignmentsProps {
@@ -63,6 +64,7 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
 
       if (res.status === 200 || res.status === 201) {
         toast.success("Assignment added successfully");
+        redirect("/lecturer-courses");
       } else {
         toast.error("Failed to add assignment. Please try again.");
       }
