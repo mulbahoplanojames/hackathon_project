@@ -5,17 +5,6 @@ import axios from "axios";
 import { Tags } from "lucide-react";
 import Image from "next/image";
 
-type AssigmentType = {
-  id: number;
-  course_id: number;
-  title: string;
-  status: boolean;
-  marksObtain: number;
-  totalMarks: number;
-  created_at: string;
-  updated_at: string;
-};
-
 const fetchEnrollCourse = async (id: string) => {
   try {
     const response = await axios.get(`http://localhost:8000/api/courses/${id}`);
@@ -52,7 +41,7 @@ const EnrollCourseSinglePage = async ({
             : "No Assignments Available"}
         </h2>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 pb-8">
-          {enrollCourse?.assigments?.map((assignment: AssigmentType) => (
+          {enrollCourse?.assigments?.map((assignment) => (
             <Card className="" key={assignment?.id}>
               <CardContent className="p-3 text-center">
                 <Tags
@@ -67,7 +56,7 @@ const EnrollCourseSinglePage = async ({
                   {assignment?.status ? "Submitted" : "Not Submitted"}
                 </p>
 
-                <SubmitAssignments assignmentId={assignment?.id?.toString()} />
+                <SubmitAssignments id={assignment?.id as string} />
               </CardContent>
             </Card>
           ))}
