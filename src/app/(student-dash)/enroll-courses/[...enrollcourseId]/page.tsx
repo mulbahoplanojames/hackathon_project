@@ -1,10 +1,9 @@
+import { SubmitAssignments } from "@/components/assignments/SubmitAssignments";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
-import axios from "axios";
-
-import Image from "next/image";
 import { formatDate } from "@/lib/formatDate";
+import axios from "axios";
 import { Tags } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 type AssigmentType = {
   id: number;
@@ -17,25 +16,22 @@ type AssigmentType = {
   updated_at: string;
 };
 
-const fetchCourse = async (id: string) => {
+const fetchEnrollCourse = async (id: string) => {
   try {
-    const response = await axios.get(
-      `http:///localhost:8000/api/courses/${id}`
-    );
+    const response = await axios.get(`http://localhost:8000/api/courses/${id}`);
     const data = await response.data;
+    // console.log(data);
     return data;
   } catch (error) {
-    console.log("Error fetching course:", error);
+    console.log("Error fetching enrollCourse:", error);
   }
 };
-
-const SingleCoursePage = async ({
+const EnrollCourseSinglePage = async ({
   params,
 }: {
-  params: { courseId: string };
+  params: { enrollcourseId: string };
 }) => {
-  const course = await fetchCourse(params?.courseId);
-  // console.log(course);
+  const enrollCourse = await fetchEnrollCourse(params.enrollcourseId);
 
   return (
     <>
@@ -43,20 +39,20 @@ const SingleCoursePage = async ({
         <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
           <Image
             src="/courses/course_1.svg"
-            alt={course?.title}
+            alt={enrollCourse.title}
             fill
             className="w-full h-full object-cover"
           />
         </div>
-        <h2 className="text-2xl font-semibold pb-2">{course?.title}</h2>
-        <p className="pb-4">{course?.description}</p>
+        <h2 className="text-2xl font-semibold pb-2">{enrollCourse.title}</h2>
+        <p className="pb-4">{enrollCourse.description}</p>
         <h2 className="text-xl font-semibold pb-4">
-          {course?.assigments?.length > 0
+          {enrollCourse?.assigments?.length > 0
             ? "Assignments"
             : "No Assignments Available"}
         </h2>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 pb-8">
-          {course.assigments.map((assignment: AssigmentType) => (
+          {enrollCourse?.assigments?.map((assignment: AssigmentType) => (
             <Card className="" key={assignment?.id}>
               <CardContent className="p-3 text-center">
                 <Tags
@@ -67,9 +63,11 @@ const SingleCoursePage = async ({
                 <p className="text-l text-[#8a8a8a]">
                   Date: {formatDate(assignment?.created_at)}
                 </p>
-                <Button variant="outline" className="w-full" disabled>
-                  Submit assignment
-                </Button>
+                <p className="py-2">
+                  {assignment?.status ? "Submitted" : "Not Submitted"}
+                </p>
+
+                <SubmitAssignments assignmentId={assignment?.id?.toString()} />
               </CardContent>
             </Card>
           ))}
@@ -79,4 +77,4 @@ const SingleCoursePage = async ({
   );
 };
 
-export default SingleCoursePage;
+export default EnrollCourseSinglePage;
