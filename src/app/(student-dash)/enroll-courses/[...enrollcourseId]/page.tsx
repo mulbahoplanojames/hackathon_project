@@ -1,6 +1,7 @@
 import { SubmitAssignments } from "@/components/assignments/SubmitAssignments";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/formatDate";
+import { CoursesType } from "@/types/types";
 import axios from "axios";
 import { Tags } from "lucide-react";
 import Image from "next/image";
@@ -11,6 +12,13 @@ interface Assignment {
   created_at: string;
   status: boolean;
 }
+
+export const generateStaticParams = async () => {
+  const res = await axios.get("http://localhost:8000/api/courses");
+  const data = await res.data;
+
+  return data?.map((course: CoursesType) => ({ id: course.id.toString() }));
+};
 
 const fetchEnrollCourse = async (id: string) => {
   try {

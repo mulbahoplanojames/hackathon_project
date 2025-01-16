@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/formatDate";
 import { Tags } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CoursesType } from "@/types/types";
+import Link from "next/link";
 
 type AssigmentType = {
   id: number;
@@ -50,7 +51,7 @@ const SingleCoursePage = async ({
       <section className="px-6 py-8">
         <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
           <Image
-            src="/courses/course_1.svg"
+            src="/courses/course_2.svg"
             alt={course?.title}
             fill
             className="w-full h-full object-cover"
@@ -75,13 +76,13 @@ const SingleCoursePage = async ({
                 <p className="text-l text-[#8a8a8a]">
                   Date: {formatDate(assignment?.created_at)}
                 </p>
-                <Button variant="outline" className="w-full" disabled>
-                  Submit assignment
-                </Button>
               </CardContent>
             </Card>
           ))}
         </div>
+        <Link href="/add-assignments" className="w-full">
+          <Button className="w-full">Add Assignment</Button>
+        </Link>
       </section>
     </>
   );

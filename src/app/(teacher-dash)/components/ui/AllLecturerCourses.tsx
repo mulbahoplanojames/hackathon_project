@@ -5,6 +5,7 @@ import { CoursesType } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { TeacherCoursesCard } from "./TeacherCourseCard";
 
 const getAllCourses = async () => {
   try {
@@ -30,12 +31,12 @@ const AllLecturerCourses = () => {
   };
 
   useEffect(() => {
-    setCourses(data.slice(0, isVisible));
+    setCourses(data?.slice(0, isVisible));
   }, [isVisible, data]);
 
   if (isLoading) {
     return (
-      <section className="md:py-20 py-8">
+      <section className="md:pb-20 md:pt-10 py-6">
         <Skeleton className="h-[30px] w-[250px] rounded-xl mb-4" />
         <div className="grid auto-rows-min gap-8 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
           {Array.from({ length: 8 }).map((_, index) => (
@@ -70,34 +71,36 @@ const AllLecturerCourses = () => {
 
   return (
     <>
-    <section className="md:py-14 py-8">
-          <h1 className="text-3xl font-[600] py-6">Popular Courses</h1>
-          <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
-            {courses?.slice(0, isVisible)?.map((course: CoursesType) => (
-            //   <CoursesCard
-            //     key={course.id}
-            //     imageUrl={course.imageUrl}
-            //     id={course.id}
-            //     title={course.title}
-            //     description={course.description}
-            //     created_at={course.created_at}
-            //   />
+      <section className="md:pb-14 py-8">
+        <h1 className="text-3xl font-[600] py-6">
+          View All Courses And Add Assignments
+        </h1>
+        <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
+          {courses
+            ?.slice(0, isVisible)
+            ?.map((course: CoursesType) => (
+              <TeacherCoursesCard
+                key={course?.id}
+                imageUrl={course?.imageUrl}
+                id={course?.id}
+                title={course?.title}
+                description={course?.description}
+                created_at={course?.created_at}
+              />
             ))}
-          </div>
-       
-            <section className="flex justify-center items-center pt-8">
-            
+        </div>
 
-              {data.length > isVisible && (
-           <Button
-           className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"
-         onClick={showMoreItems}
-         >
-           Load More Courses
-         </Button>
+        <section className="flex justify-center items-center pt-8">
+          {data?.length > isVisible && (
+            <Button
+              className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"
+              onClick={showMoreItems}
+            >
+              Load More Courses
+            </Button>
           )}
-            </section>
         </section>
+      </section>
     </>
   );
 };

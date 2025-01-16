@@ -38,11 +38,11 @@ const data = {
       url: "/lecturer-courses",
       icon: BookType,
     },
-    {
-      title: "Add Assignments",
-      url: "/add-assignments",
-      icon: BookOpen,
-    },
+    // {
+    //   title: "Add Assignments",
+    //   url: "/add-assignments",
+    //   icon: BookOpen,
+    // },
     {
       title: "View Assignments",
       url: "/view-assignments",
