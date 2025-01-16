@@ -12,10 +12,27 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { assignmentData } from "@/constant/assignmentData";
 import { FolderUp, Printer } from "lucide-react";
-
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 const ITEMS_PER_PAGE = 6;
 
+const fecthAllAssignments = async () => {
+  try {
+    const res = await axios.get("http://localhost:8000/api/all-assignments");
+    const data = await res?.data;
+    // console.log(data);
+    return data;
+  } catch (error) {
+    console.log("Error fetching All Assignments", error);
+  }
+};
+
 const AssignmentTable = () => {
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ["all-assignments"],
+    queryFn: () => fecthAllAssignments(),
+  });
+
   const [search, setSearch] = useState("");
   const [filteredAssignments, setFilteredAssignment] = useState(assignmentData);
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,17 +42,17 @@ const AssignmentTable = () => {
     setSearch(value);
     setCurrentPage(1);
 
-    const filtered = assignmentData.filter((assignment) =>
+    const filtered = assignmentData?.filter((assignment) =>
       assignment.module.toLowerCase().includes(value)
     );
     setFilteredAssignment(filtered);
   };
 
   // The below code is to Calculate pagination values just in case i forget in the future :)
-  const totalPages = Math.ceil(filteredAssignments.length / ITEMS_PER_PAGE);
+  const totalPages = Math?.ceil(filteredAssignments?.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentTeachers = filteredAssignments.slice(startIndex, endIndex);
+  const currentAssignment = filteredAssignments?.slice(startIndex, endIndex);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -44,7 +61,7 @@ const AssignmentTable = () => {
   // Converting table to csv and exporting it
   const handleExport = () => {
     const csvHeader = "ID,Module,Assignment Date,Submission Date,File\n";
-    const csvRows = filteredAssignments.map((assignment) =>
+    const csvRows = filteredAssignments?.map((assignment) =>
       [
         assignment.id,
         assignment.module,
@@ -67,6 +84,28 @@ const AssignmentTable = () => {
   const handlePrint = () => {
     window.print();
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-52 w-full">
+        <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-52 w-full text-center bg-red-400">
+        <div className="flex flex-col items-center w-full">
+          <h1 className="text-5xl font-bold text-red-500">Oops!</h1>
+          <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">
+            Something went wrong.
+          </p>
+          <Button>Try again</Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -123,37 +162,37 @@ const AssignmentTable = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {currentTeachers.length > 0 ? (
-                      currentTeachers.map((assignment) => (
+                    {currentAssignment?.length > 0 ? (
+                      currentAssignment?.map((assignment) => (
                         <TableRow
-                          key={assignment.id}
+                          key={assignment?.id}
                           className="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                           onClick={() =>
                             alert(
-                              `Assignment ID: ${assignment.id}. Assignment Module: ${assignment.module}`
+                              `Assignment ID: ${assignment?.id}. Assignment Module: ${assignment?.module}`
                             )
                           }
                         >
                           <TableCell className="sticky left-0 bg-gray-50 dark:bg-gray-900 py-3 px-4 whitespace-nowrap">
-                            {assignment.id}
+                            {assignment?.id}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment.module}
+                            {assignment?.module}
                           </TableCell>
 
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment.assignDate}
+                            {assignment?.assignDate}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment.dueDate}
+                            {assignment?.dueDate}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
                             <a
-                              href={assignment.file || "#"}
-                              download={assignment.file}
+                              href={assignment?.file || "#"}
+                              download={assignment?.file}
                               className="text-green-600 hover:underline"
                             >
-                              {assignment.file}
+                              {assignment?.file}
                             </a>
                           </TableCell>
                         </TableRow>
@@ -174,7 +213,7 @@ const AssignmentTable = () => {
             </div>
           </div>
 
-          {filteredAssignments.length > 0 && (
+          {filteredAssignments?.length > 0 && (
             <div className="flex items-center justify-between mt-4 px-4">
               <div className="text-sm text-gray-700 dark:text-gray-300">
                 Showing {startIndex + 1} to

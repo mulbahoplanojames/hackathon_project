@@ -30,7 +30,7 @@ export default function TeacherDashboardLayout({
   return (
     <ReactQueryProvider>
       <html lang="en">
-        <body>
+        <body className="w-full ">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -55,8 +55,7 @@ export default function TeacherDashboardLayout({
                     </Breadcrumb>
                   </div>
                 </header>
-
-                {children}
+                <div className="w-full">{children}</div>
                 <DashFooter />
               </SidebarInset>
             </SidebarProvider>

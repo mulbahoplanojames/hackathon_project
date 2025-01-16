@@ -48,11 +48,13 @@ export const createGroupSchema = z.object({
 });
 
 export const teacherAssignmentSchema = z.object({
-  module: z.string().min(1, "Module name is required"),
-  assignmentDate: z.string().nonempty("Assignment date is required"),
-  dueDate: z.string().nonempty("Due date is required"),
-  classAssignTo: z.string().min(1, "Class assigned to is required"),
-  file: z.instanceof(File).optional(),
+  title: z.string().min(1, "Module name is required"),
+  marksObtain: z.string().min(1, "Marks obtain is required"),
+  totalMarks: z.string().min(1, "Total marks is required"),
+  // assignmentDate: z.string().nonempty("Assignment date is required"),
+  // dueDate: z.string().nonempty("Due date is required"),
+  // classAssignTo: z.string().min(1, "Class assigned to is required"),
+  // file: z.instanceof(File).optional(),
 });
 
 export const newsLetterSchema = z.object({

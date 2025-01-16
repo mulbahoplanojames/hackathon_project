@@ -4,6 +4,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   Card,
   CardContent,
   CardHeader,
@@ -13,13 +20,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Form,
   FormControl,
   FormField,
@@ -28,6 +28,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { teacherAssignmentSchema } from "@/schema/zod-schema";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 type AssignmentFormValues = z.infer<typeof teacherAssignmentSchema>;
 
@@ -35,17 +37,36 @@ const AssignmentForm = () => {
   const form = useForm<AssignmentFormValues>({
     resolver: zodResolver(teacherAssignmentSchema),
     defaultValues: {
-      module: "",
-      assignmentDate: "",
-      dueDate: "",
-      classAssignTo: "",
-      file: undefined,
+      title: "",
+      marksObtain: "",
+      totalMarks: "",
     },
   });
 
-  const onSubmit = (data: AssignmentFormValues) => {
-    console.log("Form Data:", data);
-    alert("Assignment added successfully!");
+  const onSubmit = async (data: AssignmentFormValues) => {
+    const { title, marksObtain, totalMarks } = data;
+
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/assigments/create",
+        {
+          title,
+          marksObtain,
+          totalMarks,
+        }
+      );
+      const data = await res.data;
+      console.log("Form Data:", data);
+
+      if (res.status === 200 || res.status === 201) {
+        toast.success("Assignment added successfully");
+      } else {
+        toast.error("Failed to add assignment. Please try again.");
+      }
+      return data;
+    } catch (error) {
+      console.log("Error adding assignment:", error);
+    }
   };
 
   return (
@@ -60,22 +81,21 @@ const AssignmentForm = () => {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
-                <FormField
-                  control={form.control}
-                  name="module"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Module</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter module name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <FormField
+                control={form.control}
+                name="title"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Assignment Title</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter module name" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                <FormField
+              {/* <FormField
                   control={form.control}
                   name="assignmentDate"
                   render={({ field }) => (
@@ -87,9 +107,8 @@ const AssignmentForm = () => {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
-              </div>
-              <FormField
+                /> */}
+              {/* <FormField
                 control={form.control}
                 name="file"
                 render={({ field }) => (
@@ -104,16 +123,16 @@ const AssignmentForm = () => {
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
               <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
                 <FormField
                   control={form.control}
-                  name="dueDate"
+                  name="marksObtain"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Due Date</FormLabel>
+                      <FormLabel>Mark Obtained</FormLabel>
                       <FormControl>
-                        <Input type="date" {...field} />
+                        <Input type="text" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -122,24 +141,12 @@ const AssignmentForm = () => {
 
                 <FormField
                   control={form.control}
-                  name="classAssignTo"
+                  name="totalMarks"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Class Assigned To</FormLabel>
+                      <FormLabel>Total Marks</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={(value) => field.onChange(value)}
-                          defaultValue=""
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select a class" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Class A">Class A</SelectItem>
-                            <SelectItem value="Class B">Class B</SelectItem>
-                            <SelectItem value="Class C">Class C</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <Input type="text" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
