@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Image from "next/image";
 import { formatDate } from "@/lib/formatDate";
-import { Tags } from "lucide-react";
+import { CircleArrowLeft, Tags } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CoursesType } from "@/types/types";
 import Link from "next/link";
@@ -49,6 +49,9 @@ const SingleCoursePage = async ({
   return (
     <>
       <section className="px-6 py-8">
+        <Link href="/lecturer-courses">
+          <CircleArrowLeft className=" md:size-10 size-8 md:mb-6 mb-4" />
+        </Link>
         <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
           <Image
             src="/courses/course_2.svg"
