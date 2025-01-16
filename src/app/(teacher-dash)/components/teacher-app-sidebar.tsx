@@ -1,7 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { BookOpen, SquareLibrary, SquareTerminal } from "lucide-react";
+import {
+  BookOpen,
+  BookType,
+  SquareLibrary,
+  SquareTerminal,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -27,6 +32,11 @@ const data = {
       title: "Dashboard",
       url: "/teacher-dashboard",
       icon: SquareTerminal,
+    },
+    {
+      title: "Courses",
+      url: "/lecturer-courses",
+      icon: BookType,
     },
     {
       title: "Add Assignments",

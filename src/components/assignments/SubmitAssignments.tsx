@@ -23,7 +23,11 @@ import { useAssignmentUpload } from "@/lib/assignment/useAssignmentUpload";
 
 // type SubmitAssignmentsProps = string;
 
-export function SubmitAssignments(props) {
+interface SubmitAssignmentsProps {
+  id: string;
+}
+
+export function SubmitAssignments(props: SubmitAssignmentsProps) {
   const { form, onSubmit, isUploading, uploadResult, error } =
     useAssignmentUpload(props.id);
 
@@ -31,11 +35,11 @@ export function SubmitAssignments(props) {
     <Dialog>
       <DialogTrigger asChild>
         <Button className="w-full bg-primary_Clr text-white opacity-80 hover:bg-primary_Clr">
-          Update Profile
+          Submit Assignment
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <DialogTitle>Update Profile</DialogTitle>
+        <DialogTitle>Submit Your Assignment</DialogTitle>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 ">
             <FormField
@@ -43,7 +47,7 @@ export function SubmitAssignments(props) {
               name="file"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Image File</FormLabel>
+                  <FormLabel>Assignment File</FormLabel>
                   <FormControl>
                     <Input
                       type="file"

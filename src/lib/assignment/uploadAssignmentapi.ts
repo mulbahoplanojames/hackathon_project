@@ -2,6 +2,7 @@
 
 import { FileUploadError, FileUploadResponse } from "@/types/types";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export async function uploadAssignment(
   file: File,
@@ -29,6 +30,11 @@ export async function uploadAssignment(
 
     if (response.status !== 200) {
       throw new Error("File upload failed");
+      toast.error("File upload failed, please try again");
+    }
+
+    if (response.status === 200 || response.status === 201) {
+      toast.success("Assignment submitted successfully");
     }
 
     console.log(response);
