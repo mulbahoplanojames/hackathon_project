@@ -16,11 +16,20 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 const ITEMS_PER_PAGE = 6;
 
+interface AssignmnetsTypes {
+  id: number;
+  title: string;
+  file?: "";
+  module: string;
+  dateline: string;
+  created_at: string;
+}
+
 const fecthAllAssignments = async () => {
   try {
     const res = await axios.get("http://localhost:8000/api/all-assignments");
-    const data = await res?.data;
-    // console.log(data);
+    const data = await res.data;
+    console.log(data);
     return data;
   } catch (error) {
     console.log("Error fetching All Assignments", error);
@@ -28,13 +37,21 @@ const fecthAllAssignments = async () => {
 };
 
 const AssignmentTable = () => {
-  const { data, error, isLoading, refetch } = useQuery({
+  const {
+    data: assignmentDataMain = [],
+    error,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["all-assignments"],
     queryFn: () => fecthAllAssignments(),
   });
 
+  console.log("Main Data", assignmentDataMain);
+
   const [search, setSearch] = useState("");
-  const [filteredAssignments, setFilteredAssignment] = useState(assignmentData);
+  const [filteredAssignments, setFilteredAssignment] =
+    useState(assignmentDataMain);
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleSearch = (e: { target: { value: string } }) => {
@@ -42,14 +59,15 @@ const AssignmentTable = () => {
     setSearch(value);
     setCurrentPage(1);
 
-    const filtered = assignmentData?.filter((assignment) =>
-      assignment.module.toLowerCase().includes(value)
+    const filtered = assignmentDataMain?.filter(
+      (assignment: AssignmnetsTypes) =>
+        assignment.module.toLowerCase().includes(value)
     );
     setFilteredAssignment(filtered);
   };
 
   // The below code is to Calculate pagination values just in case i forget in the future :)
-  const totalPages = Math?.ceil(filteredAssignments?.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(filteredAssignments?.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const currentAssignment = filteredAssignments?.slice(startIndex, endIndex);
@@ -60,13 +78,13 @@ const AssignmentTable = () => {
 
   // Converting table to csv and exporting it
   const handleExport = () => {
-    const csvHeader = "ID,Module,Assignment Date,Submission Date,File\n";
-    const csvRows = filteredAssignments?.map((assignment) =>
+    const csvHeader = "ID,Module,Uploaded Date,Submission Date,File\n";
+    const csvRows = filteredAssignments?.map((assignment: AssignmnetsTypes) =>
       [
         assignment.id,
         assignment.module,
-        assignment.assignDate,
-        assignment.dueDate,
+        assignment.created_at,
+        assignment.dateline,
         assignment.file,
       ].join(",")
     );
@@ -163,7 +181,7 @@ const AssignmentTable = () => {
                   </TableHeader>
                   <TableBody>
                     {currentAssignment?.length > 0 ? (
-                      currentAssignment?.map((assignment) => (
+                      currentAssignment?.map((assignment: AssignmnetsTypes) => (
                         <TableRow
                           key={assignment?.id}
                           className="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
@@ -177,14 +195,14 @@ const AssignmentTable = () => {
                             {assignment?.id}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment?.module}
+                            {assignment?.title}
                           </TableCell>
 
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment?.assignDate}
+                            {assignment?.created_at}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment?.dueDate}
+                            {assignment?.dateline}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
                             <a
@@ -203,7 +221,7 @@ const AssignmentTable = () => {
                           colSpan={5}
                           className="text-center py-3 px-4 text-gray-500"
                         >
-                          No teachers found.
+                          No Assignment found.
                         </TableCell>
                       </TableRow>
                     )}

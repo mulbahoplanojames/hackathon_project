@@ -32,8 +32,10 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 type AssignmentFormValues = z.infer<typeof teacherAssignmentSchema>;
-
-const AssignmentForm = () => {
+interface AddAssignmentsProps {
+  id: string;
+}
+const AddAssignmentForm = (props: AddAssignmentsProps) => {
   const form = useForm<AssignmentFormValues>({
     resolver: zodResolver(teacherAssignmentSchema),
     defaultValues: {
@@ -53,6 +55,7 @@ const AssignmentForm = () => {
           title,
           marksObtain,
           totalMarks,
+          course_id: props.id,
         }
       );
       const data = await res.data;
@@ -71,14 +74,12 @@ const AssignmentForm = () => {
 
   return (
     <section className="p-4 pt-3">
-      <Card className="w-full mt-8">
-        <CardHeader>
-          <CardTitle>Add Assignment</CardTitle>
-          <CardDescription>
-            Fill in the details to add a new assignment.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button className="w-full">Add Assignment</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogTitle>Add Assignment to Student</DialogTitle>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
@@ -160,10 +161,10 @@ const AssignmentForm = () => {
               </Button>
             </form>
           </Form>
-        </CardContent>
-      </Card>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
 
-export default AssignmentForm;
+export default AddAssignmentForm;

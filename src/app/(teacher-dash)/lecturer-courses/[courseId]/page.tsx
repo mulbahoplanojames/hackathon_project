@@ -7,6 +7,7 @@ import { CircleArrowLeft, Tags } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CoursesType } from "@/types/types";
 import Link from "next/link";
+import AddAssignmentForm from "../../add-assignments/page";
 
 type AssigmentType = {
   id: number;
@@ -83,9 +84,7 @@ const SingleCoursePage = async ({
             </Card>
           ))}
         </div>
-        <Link href="/add-assignments" className="w-full">
-          <Button className="w-full">Add Assignment</Button>
-        </Link>
+        <AddAssignmentForm id={course?.id as string} />
       </section>
     </>
   );
