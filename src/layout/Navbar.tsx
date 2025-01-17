@@ -8,6 +8,7 @@ import UserProfile from "@/components/UserProfile";
 import { Button } from "@/components/ui/button";
 import { getCookie } from "cookies-next";
 import { useEffect, useState } from "react";
+import { MobileNavbar } from "./MobileNavbar";
 
 const Navbar = () => {
   const [token, setToken] = useState("");
@@ -50,6 +51,7 @@ const Navbar = () => {
             </>
           )}
           <ModeToggle />
+          <MobileNavbar />
           {/* <TbMenu2
             className={`max-lg:block hidden text-3xl cursor-pointer `}
             onClick={() => {

@@ -8,7 +8,7 @@ const MenuLinks = () => {
   const pathName = usePathname();
   return (
     <>
-      <menu className="flex items-center justify-center gap-x-6">
+      <menu className="md:flex hidden items-center justify-center gap-x-6 ">
         <ul className="max-lg:hidden">
           {navLinks.map((navlink) => {
             const isActive = pathName === navlink.path;

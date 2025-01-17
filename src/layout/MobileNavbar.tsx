@@ -1,50 +1,80 @@
+"use client";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import UserProfile from "@/components/UserProfile";
+import { navLinks } from "@/constant/navData";
+import { getCookie } from "cookies-next";
+import { PackageCheck } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { TbMenu2 } from "react-icons/tb";
 
 export function MobileNavbar() {
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    const token = getCookie("token");
+    if (token) {
+      setToken(token);
+    }
+  }, [token]);
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
+      <SheetTrigger asChild className="md:hidden block">
+        <TbMenu2
+          size={38}
+          className="dark:text-white text-primary_Clr cursor-pointer"
+        />
       </SheetTrigger>
       <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
+        <SheetClose asChild>
+          <SheetHeader className="text-left mt-10 flex gap-2  items-center text-primary_Clr flex-row cursor-pointer mb-14">
+            <PackageCheck size={38} />
+            <SheetTitle className="text-2xl font-bold text-primary_Clr">
+              Performance Hub
+            </SheetTitle>
+          </SheetHeader>
+        </SheetClose>
+
+        <menu className="flex flex-col gap-y-8">
+          {navLinks.map((link) => (
+            <SheetClose asChild key={link.label}>
+              <Link
+                href={link.path}
+                className="text-primary_Clr text-2xl font-semibold"
+              >
+                {link.label}
+              </Link>
+            </SheetClose>
+          ))}
+        </menu>
+
+        <div className="gap-x-4 flex items-center justify-start mt-8">
+          {token ? (
+            <>
+              <UserProfile />
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button className="dark:bg-transparent bg-white dark:text-white text-primary_Clr hover:bg-white border dark:border-white border-transparent  hover:opacity-80 md:block hidden">
+                  Login
+                </Button>
+              </Link>
+              <Link href="/signup">
+                <Button className="md:block hidden bg-white text-primary_Clr hover:opacity-85 hover:bg-white">
+                  Create Account
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );
