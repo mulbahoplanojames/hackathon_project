@@ -1,7 +1,6 @@
 "use client";
 import { z } from "zod";
 import Link from "next/link";
-import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,6 +17,7 @@ import {
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { ChevronsLeft } from "lucide-react";
 
 const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -50,6 +50,7 @@ const Login = () => {
       return response;
     } catch (error) {
       console.error("Login failed from the login catch block:", error);
+      toast.error("Login failed or Account not found");
     }
   };
 
@@ -58,7 +59,7 @@ const Login = () => {
       <section className="flex flex-col sm:flex-row h-auto sm:h-[38rem] w-full sm:w-[70rem] bg-white dark:bg-sidebar rounded-[20px] shadow sm:shadow-lg">
         <div className="w-full sm:w-[60%] p-8 md:p-12 flex flex-col justify-center">
           <Link href="/" className="mb-4  w-8">
-            <Image src="/Left_chevron.svg" alt="" width={30} height={20} />
+            <ChevronsLeft className="size-8" />
           </Link>
           <h2 className="text-3xl sm:text-5xl font-bold">Login</h2>
           <h4 className="mt-3 text-[20px]">
