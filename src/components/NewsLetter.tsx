@@ -51,7 +51,7 @@ const NewsLetter = () => {
                         {...field}
                         type="email"
                         placeholder="Enter your Email"
-                        className="bg-sidebar outline-none h-14 w-full md:w-[400px] lg:w-[320px] mb-2 rounded-2xl"
+                        className="bg-sidebar outline-none h-14 w-full md:w-[400px] lg:w-[440px] mb-2 rounded-2xl"
                       />
                     </FormControl>
                     <FormMessage />

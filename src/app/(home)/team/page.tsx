@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { teamMembers } from "@/data/teamData";
 import { OurTeamCard } from "@/components/doctor_teamCards";
+import { Button } from "@/components/ui/button";
 
 const Team = () => {
   return (
@@ -19,9 +19,9 @@ const Team = () => {
             of the famous passage.
           </p>
           <Link href="/signup">
-            <button className="bg-[#65a30d] text-white text-xl mt-3 py-4 px-5 rounded-lg">
+            <Button className="bg-primary_Clr text-white text-xl mt-3 py-6 px-5 rounded-xl">
               Create Account
-            </button>
+            </Button>
           </Link>
         </div>
       </div>
@@ -43,7 +43,7 @@ export default Team;
 
 const CardList = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-0 lg:px-[10rem]  gap-8 ">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-0 lg:px-[10rem]  gap-8 mb-12">
       {teamMembers.map((member, index) => (
         <OurTeamCard key={index} image={member.image} />
       ))}
