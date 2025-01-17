@@ -21,7 +21,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className=" flex justify-between items-center py-4 md:px-10 px-4 fixed z-50 w-full top-0 backdrop-blur-[18px] backdrop-saturate-[162%] bg-transparent border-b-2 border-primary_Clr dark:border-white">
+      <nav className=" flex justify-between items-center py-2 md:px-10 px-4 fixed z-50 w-full top-0 backdrop-blur-[30px] backdrop-saturate-[200%] bg-transparent border-b-2 border-primary_Clr dark:border-white">
         <Link
           href="/"
           className="text-xl font-bold flex justify-center items-center gap-2  md:w-10 md:h-10 w-10 h-10 rounded-md relative bg-primary_Clr text-white"
@@ -52,12 +52,6 @@ const Navbar = () => {
           )}
           <ModeToggle />
           <MobileNavbar />
-          {/* <TbMenu2
-            className={`max-lg:block hidden text-3xl cursor-pointer `}
-            onClick={() => {
-              setIsMenuOpen(!isMenuOpen);
-            }}
-          /> */}
         </div>
       </nav>
     </>
