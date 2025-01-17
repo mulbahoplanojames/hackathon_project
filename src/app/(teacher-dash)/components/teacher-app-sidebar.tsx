@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import {
-  BookOpen,
   BookType,
+  CopyPlus,
   SquareLibrary,
   SquareTerminal,
 } from "lucide-react";
@@ -38,11 +38,11 @@ const data = {
       url: "/lecturer-courses",
       icon: BookType,
     },
-    // {
-    //   title: "Add Assignments",
-    //   url: "/add-assignments",
-    //   icon: BookOpen,
-    // },
+    {
+      title: "Add Courses",
+      url: "/add-courses",
+      icon: CopyPlus,
+    },
     {
       title: "View Assignments",
       url: "/view-assignments",

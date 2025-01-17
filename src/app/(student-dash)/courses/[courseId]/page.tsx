@@ -79,8 +79,12 @@ const SingleCoursePage = async ({
                 <p className="text-l text-[#8a8a8a]">
                   Date: {formatDate(assignment?.created_at)}
                 </p>
-                <Button variant="outline" className="w-full" disabled>
-                  Submit assignment
+                <Button
+                  variant="outline"
+                  className="w-full text-sm mt-3"
+                  disabled
+                >
+                  Enroll Now To Submit
                 </Button>
               </CardContent>
             </Card>

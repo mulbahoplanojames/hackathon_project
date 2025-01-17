@@ -89,7 +89,7 @@ export type CoursesType = {
   id: string;
   title: string;
   created_at: string;
-  imageUrl: string;
+  avater: string;
   description: string;
 };
 

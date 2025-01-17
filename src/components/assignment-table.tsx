@@ -66,7 +66,7 @@ const AssignmentTable = () => {
 
     const filtered = assignmentDataMain?.filter(
       (assignment: AssignmnetsTypes) =>
-        assignment.module.toLowerCase().includes(value)
+        assignment?.module.toLowerCase().includes(value)
     );
     setFilteredAssignment(filtered);
   };

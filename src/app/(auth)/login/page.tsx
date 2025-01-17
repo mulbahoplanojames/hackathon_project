@@ -31,7 +31,7 @@ const Login = () => {
   const router = useRouter();
 
   const onHandleLoginSubmit = async (data: z.infer<typeof loginSchema>) => {
-    console.log(data);
+    // console.log(data);
     try {
       const response = await axios.post("/api/auth/login", {
         email: data.email,

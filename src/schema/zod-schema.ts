@@ -85,3 +85,28 @@ export const fileUploadSchema = z.object({
 });
 
 export type FileUploadSchemaType = z.infer<typeof fileUploadSchema>;
+
+const ACCEPTED_COURSE_FILE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
+export const addCoursesSchema = z.object({
+  title: z.string().min(5, { message: "Title is required" }),
+  description: z
+    .string()
+    .min(10, { message: "Course Description is required" }),
+  catOne: z.string().min(1, { message: "CatOne is required" }),
+  catTwo: z.string().min(1, { message: "CatTwo is required" }),
+  Fat: z.string().min(1, { message: "Fat is required" }),
+  total: z.string().min(1, { message: "Total is required" }),
+  file: z
+    .instanceof(File)
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine(
+      (file) => ACCEPTED_COURSE_FILE_TYPES.includes(file.type),
+      "Only image, PDF, Word and PowerPoint formats are supported."
+    ),
+});

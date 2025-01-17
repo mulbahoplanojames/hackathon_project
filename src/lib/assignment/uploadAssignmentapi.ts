@@ -11,9 +11,9 @@ export async function uploadAssignment(
   const formData = new FormData();
   formData.append("file", file);
   console.log(formData);
-  console.log("Assignment File:", file);
+  // console.log("Assignment File:", file);
 
-  console.log("ID", assignmentId);
+  // console.log("ID", assignmentId);
   try {
     const response = await axios.post(
       `http://localhost:8000/api/courses/assigment/submit/${assignmentId}`,

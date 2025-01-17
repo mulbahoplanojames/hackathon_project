@@ -81,7 +81,7 @@ const AllCourses = () => {
         {courses.map((course: CoursesType) => (
           <CoursesCard
             key={course.id}
-            imageUrl={course.imageUrl}
+            avater={course.avater}
             id={course.id}
             title={course.title}
             description={course.description}
