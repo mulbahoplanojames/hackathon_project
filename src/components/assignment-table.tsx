@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -10,10 +10,12 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { assignmentData } from "@/constant/assignmentData";
+// import { assignmentData } from "@/constant/assignmentData";
 import { FolderUp, Printer } from "lucide-react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import { formatDate } from "@/lib/formatDate";
+import toast from "react-hot-toast";
 const ITEMS_PER_PAGE = 6;
 
 interface AssignmnetsTypes {
@@ -47,12 +49,15 @@ const AssignmentTable = () => {
     queryFn: () => fecthAllAssignments(),
   });
 
-  console.log("Main Data", assignmentDataMain);
-
   const [search, setSearch] = useState("");
-  const [filteredAssignments, setFilteredAssignment] =
-    useState(assignmentDataMain);
+  const [filteredAssignments, setFilteredAssignment] = useState<
+    AssignmnetsTypes[]
+  >([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setFilteredAssignment(assignmentDataMain);
+  }, [assignmentDataMain]);
 
   const handleSearch = (e: { target: { value: string } }) => {
     const value = e.target.value.toLowerCase();
@@ -119,7 +124,7 @@ const AssignmentTable = () => {
           <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">
             Something went wrong.
           </p>
-          <Button>Try again</Button>
+          <Button onClick={() => refetch}>Try again</Button>
         </div>
       </div>
     );
@@ -169,6 +174,9 @@ const AssignmentTable = () => {
                         Module
                       </TableCell>
                       <TableCell className="font-semibold text-gray-600 dark:text-gray-400 py-3 px-4 whitespace-nowrap">
+                        Assignment Title
+                      </TableCell>
+                      <TableCell className="font-semibold text-gray-600 dark:text-gray-400 py-3 px-4 whitespace-nowrap">
                         Assignment Date
                       </TableCell>
                       <TableCell className="font-semibold text-gray-600 dark:text-gray-400 py-3 px-4 whitespace-nowrap">
@@ -181,12 +189,12 @@ const AssignmentTable = () => {
                   </TableHeader>
                   <TableBody>
                     {currentAssignment?.length > 0 ? (
-                      currentAssignment?.map((assignment: AssignmnetsTypes) => (
+                      currentAssignment.map((assignment: AssignmnetsTypes) => (
                         <TableRow
                           key={assignment?.id}
                           className="hover:bg-gray-100 dark:hover:bg-gray-700 transition"
                           onClick={() =>
-                            alert(
+                            toast.success(
                               `Assignment ID: ${assignment?.id}. Assignment Module: ${assignment?.module}`
                             )
                           }
@@ -195,22 +203,27 @@ const AssignmentTable = () => {
                             {assignment?.id}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
+                            {assignment?.module}
+                          </TableCell>
+                          <TableCell className="py-3 px-4 whitespace-nowrap">
                             {assignment?.title}
                           </TableCell>
-
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment?.created_at}
+                            {formatDate(assignment?.created_at)}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
-                            {assignment?.dateline}
+                            {formatDate(assignment?.dateline)}
                           </TableCell>
                           <TableCell className="py-3 px-4 whitespace-nowrap">
                             <a
                               href={assignment?.file || "#"}
-                              download={assignment?.file}
+                              download
+                              rel="noopener noreferrer"
                               className="text-green-600 hover:underline"
                             >
-                              {assignment?.file}
+                              {assignment?.title
+                                ? assignment.title.concat(".pdf")
+                                : "assignment.pdf"}
                             </a>
                           </TableCell>
                         </TableRow>
@@ -234,9 +247,9 @@ const AssignmentTable = () => {
           {filteredAssignments?.length > 0 && (
             <div className="flex items-center justify-between mt-4 px-4">
               <div className="text-sm text-gray-700 dark:text-gray-300">
-                Showing {startIndex + 1} to
-                {Math.min(endIndex, filteredAssignments.length)} of{" "}
-                {filteredAssignments.length} teachers
+                Showing {startIndex + 1} to &nbsp;
+                {Math.min(endIndex, filteredAssignments.length)} of &nbsp;
+                {filteredAssignments.length} Assignments
               </div>
               <div className="flex gap-2">
                 <Button
