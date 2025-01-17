@@ -31,7 +31,7 @@ const handleEnrollInCourse = async ({
       }
     );
     const data = await response.data;
-    console.log("Response:", response);
+    // console.log("Response:", response);
     console.log(data);
     if (response.status === 200 || response.status === 201) {
       toast.success("Enrolled in course successfully");
@@ -54,7 +54,7 @@ export const CoursesCard = (props: CoursesType) => {
         <Link href={`/courses/${props.id}`}>
           <div className="pb-2">
             <Image
-              src="courses/course_1.svg"
+              src={props?.avater ? props?.avater : "/courses/course_1.svg"}
               alt={props.title}
               width={0}
               height={0}
