@@ -14,13 +14,7 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import {
   Popover,
   PopoverContent,
@@ -37,19 +31,61 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { getCookie } from "cookies-next";
 
-const BookingForm = () => {
+const BookingForm = ({
+  name,
+  doctor_id,
+}: {
+  name: string;
+  doctor_id: string;
+}) => {
+  console.log("Props Data", doctor_id);
+  console.log("Props Data", name);
+
   const form = useForm<z.infer<typeof bookingSchema>>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
       yourName: "",
       preferredDate: new Date(),
-      preferredTime: "",
-      doctorName: "",
+      description: "",
     },
   });
-  const onSubmit = async (data: z.infer<typeof bookingSchema>) => {
-    console.log(data);
+
+  const user = getCookie("user");
+  const currentUser = user ? JSON.parse(user as string) : null;
+
+  const onSubmit = async (formValues: z.infer<typeof bookingSchema>) => {
+    console.log("form formValues", formValues);
+    const { yourName, preferredDate, description } = formValues;
+    const preferredDateString = format(preferredDate, "yyyy-MM-dd");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/apointment/create",
+        {
+          patient_name: yourName,
+          doctor_id: doctor_id,
+          user_id: currentUser?.id,
+          prefared_date: preferredDateString,
+          description: description,
+        }
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Appointment booked successfully");
+      } else {
+        toast.error("Failed to book an appointment");
+      }
+
+      const data = response.data;
+      return data;
+    } catch (error) {
+      console.log("Data not sent", error);
+    }
   };
 
   return (
@@ -57,18 +93,18 @@ const BookingForm = () => {
       <Dialog>
         <DialogTrigger asChild>
           <Button className="w-full bg-primary_Clr text-white opacity-80 hover:bg-primary_Clr">
-            Submit Assignment
+            Book An Appointment
           </Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogTitle>Submit Your Assignment</DialogTitle>
+        <DialogContent className="sm:max-w-[650px]">
+          <DialogTitle>Book An Appointment with {name}</DialogTitle>
 
           <Form {...form}>
             <form
-              className="flex flex-col space-y-4 border-2 border-black py-12 px-8 rounded-lg"
+              className="flex flex-col space-y-4 border-2 border-black py-6 px-8 rounded-lg"
               onSubmit={form.handleSubmit(onSubmit)}
             >
-              <div className="grid md:grid-cols-2 md:gap-16 gap-4 mb-8 place-items-center">
+              <div className="grid md:grid-cols-2 md:gap-16 gap-4 mb-4 place-items-center">
                 <FormField
                   name="yourName"
                   control={form.control}
@@ -128,64 +164,26 @@ const BookingForm = () => {
                 />
               </div>
 
-              <div className="grid md:grid-cols-2 md:gap-16 gap-4">
-                <FormField
-                  name="preferredTime"
-                  control={form.control}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel htmlFor="">Preferred Time</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Give a preferred time"
-                          className="h-10"
-                          type="text"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="doctorName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Doctors Name</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger className="h-10">
-                            <SelectValue placeholder="Select a verified email to display" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Dr. John Doe">
-                            Dr. John Doe
-                          </SelectItem>
-                          <SelectItem value="Dr. Michael Brown">
-                            Dr. Michael Brown
-                          </SelectItem>
-                          <SelectItem value="Dr. Alex Smith">
-                            Dr. Alex Smith
-                          </SelectItem>
-                          <SelectItem value="Dr. Sarah Johnson">
-                            Dr. Sarah Johnson
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                name="description"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="">Description</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Enter your preferred description"
+                        className="h-10"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
               <button
                 type="submit"
-                className="py-[.7rem] bg-primary_Clr text-white rounded-md w-full md:w-[28rem]"
+                className="py-[.7rem] bg-primary_Clr text-white rounded-md w-full md:w-[28rem] mx-auto"
               >
                 Book an Appointment now
               </button>

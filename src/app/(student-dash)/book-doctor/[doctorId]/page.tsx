@@ -20,7 +20,7 @@ const fetchDoctorInfo = async (id: string) => {
   try {
     const response = await axios.get(`http://localhost:8000/api/doctor/${id}`);
     const data = await response.data;
-    // console.log("Doctor:", data);
+    console.log("Doctor:", data);
     return data;
   } catch (error) {
     console.log("Error fetching doctorInfo:", error);
@@ -33,6 +33,7 @@ const SingleDoctorPage = async ({
   params: { doctorId: string };
 }) => {
   const doctor = await fetchDoctorInfo(params?.doctorId);
+  // console.log("New Doc", doctor);
 
   return (
     <>
@@ -48,8 +49,8 @@ const SingleDoctorPage = async ({
             className="w-full h-full object-contain"
           />
         </div>
-        <h2 className="text-xl text-primary_Clr pb-2 font-semibold">
-          {doctor.name}
+        <h2 className="text-2xl text-primary_Clr pb-2 font-semibold">
+          {doctor.firstName}
         </h2>
         <div className="flex justify-between items-center py-2 flex-wrap">
           <p>
@@ -70,7 +71,7 @@ const SingleDoctorPage = async ({
           <p>
             <span className="font-bold text-primary_Clr text-lg">Contact:</span>
             &nbsp;
-            {doctor?.contact}
+            {doctor?.phone}
           </p>
           <p>
             <span className="font-bold text-primary_Clr text-lg">
@@ -80,7 +81,11 @@ const SingleDoctorPage = async ({
             {doctor?.hospital}
           </p>
         </div>
-        <BookingForm />
+        <p className="font-bold text-primary_Clr text-xl pb-2 pt-4">
+          Doctor Bio:{" "}
+        </p>
+        <p className="text-lg">{doctor.bio}</p>
+        <BookingForm name={doctor?.firstName} doctor_id={doctor?.id} />
       </section>
     </>
   );

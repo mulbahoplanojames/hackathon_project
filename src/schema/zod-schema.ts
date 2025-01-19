@@ -12,10 +12,9 @@ export const bookingSchema = z.object({
   preferredDate: z.coerce
     .date()
     .min(new Date(), { message: "Please enter a valid date" }),
-  preferredTime: z
+  description: z
     .string()
-    .min(3, { message: "Please enter this information" }),
-  doctorName: z.string().min(3, { message: "Please enter this information" }),
+    .min(8, { message: "Description must be at least 8 characters long" }),
 });
 
 export const NewsLetterSchema = z.object({
