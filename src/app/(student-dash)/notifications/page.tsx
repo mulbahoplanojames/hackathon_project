@@ -13,12 +13,13 @@ import { getCookie } from "cookies-next";
 import { Bell } from "lucide-react";
 
 type AppointmentCreatedType = {
-  message: string;
+  
   id: string;
   created_at: string;
   notifiable_id: number;
   notifiable_type: string;
   data: {
+    message: string;
     apointment: {
       description: string;
       doctor_id: number;
@@ -82,13 +83,14 @@ const NotificationsPage = () => {
               <CardHeader className="flex items-center">
                 <Bell className="mr-2 text-primary_Clr" />
                 <CardTitle className="text-lg">
-                  {notification.message}
+                  {notification?.data?.message}
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-black">
                 <CardDescription className="text-lg">
                   {notification?.data?.apointment?.description}
                 </CardDescription>
+                <p> <span>appointment to:</span> {notification?.data?.apointment?.patient_name}</p>
                 <div className="text-lg mt-2">
                   {/* <formatDate date={notification.created_at} /> */}
                 </div>
