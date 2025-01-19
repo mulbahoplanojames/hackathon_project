@@ -1,12 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
-import {
-  DoctorsCardsType,
-  ReportCardsType,
-  TeamMembersType,
-} from "@/types/types";
-import { Card } from "./ui/card";
+import { ReportCardsType, TeamMembersType } from "@/types/types";
 
 const ReportsCards: React.FC<ReportCardsType> = ({ description, booking }) => {
   return (
@@ -26,38 +20,6 @@ const ReportsCards: React.FC<ReportCardsType> = ({ description, booking }) => {
   );
 };
 export { ReportsCards };
-
-const DoctorsCard: React.FC<DoctorsCardsType> = ({
-  title,
-  description,
-  imageSrc,
-}) => {
-  return (
-    <Card className="grid grid-rows-1 rounded-[15px] max-w-[500px] overflow-hidden dark:bg-sidebar shadow-md">
-      <Image
-        src={imageSrc}
-        alt=""
-        width={0}
-        height={0}
-        className="w-full max-w-[600px]"
-      />
-      <div className="p-2 flex flex-col items-start ">
-        <h1 className="text-[20px] font-semibold">{title}</h1>
-        <h2 className="text-primary_Clr text-lg mt-1">{description}</h2>
-        <p className="text-gray-500 dark:text-white w-[17rem] text-base mt-1">
-          Commodo qui nulla ipsum ea cupidatat sit aliquip dolor.
-        </p>
-        <Link href="/book-doctor/booking-form">
-          <button className="bg-[#064e3b] text-white text-[16px] px-[3rem] py-2 rounded-[5px] mt-4">
-            Book Appointment
-          </button>
-        </Link>
-      </div>
-    </Card>
-  );
-};
-
-export { DoctorsCard };
 
 const OurTeamCard = ({ image }: TeamMembersType) => {
   return (

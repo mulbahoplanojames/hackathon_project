@@ -76,7 +76,7 @@ const AllCourses = () => {
 
   return (
     <section className="md:py-14 py-8">
-      <h1 className="text-3xl font-[600] py-6">Popular Courses</h1>
+      <h1 className="text-3xl font-[600] py-6">View All Courses</h1>
       <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
         {courses.map((course: CoursesType) => (
           <CoursesCard

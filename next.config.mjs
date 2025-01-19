@@ -12,7 +12,7 @@ const nextConfig = {
         protocol: "http",
         hostname: "localhost",
         port: "8000",
-        pathname: '/storage/**',
+        pathname: "/storage/**",
       },
       {
         protocol: "https",
@@ -27,9 +27,14 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "via.placeholder.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
-
 
 export default nextConfig;

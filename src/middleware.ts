@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
   //  Define public paths that don't require authentication
@@ -13,6 +13,8 @@ export function middleware(request: NextRequest) {
 
   // const get the token from the cookie
   const token = request.cookies.get("token")?.value;
+  // const user = request.cookies.get("user")?.value;
+  // console.log(JSON.parse(user));
 
   // Only redirect from login/signup to dashboard if user is logged in
   if (isPublicPath && token) {
