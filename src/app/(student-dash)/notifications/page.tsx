@@ -12,6 +12,23 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Bell } from "lucide-react";
 
+type AppointmentCreatedType = {
+  message: string;
+  id: string;
+  created_at: string;
+  notifiable_id: number;
+  notifiable_type: string;
+  data: {
+    apointment: {
+      description: string;
+      doctor_id: number;
+      patient_name: string;
+      prefared_date: string;
+      user_id: number;
+    };
+  };
+};
+
 const fetchNotifications = async (id: string) => {
   try {
     const response = await axios.get(
@@ -56,25 +73,29 @@ const NotificationsPage = () => {
           <span> Notifications</span>
           <span className="absolute w-3 h-3 bg-red-500 top-0 right-0 rounded-full animate-ping"></span>
         </h1>
-        {/* <div className="">
-          {notifications.map((notification) => (
+        <div className="">
+          {notification?.map((notification: AppointmentCreatedType) => (
             <Card
               key={notification.id}
               className="border-l-4 border-primary_Clr shadow-sm mb-6"
             >
               <CardHeader className="flex items-center">
                 <Bell className="mr-2 text-primary_Clr" />
-                <CardTitle className="text-lg">{notification.title}</CardTitle>
+                <CardTitle className="text-lg">
+                  {notification.message}
+                </CardTitle>
               </CardHeader>
               <CardContent className="text-black">
                 <CardDescription className="text-lg">
-                  {notification.description}
+                  {notification?.data?.apointment?.description}
                 </CardDescription>
-                <div className="text-lg mt-2">{notification.time}</div>
+                <div className="text-lg mt-2">
+                  {/* <formatDate date={notification.created_at} /> */}
+                </div>
               </CardContent>
             </Card>
           ))}
-        </div> */}
+        </div>
       </section>
     </>
   );
