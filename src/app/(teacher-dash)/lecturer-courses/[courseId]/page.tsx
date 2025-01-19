@@ -54,7 +54,7 @@ const SingleCoursePage = async ({
         </Link>
         <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
           <Image
-            src="/courses/course_2.svg"
+            src={course?.avater ? course?.avater : "/courses/course_1.svg"}
             alt={course?.title}
             fill
             className="w-full h-full object-cover"

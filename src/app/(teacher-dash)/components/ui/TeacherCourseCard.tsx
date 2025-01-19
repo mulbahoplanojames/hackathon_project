@@ -11,13 +11,12 @@ export const TeacherCoursesCard = (props: CoursesType) => {
     <Card className="p-2 rounded-lg shadow-lg h-fit">
       <CardContent className="p-0 h-fit">
         <Link href={`/lecturer-courses/${props.id}`}>
-          <div className="pb-2">
+          <div className="pb-2 h-48 w-[90%] relative overflow-hidden mx-auto my-2 ">
             <Image
               src={props?.avater ? props?.avater : "/courses/course_1.svg"}
-              alt={props?.title}
-              width={0}
-              height={0}
-              style={{ width: "100%", maxWidth: "600px", height: "auto" }}
+              alt={props.title}
+              fill
+              className="w-full h-full"
             />
           </div>
           <div>

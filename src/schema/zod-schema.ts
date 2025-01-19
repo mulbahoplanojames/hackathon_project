@@ -48,11 +48,6 @@ export const createGroupSchema = z.object({
 
 export const teacherAssignmentSchema = z.object({
   title: z.string().min(1, "Module name is required"),
-  marksObtain: z.string().min(1, "Marks obtain is required"),
-  totalMarks: z.string().min(1, "Total marks is required"),
-  // assignmentDate: z.string().nonempty("Assignment date is required"),
-  // dueDate: z.string().nonempty("Due date is required"),
-  // classAssignTo: z.string().min(1, "Class assigned to is required"),
   // file: z.instanceof(File).optional(),
 });
 
@@ -97,10 +92,6 @@ export const addCoursesSchema = z.object({
   description: z
     .string()
     .min(10, { message: "Course Description is required" }),
-  catOne: z.string().min(1, { message: "CatOne is required" }),
-  catTwo: z.string().min(1, { message: "CatTwo is required" }),
-  Fat: z.string().min(1, { message: "Fat is required" }),
-  total: z.string().min(1, { message: "Total is required" }),
   file: z
     .instanceof(File)
     .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)

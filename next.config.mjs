@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ["localhost"],
     remotePatterns: [
       {
         protocol: "https",
@@ -13,6 +14,12 @@ const nextConfig = {
         hostname: "localhost",
         port: "8000",
         pathname: "/storage/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+        pathname: "/**",
       },
       {
         protocol: "https",
@@ -39,11 +46,9 @@ const nextConfig = {
         hostname: "robohash.org",
         port: "",
         pathname: "/**",
-      }
+      },
     ],
   },
 };
-
-
 
 export default nextConfig;

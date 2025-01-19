@@ -8,17 +8,14 @@ export async function uploadAssignment(
   file: File,
   assignmentId: string
 ): Promise<FileUploadResponse> {
-  const formData = new FormData();
-  formData.append("file", file);
-  console.log(formData);
-  // console.log("Assignment File:", file);
+  console.log("Assignment File:", file);
 
-  // console.log("ID", assignmentId);
+  console.log("ID", assignmentId);
   try {
     const response = await axios.post(
       `http://localhost:8000/api/courses/assigment/submit/${assignmentId}`,
       {
-        file: file,
+        file,
       },
       {
         headers: {
@@ -35,6 +32,7 @@ export async function uploadAssignment(
 
     if (response.status === 200 || response.status === 201) {
       toast.success("Assignment submitted successfully");
+      window.location.reload();
     }
 
     console.log(response);
@@ -42,6 +40,7 @@ export async function uploadAssignment(
     return await response.data;
   } catch (error) {
     console.log("Error from the catch Assignment:", error);
+    toast.error("File upload failed, please try again");
 
     throw {
       message:

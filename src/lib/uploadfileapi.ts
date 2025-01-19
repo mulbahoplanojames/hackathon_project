@@ -8,10 +8,10 @@ const user = getCookie("user");
 const currentUser = user ? JSON.parse(user as string) : null;
 
 export async function uploadFile(file: File): Promise<FileUploadResponse> {
-  const formData = new FormData();
-  formData.append("file", file);
-  console.log(formData);
-  console.log(file);
+  // const formData = new FormData();
+  // formData.append("file", file);
+  // console.log(formData);
+  // console.log(file);
 
   try {
     const response = await axios.post(

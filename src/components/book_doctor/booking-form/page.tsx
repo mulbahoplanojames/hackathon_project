@@ -35,6 +35,7 @@ import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 const BookingForm = ({
   name,
@@ -43,8 +44,7 @@ const BookingForm = ({
   name: string;
   doctor_id: string;
 }) => {
-  console.log("Props Data", doctor_id);
-  console.log("Props Data", name);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof bookingSchema>>({
     resolver: zodResolver(bookingSchema),
@@ -77,6 +77,7 @@ const BookingForm = ({
 
       if (response.status === 200 || response.status === 201) {
         toast.success("Appointment booked successfully");
+        router.push("/notifications");
       } else {
         toast.error("Failed to book an appointment");
       }

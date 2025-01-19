@@ -24,7 +24,6 @@ import {
 import { teacherAssignmentSchema } from "@/schema/zod-schema";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { redirect } from "next/navigation";
 
 type AssignmentFormValues = z.infer<typeof teacherAssignmentSchema>;
 interface AddAssignmentsProps {
@@ -35,21 +34,17 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
     resolver: zodResolver(teacherAssignmentSchema),
     defaultValues: {
       title: "",
-      marksObtain: "",
-      totalMarks: "",
     },
   });
 
   const onSubmit = async (data: AssignmentFormValues) => {
-    const { title, marksObtain, totalMarks } = data;
+    const { title } = data;
 
     try {
       const res = await axios.post(
         "http://localhost:8000/api/assigments/create",
         {
           title,
-          marksObtain,
-          totalMarks,
           course_id: props.id,
         }
       );
@@ -58,7 +53,7 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
 
       if (res.status === 200 || res.status === 201) {
         toast.success("Assignment added successfully");
-        redirect("/lecturer-courses");
+        window.location.reload();
       } else {
         toast.error("Failed to add assignment. Please try again.");
       }
@@ -93,19 +88,6 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
               />
 
               {/* <FormField
-                  control={form.control}
-                  name="assignmentDate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Assignment Date</FormLabel>
-                      <FormControl>
-                        <Input type="date" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                /> */}
-              {/* <FormField
                 control={form.control}
                 name="file"
                 render={({ field }) => (
@@ -121,35 +103,6 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
                   </FormItem>
                 )}
               /> */}
-              <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
-                <FormField
-                  control={form.control}
-                  name="marksObtain"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Mark Obtained</FormLabel>
-                      <FormControl>
-                        <Input type="text" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="totalMarks"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Total Marks</FormLabel>
-                      <FormControl>
-                        <Input type="text" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
 
               {/* Submit Button */}
               <Button type="submit" className="w-full">

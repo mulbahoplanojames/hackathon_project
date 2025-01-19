@@ -29,26 +29,18 @@ const AddCoursePage = () => {
     defaultValues: {
       title: "",
       description: "",
-      catOne: "",
-      catTwo: "",
-      Fat: "",
-      total: "",
       file: undefined,
     },
   });
 
   const onSubmit = async (data: z.infer<typeof addCoursesSchema>) => {
-    const { title, total, Fat, catOne, catTwo, description, file } = data;
+    const { title, description, file } = data;
     console.log(data);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/courses/create",
         {
           title,
-          total,
-          Fat,
-          catOne,
-          catTwo,
           description,
           file,
         },
@@ -92,7 +84,7 @@ const AddCoursePage = () => {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Title</FormLabel>
+                        <FormLabel>Course Name / Title</FormLabel>
                         <FormControl>
                           <Input placeholder="title" {...field} />
                         </FormControl>
@@ -100,27 +92,13 @@ const AddCoursePage = () => {
                       </FormItem>
                     )}
                   />
-                  <FormField
-                    control={addCourseForm.control}
-                    name="total"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Total Marks </FormLabel>
-                        <FormControl>
-                          <Input placeholder="Enter the total " {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
+
                   <FormField
                     control={addCourseForm.control}
                     name="file"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>File</FormLabel>
+                        <FormLabel>Course Image</FormLabel>
                         <FormControl>
                           <Input
                             type="file"
@@ -131,23 +109,6 @@ const AddCoursePage = () => {
                                 field.onChange(file);
                               }
                             }}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={addCourseForm.control}
-                    name="Fat"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Total Marks For FAT</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter the total marks for FAT"
-                            {...field}
                           />
                         </FormControl>
                         <FormMessage />
@@ -172,44 +133,6 @@ const AddCoursePage = () => {
                     </FormItem>
                   )}
                 />
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-6">
-                  <FormField
-                    control={addCourseForm.control}
-                    name="catOne"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Marks For CAT ONE</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            {...field}
-                            placeholder="Enter marks for CAT ONE"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={addCourseForm.control}
-                    name="catTwo"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Marks For CAT TWO</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="text"
-                            {...field}
-                            placeholder="Enter marks for CAT TWO"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-
                 <Button type="submit">Add Course</Button>
               </form>
             </Form>
