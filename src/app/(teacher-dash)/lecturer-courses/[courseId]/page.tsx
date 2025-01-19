@@ -4,7 +4,6 @@ import axios from "axios";
 import Image from "next/image";
 import { formatDate } from "@/lib/formatDate";
 import { CircleArrowLeft, Tags } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { CoursesType } from "@/types/types";
 import Link from "next/link";
 import AddAssignmentForm from "../../add-assignments/page";

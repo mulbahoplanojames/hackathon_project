@@ -28,9 +28,7 @@ const Navbar = () => {
         >
           <PackageCheck />
         </Link>
-        {/*//! Menu items for larger devices and mapping through the links */}
         <MenuLinks />
-
         <div className="gap-x-4 flex items-center justify-center">
           {token ? (
             <>

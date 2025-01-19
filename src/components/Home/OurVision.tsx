@@ -22,7 +22,7 @@ const OurVision = () => {
           </Link>
         </div>
         <div className=" lg:h-[500px] md:h-[450px] h-[400px] w-full md:w-[90%] rounded-lg overflow-hidden relative  ">
-          <Image src="/hero.svg" alt="Our vision image og students" fill />
+          <Image src="/hero.svg" alt="Our vision image of students" fill />
         </div>
       </section>
     </>

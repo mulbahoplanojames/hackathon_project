@@ -33,8 +33,8 @@ const Footer = () => {
   return (
     <>
       <footer className="px-4 divide-y  text-white bg-primary_Clr border-t-primary_Clr border-2">
-        <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
-          <div className="lg:w-1/3">
+        <div className="container flex flex-col justify-between py-10 md:gap-16 gap-4 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+          <div className="lg:w-1/3  ">
             <Link
               rel="noopener noreferrer"
               href="#"
@@ -47,48 +47,34 @@ const Footer = () => {
                 Student P. Hub
               </span>
             </Link>
-          </div>
-          <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
-            {footerData.map((item, index) => (
-              <div key={index} className="space-y-3">
-                <h3 className="uppercase text-white">{item.title}</h3>
-                <ul className="space-y-1">
-                  {item.links.map((link, index) => (
-                    <Link href={link.href} key={index} className="block py-2">
-                      {link.name}
-                    </Link>
-                  ))}
-                </ul>
-              </div>
-            ))}
-
-            <div className="space-y-3 flex-1">
+            <div className="space-y-2 mt-3">
               <h3 className="uppercase text-white">
                 Subscribe to our newsletter
               </h3>
               <p className="">
                 Stay updated on our latest features and offerings.
               </p>
-              <div className="flex justify-center space-x-3">
+              <div className="w-full space-x-3">
                 <Form {...form}>
                   <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8"
+                    className="w-full flex items-center gap-2 "
                   >
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="flex-1 ">
                           <FormControl>
                             <Input placeholder="shadcn" {...field} />
                           </FormControl>
-
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" className="">
+                      Submit
+                    </Button>
                   </form>
                 </Form>
               </div>
@@ -97,6 +83,20 @@ const Footer = () => {
                 receive updates.
               </p>
             </div>
+          </div>
+          <div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
+            {footerData.map((item, index) => (
+              <div key={index} className="space-y-3">
+                <h3 className="uppercase text-white">{item.title}</h3>
+                <ul className="space-y-1">
+                  {item.links.map((link, index) => (
+                    <Link href={link.href} key={index} className="block py-2 ">
+                      {link.name}
+                    </Link>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
         <div className="py-6 text-sm text-center dark:text-gray-600">
