@@ -22,7 +22,7 @@ const DoctorsCard: React.FC<DoctorType> = ({
           />
         </CardHeader>
         <h3 className="text-blue-500 text-lg pb-2 truncate">{firstName}</h3>
-        <p className="text-base pb-2">{specialization.slice(0, 30)}</p>
+        <p className="text-base pb-2">{specialization?.slice(0, 30)}</p>
         <Link href={`/book-doctor/${id}`}>
           <Button className="w-full">View to Book</Button>
         </Link>
