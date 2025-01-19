@@ -85,6 +85,7 @@ const BookingForm = ({
       return data;
     } catch (error) {
       console.log("Data not sent", error);
+      toast.error("Failed to book an appointment");
     }
   };
 
