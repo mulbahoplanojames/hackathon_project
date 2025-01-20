@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
   const userCookie = request.cookies.get("user")?.value;
   const user = userCookie ? JSON.parse(userCookie) : null;
   const userRole = user?.roles[0]?.title;
-  console.log("Middleware User Role: ", userRole);
+  // console.log("Middleware User Role: ", userRole);
 
   // Redirect logged-in users to appropriate dashboards from login/signup
   if (isPublicPath && token) {

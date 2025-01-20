@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 import Link from "next/link";
+
 const UserProfile = () => {
-  // const token = getCookie("token");
-  // console.log(token);
+  const userCookie = getCookie("user");
+  const user = userCookie ? JSON.parse(userCookie) : null;
+  const userRole = user?.roles[0]?.title;
+
   return (
     <>
       <div className="dropdown dropdown-end">
@@ -31,9 +34,15 @@ const UserProfile = () => {
               <span className="badge">New</span>
             </a>
           </li>
-          <li>
-            <Link href="/dashboard">Dashboard</Link>
-          </li>
+          {userRole === undefined ? (
+            <li>
+              <Link href="/dashboard">Dashboard</Link>
+            </li>
+          ) : (
+            <li>
+              <Link href="/teacher-dashboard">Dashboard</Link>
+            </li>
+          )}
           <li>
             <span
               onClick={() => {

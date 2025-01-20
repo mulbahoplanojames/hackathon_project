@@ -20,7 +20,6 @@ import { Bell, Search } from "lucide-react";
 import { ModeToggle } from "@/context/ ModeToggle";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Button } from "@/components/ui/button";
-import DashFooter from "@/layout/DashFooter";
 import { Toaster } from "react-hot-toast";
 import ReactQueryProvider from "@/context/ReactQueryProvider";
 
@@ -66,7 +65,6 @@ export default function RootLayout({
                 </header>
 
                 {children}
-                <DashFooter />
               </SidebarInset>
             </SidebarProvider>
           </ThemeProvider>

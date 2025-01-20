@@ -12,7 +12,6 @@ import { Input } from "@/components/ui/input";
 import { Bell } from "lucide-react";
 import { ModeToggle } from "@/context/ ModeToggle";
 import { ThemeProvider } from "@/context/theme-provider";
-import DashFooter from "@/layout/DashFooter";
 import { TeacherAppSidebar } from "./components/teacher-app-sidebar";
 import ReactQueryProvider from "@/context/ReactQueryProvider";
 import { Toaster } from "react-hot-toast";
@@ -57,7 +56,6 @@ export default function TeacherDashboardLayout({
                   </div>
                 </header>
                 <div className="w-full">{children}</div>
-                <DashFooter />
               </SidebarInset>
             </SidebarProvider>
           </ThemeProvider>

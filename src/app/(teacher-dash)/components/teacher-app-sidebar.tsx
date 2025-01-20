@@ -11,7 +11,6 @@ import {
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
@@ -19,7 +18,6 @@ import {
 
 import { TeacherNavMain } from "./teacher-nav-main";
 import { NavTeacher } from "./nav-teacher";
-import { Calendar } from "@/components/ui/calendar";
 
 const data = {
   user: {
@@ -54,7 +52,6 @@ const data = {
 export function TeacherAppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar>) {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
   return (
     <Sidebar variant="inset" {...props} className="bg-primary_Clr">
       <SidebarHeader>
@@ -67,14 +64,6 @@ export function TeacherAppSidebar({
       <SidebarContent>
         <TeacherNavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          className="rounded-md border shadow w-full text-sm"
-        />
-      </SidebarFooter>
     </Sidebar>
   );
 }
