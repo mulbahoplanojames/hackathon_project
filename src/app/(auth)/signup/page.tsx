@@ -58,13 +58,20 @@ const SignUp = () => {
         revalidatePath("/");
       }
 
+      if (response.status === 409) {
+        toast.error("Account already exists");
+      }
+
+      if (response.status === 500) {
+        toast.error("Registration failed, please try again");
+      }
+
       return response;
     } catch (error) {
       console.log(
         "Registration failed from the signup form catch request :",
         error
       );
-      toast.error("Registration failed, please try again");
     }
   };
 

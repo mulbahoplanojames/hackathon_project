@@ -43,7 +43,7 @@ const SingleDoctorPage = async ({
         </Link>
         <div className="w-full h-[20rem] md:mb-5 mb-3 rounded-lg bg-slate-100 relative overflow-hidden">
           <Image
-            src={doctor?.image ? doctor?.image : "/user.jpg"}
+            src={doctor?.avater ? doctor?.avater : "/user.jpg"}
             alt={doctor?.name}
             fill
             className="w-full h-full object-contain"

@@ -9,3 +9,7 @@ export type DoctorType = {
   phone?: string;
   email?: string;
 };
+
+export type AddAssignmentsProps = {
+  id: string;
+};

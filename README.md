@@ -1,3 +1,5 @@
+how to inplement this login in my existng code : user with the roles of teacher to access all of the isTeacher routes, a user with the role of student to acccess all of the isStudent and both the user with the roles of teacher and students to have access to all of the isShared routes event when they are login in or not .
+
 ## Hackathon Team Project
 
 comprehensive platform designed to empower students, teachers, and parents by providing tools for academic performance tracking, health management, e-commerce for school supplies, and AI-powered assistance. The platform fosters holistic development by integrating real-time insights, personalized recommendations, and user-friendly tools for everyday needs. 🚀

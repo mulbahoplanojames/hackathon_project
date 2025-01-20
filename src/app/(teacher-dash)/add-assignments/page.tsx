@@ -24,11 +24,10 @@ import {
 import { teacherAssignmentSchema } from "@/schema/zod-schema";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { AddAssignmentsProps } from "@/types/type2";
 
 type AssignmentFormValues = z.infer<typeof teacherAssignmentSchema>;
-interface AddAssignmentsProps {
-  id: string;
-}
+
 const AddAssignmentForm = (props: AddAssignmentsProps) => {
   const form = useForm<AssignmentFormValues>({
     resolver: zodResolver(teacherAssignmentSchema),

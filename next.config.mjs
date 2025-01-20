@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost"],
     remotePatterns: [
       {
         protocol: "https",
@@ -27,7 +26,6 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-
       {
         protocol: "https",
         hostname: "images.app.goo.gl",
@@ -40,7 +38,6 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-
       {
         protocol: "https",
         hostname: "robohash.org",

@@ -12,7 +12,7 @@ export default function TeacherDashboard() {
         <h1 className=" text-3xl  pb-3  pt-2">Welcome Back, Mr. James</h1>
         <p className="pb-2 text-lg ">
           Your students completed <span className="text-red-700">80%</span> of
-          their tasks.{" "}
+          their tasks.
         </p>
         <p className="pb-3 text-lg ">
           Progress is <span className="text-red-700"> very good !</span>

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function AboutUsHeader() {
   return (
-    <div className="bg-[url('/about-hero.svg')] bg-center bg-cover">
+    <div className="bg-[url('/about_hero.png')] bg-center bg-cover">
       <div className="w-full h-full backdrop-brightness-50 bg-black/30 px-5 py-28 md:px-10 md:pb-32 md:pt-36">
         <h1 className=" text-white text-6xl sm:text-7xl md:text-7xl">
           About Us
