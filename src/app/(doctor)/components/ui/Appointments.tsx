@@ -1,16 +1,19 @@
 "use client";
 
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatDate } from "@/lib/formatDate";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Bell } from "lucide-react";
+import toast from "react-hot-toast";
 
 type AppointmentCreatedType = {
   id: string;
@@ -18,7 +21,15 @@ type AppointmentCreatedType = {
   notifiable_id: number;
   notifiable_type: string;
   data: {
-    message: string;
+    nofication: string;
+    user: {
+      description?: string;
+      email: number;
+      firstName: string;
+      lastName: string;
+      rollNumber: string;
+      user_id: number;
+    };
     apointment: {
       description: string;
       doctor_id: number;
@@ -38,7 +49,49 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Noti data:", data);
+    console.log("Doctor No data:", data);
+    return data;
+  } catch (error) {
+    console.log("Error fetching notifications:", error);
+  }
+};
+
+const approveAppointment = async (id: string) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:8000/api/apointment/aprove/${id}`
+    );
+    if (!response.data) {
+      console.warn("No notifications found, using default data");
+    }
+
+    if (response.status === 200 || response.status === 201) {
+      toast.success("Appointment Approved");
+    }
+
+    const data = await response.data;
+    console.log("Approve data:", data);
+    return data;
+  } catch (error) {
+    console.log("Error fetching notifications:", error);
+  }
+};
+
+const rejectAppointment = async (id: string) => {
+  try {
+    const response = await axios.put(
+      `http://localhost:8000/api/apointment/decline/${id}`
+    );
+    if (!response.data) {
+      console.warn("No notifications found, using default data");
+    }
+
+    if (response.status === 200 || response.status === 201) {
+      toast.success("Appointment Rejected");
+    }
+
+    const data = await response.data;
+    console.log("Reject data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -69,30 +122,57 @@ const Appointments = () => {
   return (
     <>
       <section className="p-4 pt-3">
-        <div className="">
+        <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
           {notification?.length > 0 ? (
             notification?.map((notification: AppointmentCreatedType) => (
               <Card
                 key={notification.id}
-                className="border-l-4 border-primary_Clr shadow-sm mb-6"
+                className="border-l-4 border-primary_Clr shadow-sm mb-6 h-fit"
               >
                 <CardHeader className="flex items-center">
                   <Bell className="mr-2 text-primary_Clr" />
                   <CardTitle className="text-lg">
-                    {notification?.data?.message}
+                    {notification?.data?.nofication}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-black">
-                  <CardDescription className="text-lg">
-                    {notification?.data?.apointment?.description}
-                  </CardDescription>
-                  <p>
-                    <span>appointment to:</span>
-                    {notification?.data?.apointment?.patient_name}
+                <CardContent className="text-black dark:text-white">
+                  <p className="text-lg ">
+                    <span>You have an Appointment with</span> &nbsp;
+                    <span>
+                      Student,&nbsp;
+                      {notification?.data?.apointment?.patient_name}
+                    </span>
                   </p>
-                  <div className="text-lg mt-2">
-                    {/* <formatDate date={notification.created_at} /> */}
-                  </div>
+
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-base">
+                        Appointment Details
+                      </AccordionTrigger>
+                      <AccordionContent className="text-base">
+                        {notification?.data?.apointment?.description}
+                      </AccordionContent>
+                      <AccordionContent className="text-sm">
+                        Schedule For: &nbsp;
+                        {formatDate(
+                          notification?.data?.apointment?.prefared_date
+                        )}
+                      </AccordionContent>
+                      <AccordionContent className="text-sm flex space-x-3">
+                        <Button
+                          variant="destructive"
+                          onClick={() => rejectAppointment(notification?.id)}
+                        >
+                          Reject
+                        </Button>
+                        <Button
+                          onClick={() => approveAppointment(notification?.id)}
+                        >
+                          Approve
+                        </Button>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </CardContent>
               </Card>
             ))

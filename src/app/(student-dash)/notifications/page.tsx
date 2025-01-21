@@ -47,7 +47,7 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    // console.log("Student notification: ", data);
+    console.log("Student notification: ", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -84,7 +84,7 @@ const NotificationsPage = () => {
             notification?.map((notification: AppointmentCreatedType) => (
               <Card
                 key={notification.id}
-                className="border-l-4 border-primary_Clr shadow-sm mb-6"
+                className="border-l-4 border-primary_Clr shadow-sm mb-6 h-fit"
               >
                 <CardHeader className="flex items-center">
                   <Bell className="mr-2 text-primary_Clr" />

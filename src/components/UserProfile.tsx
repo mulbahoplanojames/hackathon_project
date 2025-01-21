@@ -55,9 +55,17 @@ const UserProfile = () => {
             <li>
               <Link href="/dashboard">Dashboard</Link>
             </li>
-          ) : (
+          ) : userRole === "teacher" ? (
             <li>
               <Link href="/teacher-dashboard">Dashboard</Link>
+            </li>
+          ) : userRole === "doctor" ? (
+            <li>
+              <Link href="/doctor-dashboard">Dashboard</Link>
+            </li>
+          ) : (
+            <li>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
           )}
           <li>
