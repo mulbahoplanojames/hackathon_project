@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
@@ -38,14 +38,14 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Doctor noti", data);
+    console.log("Noti data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
   }
 };
 
-const NotificationsPage = () => {
+const TeacherNotificationsPage = () => {
   const user = getCookie("user");
   const currentUser = user ? JSON.parse(user as string) : null;
 
@@ -70,7 +70,7 @@ const NotificationsPage = () => {
     <>
       <section className="p-4 pt-3">
         <h1 className="text-3xl text-primary_Clr pb-4 ">Notifications</h1>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
+        <div className="">
           {notification?.length > 0 ? (
             notification?.map((notification: AppointmentCreatedType) => (
               <Card
@@ -83,23 +83,17 @@ const NotificationsPage = () => {
                     {notification?.data?.message}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-black dark:text-white">
-                  <p className="text-lg ">
-                    <span>You have an Appointment with:</span>
+                <CardContent className="text-black">
+                  <CardDescription className="text-lg">
+                    {notification?.data?.apointment?.description}
+                  </CardDescription>
+                  <p>
+                    <span>appointment to:</span>
                     {notification?.data?.apointment?.patient_name}
                   </p>
                   <div className="text-lg mt-2">
                     {/* <formatDate date={notification.created_at} /> */}
                   </div>
-
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>Appointment Content</AccordionTrigger>
-                      <AccordionContent className="text-base">
-                        {notification?.data?.apointment?.description}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
                 </CardContent>
               </Card>
             ))
@@ -112,4 +106,4 @@ const NotificationsPage = () => {
   );
 };
 
-export default NotificationsPage;
+export default TeacherNotificationsPage;

@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
       //   maxAge: 60 * 60 * 24 * 7, // 7 days
       // });
       const data = registerResponse.data;
-      // console.log("Sign Up user Data", data);
+      console.log("Sign Up user Data", data);
       setCookie("user", data, { req: request, res: response });
       setCookie("token", token, { req: request, res: response });
       return response;

@@ -18,6 +18,15 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { ChevronsLeft } from "lucide-react";
+import { getCookie } from "cookies-next";
+
+interface UserRole {
+  title: string;
+}
+
+interface User {
+  roles?: UserRole[];
+}
 
 const Login = () => {
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -31,6 +40,19 @@ const Login = () => {
   const router = useRouter();
 
   const onHandleLoginSubmit = async (data: z.infer<typeof loginSchema>) => {
+    const userCookie = getCookie("user");
+    let user: User | null = null;
+
+    try {
+      user = userCookie ? JSON.parse(userCookie as string) : null;
+    } catch (error) {
+      console.error("Failed to parse user cookie:", error);
+    }
+
+    const userRole =
+      user?.roles && user.roles.length > 0 ? user.roles[0].title : null;
+    console.log("User Role : ", userRole);
+
     // console.log(data);
     try {
       const response = await axios.post("/api/auth/login", {
@@ -42,10 +64,14 @@ const Login = () => {
       if (response.status === 200 || response.status === 201) {
         form.reset();
         toast.success("Login successfully");
-        router.push("/dashboard");
+        router.push(
+          userRole === undefined || userRole === null
+            ? "/dashboard"
+            : userRole === "teacher"
+              ? "/teacher-dashboard"
+              : "/dashboard"
+        );
       }
-
-      form.reset();
 
       return response;
     } catch (error) {

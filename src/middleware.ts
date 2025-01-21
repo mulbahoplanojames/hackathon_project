@@ -18,6 +18,7 @@ export async function middleware(request: NextRequest) {
     "/view-assignments",
     "/add-courses",
     "/lecturer-courses",
+    "/teacher-notifications",
   ].includes(pathname);
 
   // Define paths accessible only to students
@@ -36,7 +37,7 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const userCookie = request.cookies.get("user")?.value;
   const user = userCookie ? JSON.parse(userCookie) : null;
-  const userRole = user?.roles[0]?.title;
+  const userRole = user?.roles?.[0]?.title || null;
   // console.log("Middleware User Role: ", userRole);
 
   // Redirect logged-in users to appropriate dashboards from login/signup

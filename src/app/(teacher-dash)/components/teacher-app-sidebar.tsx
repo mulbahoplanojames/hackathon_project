@@ -2,8 +2,11 @@
 
 import * as React from "react";
 import {
+  Bell,
   BookType,
   CopyPlus,
+  MessageSquareText,
+  Settings,
   SquareLibrary,
   SquareTerminal,
 } from "lucide-react";
@@ -18,13 +21,9 @@ import {
 
 import { TeacherNavMain } from "./teacher-nav-main";
 import { NavTeacher } from "./nav-teacher";
+import { TeacherNavProjects } from "./teacher-nav-projects";
 
 const data = {
-  user: {
-    name: "Teacher Oplano",
-    email: "teacheroplano@gmail.com.com",
-    avatar: "/clients/client_1.svg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -47,6 +46,23 @@ const data = {
       icon: SquareLibrary,
     },
   ],
+  projects: [
+    {
+      name: "Messages",
+      url: "#",
+      icon: MessageSquareText,
+    },
+    {
+      name: "Notifications",
+      url: "/teacher-notifications",
+      icon: Bell,
+    },
+    {
+      name: "Setting",
+      url: "#",
+      icon: Settings,
+    },
+  ],
 };
 
 export function TeacherAppSidebar({
@@ -57,12 +73,13 @@ export function TeacherAppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <NavTeacher user={data.user} />
+            <NavTeacher />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <TeacherNavMain items={data.navMain} />
+        <TeacherNavProjects projects={data.projects} />
       </SidebarContent>
     </Sidebar>
   );

@@ -3,10 +3,27 @@ import Image from "next/image";
 import { deleteCookie, getCookie } from "cookies-next";
 import Link from "next/link";
 
+interface UserRole {
+  title: string;
+}
+
+interface User {
+  roles?: UserRole[];
+}
+
 const UserProfile = () => {
   const userCookie = getCookie("user");
-  const user = userCookie ? JSON.parse(userCookie) : null;
-  const userRole = user?.roles[0]?.title;
+  let user: User | null = null;
+
+  try {
+    user = userCookie ? JSON.parse(userCookie as string) : null;
+  } catch (error) {
+    console.error("Failed to parse user cookie:", error);
+  }
+
+  const userRole =
+    user?.roles && user.roles.length > 0 ? user.roles[0].title : null;
+  console.log("User Role : ", userRole);
 
   return (
     <>
@@ -34,7 +51,7 @@ const UserProfile = () => {
               <span className="badge">New</span>
             </a>
           </li>
-          {userRole === undefined ? (
+          {userRole === undefined || userRole === null ? (
             <li>
               <Link href="/dashboard">Dashboard</Link>
             </li>
