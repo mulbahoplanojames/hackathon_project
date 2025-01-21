@@ -53,7 +53,7 @@ const Login = () => {
       user?.roles && user.roles.length > 0 ? user.roles[0].title : null;
     console.log("User Role : ", userRole);
 
-    // console.log(data);
+    console.log("data user", userRole);
     try {
       const response = await axios.post("/api/auth/login", {
         email: data.email,

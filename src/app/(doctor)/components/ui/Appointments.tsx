@@ -1,13 +1,12 @@
 "use client";
 
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatDate } from "@/lib/formatDate";
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
@@ -27,14 +26,6 @@ type AppointmentCreatedType = {
       prefared_date: string;
       user_id: number;
     };
-    doctor: {
-      firstName: string;
-      lastName: string;
-      email: number;
-      gender: string;
-      phone: string;
-      user_id: number;
-    };
   };
 };
 
@@ -47,14 +38,14 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    // console.log("Student notification: ", data);
+    console.log("Noti data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
   }
 };
 
-const NotificationsPage = () => {
+const Appointments = () => {
   const user = getCookie("user");
   const currentUser = user ? JSON.parse(user as string) : null;
 
@@ -78,8 +69,7 @@ const NotificationsPage = () => {
   return (
     <>
       <section className="p-4 pt-3">
-        <h1 className="text-3xl text-primary_Clr pb-4 ">Notifications</h1>
-        <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
+        <div className="">
           {notification?.length > 0 ? (
             notification?.map((notification: AppointmentCreatedType) => (
               <Card
@@ -92,30 +82,17 @@ const NotificationsPage = () => {
                     {notification?.data?.message}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-black dark:text-white">
-                  <p className="text-lg ">
-                    <span>You have an Appointment with:</span> &nbsp;
-                    <span>
-                      Dr.&nbsp;{notification?.data?.doctor?.firstName}
-                    </span>
+                <CardContent className="text-black">
+                  <CardDescription className="text-lg">
+                    {notification?.data?.apointment?.description}
+                  </CardDescription>
+                  <p>
+                    <span>appointment to:</span>
+                    {notification?.data?.apointment?.patient_name}
                   </p>
-
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger className="text-base">
-                        Appointment Details
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base">
-                        {notification?.data?.apointment?.description}
-                      </AccordionContent>
-                      <AccordionContent className="text-sm">
-                        Schedule For: &nbsp;
-                        {formatDate(
-                          notification?.data?.apointment?.prefared_date
-                        )}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                  <div className="text-lg mt-2">
+                    {/* <formatDate date={notification.created_at} /> */}
+                  </div>
                 </CardContent>
               </Card>
             ))
@@ -128,4 +105,4 @@ const NotificationsPage = () => {
   );
 };
 
-export default NotificationsPage;
+export default Appointments;
