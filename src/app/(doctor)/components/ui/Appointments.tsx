@@ -31,6 +31,7 @@ type AppointmentCreatedType = {
       user_id: number;
     };
     apointment: {
+      id: string;
       description: string;
       doctor_id: number;
       patient_name: string;
@@ -161,12 +162,18 @@ const Appointments = () => {
                       <AccordionContent className="text-sm flex space-x-3">
                         <Button
                           variant="destructive"
-                          onClick={() => rejectAppointment(notification?.id)}
+                          onClick={() =>
+                            rejectAppointment(notification?.data.apointment?.id)
+                          }
                         >
                           Reject
                         </Button>
                         <Button
-                          onClick={() => approveAppointment(notification?.id)}
+                          onClick={() =>
+                            approveAppointment(
+                              notification?.data.apointment?.id
+                            )
+                          }
                         >
                           Approve
                         </Button>
