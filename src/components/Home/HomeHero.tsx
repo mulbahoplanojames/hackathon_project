@@ -27,7 +27,7 @@ const HomeHero = () => {
           {/* Image for larger and medium screens */}
           <div className="hidden md:block relative w-full h-full">
             <Image
-              src="/homehero1.png"
+              src="https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655488/homehero1_aqjabf.png"
               alt="hero image for large screens"
               fill
             />

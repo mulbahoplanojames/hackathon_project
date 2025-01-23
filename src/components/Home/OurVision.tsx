@@ -19,11 +19,11 @@ const OurVision = () => {
           </p>
           <Link href="/team">
             <Button className="text-base">View our Team</Button>
-          </Link>
+        </Link>
         </div>
         <div className=" lg:h-[500px] md:h-[450px] h-[400px] w-full md:w-[90%] rounded-lg overflow-hidden relative  ">
           <Image
-            src="/public/about_hero.png"
+            src="https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655482/about_hero_m851cw.png"
             alt="Our vision image of students"
             fill
             priority

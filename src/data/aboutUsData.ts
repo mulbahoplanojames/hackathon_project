@@ -18,16 +18,17 @@ export const BasicDetailsData = [
 ]
 
 export const TrustCompanysData = [
-    {ImageUrl: '/aboutUs/framer.png'},
-    {ImageUrl: '/aboutUs/dropbox.png'},
-    {ImageUrl: '/aboutUs/medium.png'},
-    {ImageUrl: '/aboutUs/webflow.png'},
-    {ImageUrl: '/aboutUs/framer.png'},
-    {ImageUrl: '/aboutUs/dropbox.png'},
-    {ImageUrl: '/aboutUs/medium.png'},
-    {ImageUrl: '/aboutUs/webflow.png'},
-    {ImageUrl: '/aboutUs/framer.png'},
-    {ImageUrl: '/aboutUs/dropbox.png'},
-    {ImageUrl: '/aboutUs/medium.png'},
-    {ImageUrl: '/aboutUs/webflow.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655398/framer_x5tjjp.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655401/dropbox_vetxpb.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655400/medium_x43esy.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655398/webflow_abbm4v.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655398/framer_x5tjjp.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655401/dropbox_vetxpb.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655400/medium_x43esy.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655398/webflow_abbm4v.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655398/framer_x5tjjp.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655401/dropbox_vetxpb.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655400/medium_x43esy.png'},
+    {ImageUrl: 'https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655398/webflow_abbm4v.png'},
+  
 ]

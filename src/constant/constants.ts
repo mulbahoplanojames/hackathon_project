@@ -99,31 +99,31 @@ export const unlockPotentialData = [
   {
     id: 1,
     title: "Unlock Potential image 1",
-    Image: "/unlock_potential/potential_1.svg",
+    Image: "https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655420/potential_1_iyqgua.svg",
   },
   {
     id: 2,
     title: "Unlock Potential image 2",
-    Image: "/unlock_potential/potential_2.svg",
+    Image: "https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655420/potential_2_ltuyvy.svg",
   },
   {
     id: 3,
     title: "Unlock Potential image 3",
-    Image: "/unlock_potential/potential_3.svg",
+    Image: "https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655421/potential_3_zyjuvj.svg",
   },
   {
     id: 4,
     title: "Unlock Potential image 4",
-    Image: "/unlock_potential/potential_4.svg",
+    Image: "https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655421/potential_4_byumn0.svg",
   },
   {
     id: 5,
     title: "Unlock Potential image 5",
-    Image: "/unlock_potential/potential_2.svg",
+    Image: "https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655420/potential_2_ltuyvy.svg",
   },
   {
     id: 6,
     title: "Unlock Potential image 6",
-    Image: "/unlock_potential/potential_1.svg",
+    Image: "https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655420/potential_1_iyqgua.svg",
   },
 ];

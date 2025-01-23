@@ -65,7 +65,7 @@ const NewsLetter = () => {
           </Form>
         </aside>
         <Image
-          src="/check.svg"
+          src="https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655481/check_rtvsbp.svg"
           alt=""
           width={0}
           height={0}
