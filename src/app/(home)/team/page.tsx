@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 const Team = () => {
   return (
     <>
-      <div className="w-full bg-[url('/Rectangle_14.svg')] bg-cover bg-center bg-no-repeat">
+      <div className="w-full bg-[url('https://res.cloudinary.com/dx2ub50ms/image/upload/v1737657967/team-hero_azaqoc.svg')] bg-cover bg-center bg-no-repeat">
         <div className="w-full h-full backdrop-brightness-50 bg-black/30 px-5 py-28  md:px-10 md:py-48">
           <h1 className="text-6xl sm:text-7xl md:text-9xl mb-4 text-white">
             Our Team

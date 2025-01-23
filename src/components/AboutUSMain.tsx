@@ -20,7 +20,7 @@ const AboutUsMain = () => {
               />
             ))}
           </div>
-          <section className="bg-[url('/webinare1.svg')] bg-center bg-cover bg-no-repeat rounded w-full h-[400px] sm:h-[550px]"/>
+          <section className="bg-[url('https://res.cloudinary.com/dx2ub50ms/image/upload/v1737657954/webinare1_b3bpdq.svg')] bg-center bg-cover bg-no-repeat rounded w-full h-[400px] sm:h-[550px]"/>
         </aside>
       </section>
     </div>
