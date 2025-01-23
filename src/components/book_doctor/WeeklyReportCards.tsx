@@ -13,6 +13,7 @@ const WeeklyReportCards = () => {
               key={index}
               description={card.description}
               booking={card.booking}
+              icon={card.icon}
             />
           ))}
         </div>

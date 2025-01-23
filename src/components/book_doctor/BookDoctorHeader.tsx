@@ -22,7 +22,7 @@ const BookDoctorHeader = () => {
             </p>
           </div>
           <Image
-            src="/female doctor at desk.svg"
+            src="/doctor_illu.svg"
             alt="doctor"
             width={0}
             height={0}

@@ -1,19 +1,25 @@
+import { BriefcaseMedical, HeartPulse, MessageSquareDot, Waypoints } from "lucide-react";
+
 export const ReportsData = [
   {
     description: "Total Books",
-    booking: 8
+    booking: 8,
+    icon: BriefcaseMedical 
   },
   {
     description: "Appointments",
-    booking: 3
+    booking: 3,
+    icon:Waypoints 
   },
   {
     description: "Unread Messages",
-    booking: 13
+    booking: 13,
+    icon:MessageSquareDot 
   },
   {
     description: "Doctors",
-    booking: 6
+    booking: 6,
+    icon: HeartPulse 
   },
 ];
 
