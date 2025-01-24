@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Bell } from "lucide-react";
+import { useEffect } from "react";
 
 type AppointmentCreatedType = {
   id: string;
@@ -62,10 +63,21 @@ const NotificationsPage = () => {
     data: notification = [],
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["notifications"],
     queryFn: () => fetchNotifications(currentUser?.id),
   });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 10000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
