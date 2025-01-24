@@ -53,13 +53,13 @@ const AddCoursePage = () => {
         }
       );
       const data = await response.data;
-      console.log("Form Data:", data);
+      // console.log("Form Data:", data);
       if (response.status === 200 || response.status === 201) {
         toast.success("Course added successfully");
         addCourseForm.reset();
         router.push("/lecturer-courses");
       }
-      return response;
+      return data;
     } catch (error) {
       console.log("Error Adding courses:", error);
       toast.error("Failed to add course. Please try again.");

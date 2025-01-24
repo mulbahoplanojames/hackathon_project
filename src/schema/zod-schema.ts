@@ -46,11 +46,6 @@ export const createGroupSchema = z.object({
   image: z.string().optional(),
 });
 
-export const teacherAssignmentSchema = z.object({
-  title: z.string().min(1, "Module name is required"),
-  // file: z.instanceof(File).optional(),
-});
-
 export const newsLetterSchema = z.object({
   email: z.string().email(),
 });
@@ -97,6 +92,17 @@ export const addCoursesSchema = z.object({
     .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
     .refine(
       (file) => ACCEPTED_COURSE_FILE_TYPES.includes(file.type),
+      "Only image, PDF, Word and PowerPoint formats are supported."
+    ),
+});
+
+export const teacherAssignmentSchema = z.object({
+  title: z.string().min(1, "Module name is required"),
+  assigment_file: z
+    .instanceof(File)
+    .refine((file) => file.size <= MAX_FILE_SIZE, `Max file size is 5MB.`)
+    .refine(
+      (file) => ACCEPTED_FILE_TYPES.includes(file.type),
       "Only image, PDF, Word and PowerPoint formats are supported."
     ),
 });

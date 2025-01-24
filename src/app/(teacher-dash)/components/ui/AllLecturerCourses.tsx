@@ -24,10 +24,10 @@ const AllLecturerCourses = () => {
   });
 
   const [courses, setCourses] = useState(data);
-  const [isVisible, setIsVisible] = useState(6);
+  const [isVisible, setIsVisible] = useState(8);
 
   const showMoreItems = () => {
-    setIsVisible((prev) => prev + 3);
+    setIsVisible((prev) => prev + 4);
   };
 
   useEffect(() => {

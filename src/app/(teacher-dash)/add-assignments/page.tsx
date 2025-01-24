@@ -33,18 +33,27 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
     resolver: zodResolver(teacherAssignmentSchema),
     defaultValues: {
       title: "",
+      assigment_file: undefined,
     },
   });
 
   const onSubmit = async (data: AssignmentFormValues) => {
-    const { title } = data;
+    const { title, assigment_file } = data;
+    console.log("Data", data);
 
     try {
       const res = await axios.post(
         "http://localhost:8000/api/assigments/create",
         {
           title,
+          assigment_file,
           course_id: props.id,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "X-Requested-With": "XMLHttpRequest",
+          },
         }
       );
       const data = await res.data;
@@ -86,24 +95,28 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
                 )}
               />
 
-              {/* <FormField
+              <FormField
                 control={form.control}
-                name="file"
+                name="assigment_file"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>File</FormLabel>
                     <FormControl>
                       <Input
                         type="file"
-                        onChange={(e) => field.onChange(e.target.files?.[0])}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            field.onChange(file);
+                          }
+                        }}
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
-              /> */}
+              />
 
-              {/* Submit Button */}
               <Button type="submit" className="w-full">
                 Add Assignment
               </Button>
