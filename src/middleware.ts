@@ -19,6 +19,7 @@ export async function middleware(request: NextRequest) {
     "/add-courses",
     "/lecturer-courses",
     "/teacher-notifications",
+    "/add-marks",
   ].includes(pathname);
 
   // Define paths accessible only to students
@@ -31,6 +32,7 @@ export async function middleware(request: NextRequest) {
     "/market-place",
     "/notifications",
     "/study-with-chat",
+    "/mark-sheet",
   ].includes(pathname);
 
   const isDoctorPath = ["/doctor-dashbaord", "/doctor-appointments"].includes(

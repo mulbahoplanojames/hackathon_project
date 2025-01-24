@@ -1,20 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import { ReportCardsType, TeamMembersType } from "@/types/types";
-import { Icon } from "lucide-react";
 
-const ReportsCards: React.FC<ReportCardsType> = ({ description, booking, icon }) => {
+const ReportsCards: React.FC<ReportCardsType> = ({ description, booking }) => {
   return (
     <div className="grid grid-rows-1 py-8 justify-items-center rounded-[15px] overflow-hidden dark:bg-sidebar shadow-md">
-      {/* <Image
-        src="/file article 1.svg"
-        alt=""
-        width={70}
-        height={0}
-        className="bg-[#FDF5F1] text-white  rounded-[25%] p-2"
-      /> */}
-      <div className="mx-auto w-20 h-14 bg-red-400 rounded-lg flex justify-center items-center">
-        {/* <Icon.icon  /> */}
+      <div className="mx-auto w-16 h-10 border p-2 rounded-lg overflow-hidden relative">
+        <Image src="/Group.png" alt="" className="w-full h-full" fill />
       </div>
       <h1 className="text-[18px] mt-2">{description}</h1>
       <button className="bg-[#F3F4F6]  hover:bg-[#064e3b] dark:hover:bg-slate-500 text-black hover:text-white font-semibold px-[3rem] py-2 rounded-[12px] mt-2 ">

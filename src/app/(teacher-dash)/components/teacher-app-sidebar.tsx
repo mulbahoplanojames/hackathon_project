@@ -5,6 +5,7 @@ import {
   Bell,
   BookType,
   CopyPlus,
+  DiamondPlus,
   MessageSquareText,
   Settings,
   SquareLibrary,
@@ -44,6 +45,11 @@ const data = {
       title: "View Assignments",
       url: "/view-assignments",
       icon: SquareLibrary,
+    },
+    {
+      title: "Add Marks",
+      url: "/add-marks",
+      icon: DiamondPlus,
     },
   ],
   projects: [

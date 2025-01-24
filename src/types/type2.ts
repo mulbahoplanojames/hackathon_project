@@ -13,3 +13,9 @@ export type DoctorType = {
 export type AddAssignmentsProps = {
   id: string;
 };
+
+export type ReportCardsType = {
+  id: number;
+  description: string;
+  booking: number;
+};

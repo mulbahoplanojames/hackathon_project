@@ -13,7 +13,7 @@ const Courses = () => {
       <CardContent>
         <div className="w-full h-[200px] relative overflow-hidden">
           <Image
-            src="/courses/course_1.svg"
+            src="https://res.cloudinary.com/dx2ub50ms/image/upload/v1737655402/course_1_iodxnu.svg"
             alt="Course Thumbnail"
             className="rounded-lg mb-4 w-full object-cover"
             fill

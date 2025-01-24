@@ -12,6 +12,7 @@ import {
   ShoppingBag,
   Stethoscope,
   MessageSquareText,
+  Tags,
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -69,6 +70,11 @@ const data = {
       title: "Market Place",
       url: "/market-place",
       icon: ShoppingBag,
+    },
+    {
+      title: "Mark Sheet",
+      url: "/mark-sheet",
+      icon: Tags,
     },
   ],
   projects: [

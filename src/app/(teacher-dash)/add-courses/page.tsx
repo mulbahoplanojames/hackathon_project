@@ -1,5 +1,6 @@
 "use client";
 
+import DashboardHeader from "@/components/dashboard-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -68,6 +69,7 @@ const AddCoursePage = () => {
   return (
     <>
       <section className="p-4 pt-3">
+        <DashboardHeader text="Add Course" />
         <Card>
           <CardHeader>
             <CardTitle>Add Course</CardTitle>

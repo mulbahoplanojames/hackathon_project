@@ -1,25 +1,25 @@
-import { BriefcaseMedical, HeartPulse, MessageSquareDot, Waypoints } from "lucide-react";
+import { ReportCardsType } from "@/types/type2";
 
-export const ReportsData = [
+export const ReportsData: ReportCardsType[] = [
   {
+    id: 1,
     description: "Total Books",
     booking: 8,
-    icon: BriefcaseMedical 
   },
   {
+    id: 2,
     description: "Appointments",
     booking: 3,
-    icon:Waypoints 
   },
   {
+    id: 3,
     description: "Unread Messages",
     booking: 13,
-    icon:MessageSquareDot 
   },
   {
+    id: 4,
     description: "Doctors",
     booking: 6,
-    icon: HeartPulse 
   },
 ];
 
