@@ -86,16 +86,24 @@ const EnrolledCourses = () => {
       <section className="p-4 pt-3">
         <h1 className="text-3xl font-[600] py-6">Enrolled Courses</h1>
         <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
-          {courses?.map((course: CoursesType) => (
-            <EnrolledCoursesCard
-              key={course?.title}
-              avater={course?.avater}
-              id={course?.id}
-              title={course?.title}
-              description={course?.description}
-              created_at={course?.created_at}
-            />
-          ))}
+          {courses.length > 0 ? (
+            courses?.map((course: CoursesType) => (
+              <EnrolledCoursesCard
+                key={course?.title}
+                avater={course?.avater}
+                id={course?.id}
+                title={course?.title}
+                description={course?.description}
+                created_at={course?.created_at}
+              />
+            ))
+          ) : (
+            <div className="flex justify-center items-center py-5">
+              <p className="text-red-500 text-2xl">
+                You haven&apos;t enrolled in any course yet
+              </p>
+            </div>
+          )}
         </div>
         {courses?.length >= 8 && (
           <section className="flex justify-center items-center pt-8">

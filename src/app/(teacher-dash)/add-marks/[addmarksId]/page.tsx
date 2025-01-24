@@ -26,7 +26,7 @@ const fetchCourse = async (id: string) => {
       `http:///localhost:8000/api/courses/${id}`
     );
     const data = await response.data;
-    console.log("Single Course Data", data);
+    // console.log("Single Course Data", data);
     return data;
   } catch (error) {
     console.log("Error fetching course:", error);
@@ -56,7 +56,7 @@ const AddMarksSinglePage = async ({
         <h2 className="text-2xl font-semibold pb-2">{course?.title}</h2>
         <p className="pb-4">{course?.description}</p>
         <h2 className="text-xl font-semibold pb-4">
-          {course?.assigments?.length > 0
+          {course?.users?.length > 0
             ? "Enroll Students"
             : "No Enroll Students Available"}
         </h2>

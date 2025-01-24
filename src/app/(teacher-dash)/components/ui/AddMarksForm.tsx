@@ -17,7 +17,6 @@ import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,6 +26,7 @@ import toast from "react-hot-toast";
 import { UserType } from "@/types/type2";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { formSchema } from "@/schema/zod-schema";
+import axios from "axios";
 
 const AddMarksForm = ({
   student,
@@ -41,13 +41,36 @@ const AddMarksForm = ({
     resolver: zodResolver(formSchema),
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      console.log(values);
-      toast.success("Marks Added successfully");
+      const response = await axios.post(
+        `http://localhost:8000/api/marks/create`,
+        {
+          user_id: student?.id,
+          course_id,
+          course_name,
+          catOne: values.catOne,
+          catTwo: values.catTwo,
+          fat: values.fat,
+        }
+      );
+
+      const data = await response.data;
+      console.log(data);
+
+      if (response.status === 200 || response.status === 201) {
+        toast.success("Marks Added successfully");
+        window.location.reload();
+      }
+
+      if (response.status === 409 || response.status === 500) {
+        toast.error("Marks already exists");
+      }
+
+      return data;
     } catch (error) {
       console.error("Form submission error", error);
-      toast.error("Failed to submit Marks. Please try again.");
+      toast.error("Marks already exists");
     }
   }
   return (
@@ -72,15 +95,12 @@ const AddMarksForm = ({
             </TableCell>
           </TableRow>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
+            <DialogTitle>Add Marks</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-8 max-w-3xl mx-auto py-10"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
               <FormField
                 control={form.control}
                 name="catOne"
@@ -94,9 +114,6 @@ const AddMarksForm = ({
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -115,9 +132,6 @@ const AddMarksForm = ({
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -132,9 +146,6 @@ const AddMarksForm = ({
                     <FormControl>
                       <Input placeholder="shadcn" type="" {...field} />
                     </FormControl>
-                    <FormDescription>
-                      This is your public display name.
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
