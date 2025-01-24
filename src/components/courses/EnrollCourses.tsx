@@ -99,7 +99,6 @@ const EnrolledCourses = () => {
         </div>
         {courses?.length >= 8 && (
           <section className="flex justify-center items-center pt-8">
-            {" "}
             200 in 249ms
             <Button
               className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"

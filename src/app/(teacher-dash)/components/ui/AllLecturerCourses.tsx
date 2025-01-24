@@ -71,7 +71,7 @@ const AllLecturerCourses = () => {
 
   return (
     <>
-      <section className="md:pb-14 py-8">
+      <section className="md:pb-14 py-8 md:px-6 px-4">
         <h1 className="text-3xl font-[600] py-6">
           View All Courses And Add Assignments
         </h1>
