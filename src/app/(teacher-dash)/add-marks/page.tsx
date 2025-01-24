@@ -28,7 +28,7 @@ const AddMarksPage = () => {
     queryKey: ["courses"],
     queryFn: () => fectchCourses(),
   });
-  console.log("Courses:", courses);
+  // console.log("Courses:", courses);
 
   if (isLoading) {
     return (

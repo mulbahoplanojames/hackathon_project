@@ -19,3 +19,14 @@ export type ReportCardsType = {
   description: string;
   booking: number;
 };
+
+export type UserType = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  phone?: string;
+  email?: string;
+  rollNumber?: string;
+  avater?: string;
+  gender?: string;
+};

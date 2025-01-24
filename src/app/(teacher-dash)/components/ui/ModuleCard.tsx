@@ -5,15 +5,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { formatDate } from "@/lib/formatDate";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-// import axios from "axios";
-// import toast from "react-hot-toast";
-// import { getCookie } from "cookies-next";
-
-// const user = getCookie("user");
-// const currentUser = user ? JSON.parse(user as string) : null;
+import Link from "next/link";
 
 export const ModuleCard: React.FC<CoursesType> = ({
-  // id,
+  id,
   title,
   avater,
   description,
@@ -37,7 +32,9 @@ export const ModuleCard: React.FC<CoursesType> = ({
             <p className="text-l text-[#8a8a8a]">{formatDate(created_at)}</p>
           </aside>
         </div>
-        <Button className="w-full">Add Marks</Button>
+        <Link href={`/add-marks/${id}`}>
+          <Button className="w-full">Add Marks</Button>
+        </Link>
       </CardContent>
     </Card>
   );

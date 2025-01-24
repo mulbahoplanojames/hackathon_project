@@ -100,3 +100,15 @@ export const addCoursesSchema = z.object({
       "Only image, PDF, Word and PowerPoint formats are supported."
     ),
 });
+
+export const formSchema = z.object({
+  catOne: z
+    .string()
+    .min(1, { message: "Please enter this information" })
+    .max(3),
+  catTwo: z
+    .string()
+    .min(1, { message: "Please enter this information" })
+    .max(3),
+  fat: z.string().min(1, { message: "Please enter this information" }).max(3),
+});
