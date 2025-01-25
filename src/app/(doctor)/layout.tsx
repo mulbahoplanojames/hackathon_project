@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbItem } from "@/components/ui/breadcrumb";
 import { Separator } from "@/components/ui/separator";
-
+import { Roboto } from "next/font/google";
 import {
   SidebarInset,
   SidebarProvider,
@@ -16,6 +16,13 @@ import ReactQueryProvider from "@/context/ReactQueryProvider";
 import { Toaster } from "react-hot-toast";
 import { DoctorAppSidebar } from "./components/doctor-app-sidebar";
 
+const roboto = Roboto({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata = {
   title: "Student Performance Hub Dashboard",
   description:
@@ -30,7 +37,7 @@ export default function DoctorDashboardLayout({
   return (
     <ReactQueryProvider>
       <html lang="en">
-        <body className="w-full ">
+        <body className={`${roboto.className} w-full `}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

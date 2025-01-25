@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
@@ -20,13 +20,8 @@ type AppointmentCreatedType = {
   notifiable_type: string;
   data: {
     message: string;
-    apointment: {
-      description: string;
-      doctor_id: number;
-      patient_name: string;
-      prefared_date: string;
-      user_id: number;
-    };
+    assigment_title: string;
+    file: string;
   };
 };
 
@@ -39,7 +34,7 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Noti data:", data);
+    console.log("Teacher Noti data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -60,15 +55,29 @@ const TeacherNotificationsPage = () => {
     queryFn: () => fetchNotifications(currentUser?.id),
   });
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      refetch();
-    }, 10000);
+  const handleDownload = (file: string) => {
+    if (!file) return;
+    const link = document.createElement("a");
+    link.href = file;
+    link.setAttribute("download", "Assignment.pdf");
+    link.setAttribute("target", "_blank");
+    link.style.display = "none";
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [refetch]);
+    // Add to document
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     refetch();
+  //   }, 3000);
+
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -95,17 +104,41 @@ const TeacherNotificationsPage = () => {
                     {notification?.data?.message}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="text-black">
-                  <CardDescription className="text-lg">
-                    {notification?.data?.apointment?.description}
-                  </CardDescription>
-                  <p>
-                    <span>appointment to:</span>
-                    {notification?.data?.apointment?.patient_name}
-                  </p>
-                  <div className="text-lg mt-2">
-                    {/* <formatDate date={notification.created_at} /> */}
-                  </div>
+                <CardContent className="text-black dark:text-white">
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger className="text-base">
+                        Submitted Assignment Details
+                      </AccordionTrigger>
+                      <AccordionContent className="text-base">
+                        <span>Assignment Title :</span> &nbsp;
+                        {notification?.data?.assigment_title}
+                      </AccordionContent>
+                      <AccordionContent className="text-base">
+                        <span>Attached File :</span> &nbsp;
+                        {notification?.data?.file ? (
+                          <a
+                            href={notification?.data?.file}
+                            download
+                            onClick={(e) => {
+                              e.preventDefault();
+                              handleDownload(notification?.data?.file);
+                            }}
+                          >
+                            {notification?.data?.assigment_title}.pdf
+                          </a>
+                        ) : (
+                          <span>No file attached</span>
+                        )}
+                      </AccordionContent>
+                      {/* <AccordionContent className="text-sm">
+                        Schedule For: &nbsp;
+                        {formatDate(
+                          notification?.data?.apointment?.prefared_date
+                        )}
+                      </AccordionContent> */}
+                    </AccordionItem>
+                  </Accordion>
                 </CardContent>
               </Card>
             ))

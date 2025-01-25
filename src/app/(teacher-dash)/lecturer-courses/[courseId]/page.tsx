@@ -6,7 +6,7 @@ import { formatDate } from "@/lib/formatDate";
 import { CircleArrowLeft, Tags } from "lucide-react";
 import { CoursesType } from "@/types/types";
 import Link from "next/link";
-import AddAssignmentForm from "../../add-assignments/page";
+import AddAssignmentForm from "../../components/ui/AddAssignmentForm";
 
 type AssigmentType = {
   id: number;

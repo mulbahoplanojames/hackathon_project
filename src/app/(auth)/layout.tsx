@@ -1,5 +1,13 @@
 import { ThemeProvider } from "@/context/theme-provider";
 import "../globals.css";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Next.js",
@@ -13,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${roboto.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

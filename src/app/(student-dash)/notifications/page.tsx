@@ -72,7 +72,7 @@ const NotificationsPage = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       refetch();
-    }, 10000);
+    }, 3000);
 
     return () => {
       clearInterval(intervalId);
@@ -106,10 +106,8 @@ const NotificationsPage = () => {
                 </CardHeader>
                 <CardContent className="text-black dark:text-white">
                   <p className="text-lg ">
-                    <span>You have an Appointment with:</span> &nbsp;
-                    <span>
-                      Dr.&nbsp;{notification?.data?.doctor?.firstName}
-                    </span>
+                    <span>You have book a new Appointment with:</span> &nbsp;
+                    <span>&nbsp;{notification?.data?.doctor?.firstName}</span>
                   </p>
 
                   <Accordion type="single" collapsible>

@@ -24,11 +24,14 @@ import {
 import { teacherAssignmentSchema } from "@/schema/zod-schema";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { AddAssignmentsProps } from "@/types/type2";
+
+type AddAssignmentsType = {
+  id: string;
+};
 
 type AssignmentFormValues = z.infer<typeof teacherAssignmentSchema>;
 
-const AddAssignmentForm = (props: AddAssignmentsProps) => {
+const AddAssignmentForm = ({ id }: AddAssignmentsType) => {
   const form = useForm<AssignmentFormValues>({
     resolver: zodResolver(teacherAssignmentSchema),
     defaultValues: {
@@ -47,7 +50,7 @@ const AddAssignmentForm = (props: AddAssignmentsProps) => {
         {
           title,
           assigment_file,
-          course_id: props.id,
+          course_id: id,
         },
         {
           headers: {

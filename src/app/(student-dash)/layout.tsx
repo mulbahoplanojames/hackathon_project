@@ -22,6 +22,14 @@ import { ThemeProvider } from "@/context/theme-provider";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "react-hot-toast";
 import ReactQueryProvider from "@/context/ReactQueryProvider";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "Student Performance Hub Dashboard",
@@ -37,7 +45,7 @@ export default function RootLayout({
   return (
     <ReactQueryProvider>
       <html lang="en">
-        <body>
+        <body className={`${roboto.className} w-full `}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

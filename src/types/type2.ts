@@ -10,10 +10,6 @@ export type DoctorType = {
   email?: string;
 };
 
-export type AddAssignmentsProps = {
-  id: string;
-};
-
 export type ReportCardsType = {
   id: number;
   description: string;

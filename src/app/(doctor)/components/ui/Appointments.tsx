@@ -13,6 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { Bell } from "lucide-react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 type AppointmentCreatedType = {
@@ -50,7 +51,7 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Doctor No data:", data);
+    // console.log("Doctor No data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -58,10 +59,14 @@ const fetchNotifications = async (id: string) => {
 };
 
 const approveAppointment = async (id: string) => {
+  console.log("ID:", id);
   try {
     const response = await axios.put(
       `http://localhost:8000/api/apointment/aprove/${id}`
     );
+
+    // console.log("Data", response.data);
+
     if (!response.data) {
       console.warn("No notifications found, using default data");
     }
@@ -92,7 +97,7 @@ const rejectAppointment = async (id: string) => {
     }
 
     const data = await response.data;
-    console.log("Reject data:", data);
+    // console.log("Reject data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -107,10 +112,21 @@ const Appointments = () => {
     data: notification = [],
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["notifications"],
     queryFn: () => fetchNotifications(currentUser?.id),
   });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
