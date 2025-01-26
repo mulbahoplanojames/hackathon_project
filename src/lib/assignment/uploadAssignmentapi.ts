@@ -1,8 +1,13 @@
 "use client";
 
+import { getCookie } from "cookies-next";
 import { FileUploadError, FileUploadResponse } from "@/types/types";
 import axios from "axios";
 import toast from "react-hot-toast";
+
+const user = getCookie("user");
+const currentUser = user ? JSON.parse(user as string) : null;
+const user_id = currentUser ? currentUser.id : null;
 
 export async function uploadAssignment(
   file: File,
@@ -16,6 +21,7 @@ export async function uploadAssignment(
       `http://localhost:8000/api/courses/assigment/submit/${assignmentId}`,
       {
         file,
+        user_id,
       },
       {
         headers: {
@@ -35,7 +41,7 @@ export async function uploadAssignment(
       window.location.reload();
     }
 
-    console.log(response);
+    console.log("Assignment Response:", response.data);
 
     return await response.data;
   } catch (error) {

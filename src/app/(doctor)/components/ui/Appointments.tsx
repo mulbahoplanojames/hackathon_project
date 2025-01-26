@@ -76,7 +76,7 @@ const approveAppointment = async (id: string) => {
     }
 
     const data = await response.data;
-    console.log("Approve data:", data);
+    // console.log("Approve data:", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);

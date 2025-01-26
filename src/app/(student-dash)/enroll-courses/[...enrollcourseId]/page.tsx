@@ -30,6 +30,7 @@ const fetchEnrollCourse = async (id: string) => {
     console.log("Error fetching enrollCourse:", error);
   }
 };
+
 const EnrollCourseSinglePage = async ({
   params,
 }: {
