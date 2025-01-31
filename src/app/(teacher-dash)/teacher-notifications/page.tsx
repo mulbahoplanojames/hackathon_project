@@ -26,8 +26,6 @@ type AppointmentCreatedType = {
 };
 
 const fetchNotifications = async (id: string) => {
-  console.log("id", id);
-  if (!id) return;
   try {
     const response = await axios.get(
       `http://localhost:8000/api/notifications/user/${id}`
@@ -36,7 +34,8 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Teacher Noti data:", data);
+    console.log("Lecturer notification: ", data);
+    console.log("response notification: ", response);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -49,7 +48,7 @@ const TeacherNotificationsPage = () => {
   console.log("Current", currentUser?.id);
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["teacher-notifications"],
+    queryKey: ["lecturer-notifications"],
     queryFn: () => fetchNotifications(currentUser?.id),
   });
 
@@ -67,15 +66,15 @@ const TeacherNotificationsPage = () => {
     document.body.removeChild(link);
   };
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     refetch();
-  //   }, 3000);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 6000);
 
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [refetch]);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;

@@ -51,7 +51,7 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    // console.log("Doctor No data:", data);
+    // console.log("Doctor notification: ", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -121,7 +121,7 @@ const Appointments = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       refetch();
-    }, 3000);
+    }, 5000);
 
     return () => {
       clearInterval(intervalId);
@@ -129,13 +129,26 @@ const Appointments = () => {
   }, [refetch]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="grid col-span-12 place-items-center h-72  w-[100%]">
+        <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-blue-500"></div>
+      </div>
+    );
   }
 
   if (error) {
-    return <h1>Error fetching notifications</h1>;
+    return (
+      <div className="grid col-span-12 place-items-center h-72  w-full text-center bg-red-400">
+        <div className="flex flex-col items-center w-full">
+          <h1 className="text-5xl font-bold text-red-500">Oops!</h1>
+          <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">
+            Something went wrong.
+          </p>
+          <Button onClick={() => refetch}>Try again</Button>
+        </div>
+      </div>
+    );
   }
-
   return (
     <>
       <section className="p-4 pt-3">
@@ -149,16 +162,17 @@ const Appointments = () => {
                 <CardHeader className="flex items-center">
                   <Bell className="mr-2 text-primary_Clr" />
                   <CardTitle className="text-lg">
-                    {notification?.data?.nofication}
+                    <span>💠</span>&nbsp;
+                    {notification?.data?.nofication}&nbsp;
+                    <span>💠</span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-black dark:text-white">
                   <p className="text-lg ">
-                    <span>You have an Appointment with</span> &nbsp;
-                    <span>
-                      Student,&nbsp;
-                      {notification?.data?.apointment?.patient_name}
-                    </span>
+                    <span>🧑‍🎓</span>&nbsp;&nbsp;
+                    <span>{notification?.data?.apointment?.patient_name}</span>
+                    &nbsp;
+                    <span>book an Appointment with you</span> &nbsp;
                   </p>
 
                   <Accordion type="single" collapsible>

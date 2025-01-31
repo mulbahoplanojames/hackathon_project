@@ -6,6 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/formatDate";
 import { useQuery } from "@tanstack/react-query";
@@ -84,11 +85,25 @@ const NotificationsPage = () => {
   }, [refetch]);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return (
+      <div className="grid col-span-12 place-items-center h-72  w-[100%]">
+        <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-blue-500"></div>
+      </div>
+    );
   }
 
   if (error) {
-    return <h1>Error fetching notifications</h1>;
+    return (
+      <div className="grid col-span-12 place-items-center h-72  w-full text-center bg-red-400">
+        <div className="flex flex-col items-center w-full">
+          <h1 className="text-5xl font-bold text-red-500">Oops!</h1>
+          <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">
+            Something went wrong.
+          </p>
+          <Button onClick={() => refetch}>Try again</Button>
+        </div>
+      </div>
+    );
   }
 
   return (
