@@ -26,6 +26,8 @@ type AppointmentCreatedType = {
 };
 
 const fetchNotifications = async (id: string) => {
+  console.log("id", id);
+  if (!id) return;
   try {
     const response = await axios.get(
       `http://localhost:8000/api/notifications/user/${id}`
@@ -44,14 +46,10 @@ const fetchNotifications = async (id: string) => {
 const TeacherNotificationsPage = () => {
   const user = getCookie("user");
   const currentUser = user ? JSON.parse(user as string) : null;
+  console.log("Current", currentUser?.id);
 
-  const {
-    data: notification = [],
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["notifications"],
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["teacher-notifications"],
     queryFn: () => fetchNotifications(currentUser?.id),
   });
 
@@ -69,15 +67,15 @@ const TeacherNotificationsPage = () => {
     document.body.removeChild(link);
   };
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      refetch();
-    }, 3000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     refetch();
+  //   }, 3000);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [refetch]);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -92,9 +90,8 @@ const TeacherNotificationsPage = () => {
       <section className="p-4 pt-3">
         <h1 className="text-3xl text-primary_Clr pb-4 ">Notifications</h1>
         <div className="">
-          
-          {notification?.length > 0 ? (
-            notification?.map((notification: AppointmentCreatedType) => (
+          {data?.length > 0 ? (
+            data?.map((notification: AppointmentCreatedType) => (
               <Card
                 key={notification.id}
                 className="border-l-4 border-primary_Clr shadow-sm mb-6"
