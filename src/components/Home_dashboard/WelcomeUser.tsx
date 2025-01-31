@@ -5,8 +5,6 @@ const WelcomeUser = () => {
   const user = getCookie("user");
   const currentUser = user ? JSON.parse(user as string) : null;
 
-  console.log("Current user", currentUser);
-
   return (
     <>
       <h1 className="lg:text-4xl text-3xl pb-3">

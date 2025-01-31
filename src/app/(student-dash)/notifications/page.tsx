@@ -1,5 +1,6 @@
 "use client";
 
+import DashboardHeader from "@/components/dashboard-header";
 import {
   Accordion,
   AccordionContent,
@@ -109,7 +110,7 @@ const NotificationsPage = () => {
   return (
     <>
       <section className="p-4 pt-3">
-        <h1 className="text-3xl text-primary_Clr pb-4 ">Notifications</h1>
+        <DashboardHeader text="Notifications" />
         <div className="grid md:grid-cols-2 grid-cols-1 gap-8">
           {notification?.length > 0 ? (
             notification?.map((notification: AppointmentCreatedType) => (
