@@ -7,6 +7,7 @@ import { getCookie } from "cookies-next";
 import { EnrolledCoursesCard } from "./EnrolledCourseCard";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Skeleton } from "../ui/skeleton";
+import { useEffect } from "react";
 
 const user = getCookie("user");
 const currentUser = user ? JSON.parse(user as string) : null;
@@ -34,6 +35,14 @@ const EnrolledCourses = () => {
     queryKey: ["enroll-courses", currentUser?.id],
     queryFn: () => fetchCourses(8),
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   const queryClient = useQueryClient();
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "../ui/button";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -31,6 +31,14 @@ const AllCourses = () => {
     queryKey: ["all-courses", { limit: 8 }],
     queryFn: () => getAllCourses(8),
   });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      refetch();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [refetch]);
 
   const loadMoreCourses = async () => {
     if (!courses.length) return;

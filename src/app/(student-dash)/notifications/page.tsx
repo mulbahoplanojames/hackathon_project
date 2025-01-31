@@ -36,6 +36,14 @@ type AppointmentCreatedType = {
       phone: string;
       user_id: number;
     };
+    assigment_title: string;
+    user: {
+      description?: string;
+      email: number;
+      firstName: string;
+      lastName: string;
+      rollNumber: string;
+    };
   };
 };
 
@@ -69,15 +77,15 @@ const NotificationsPage = () => {
     queryFn: () => fetchNotifications(currentUser?.id),
   });
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      refetch();
-    }, 3000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     refetch();
+  //   }, 3000);
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [refetch]);
+  //   return () => {
+  //     clearInterval(intervalId);
+  //   };
+  // }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -105,25 +113,42 @@ const NotificationsPage = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-black dark:text-white">
-                  <p className="text-lg ">
-                    <span>You have book a new Appointment with:</span> &nbsp;
-                    <span>&nbsp;{notification?.data?.doctor?.firstName}</span>
-                  </p>
+                  {notification?.data?.user ? (
+                    <p>
+                      Bravo, keep up submitting you tasks. <span>🚀</span>
+                    </p>
+                  ) : (
+                    <p className="text-base ">
+                      <span>You have book a new Appointment with:</span> &nbsp;
+                      <span>&nbsp;{notification?.data?.doctor?.firstName}</span>
+                    </p>
+                  )}
 
                   <Accordion type="single" collapsible>
                     <AccordionItem value="item-1">
-                      <AccordionTrigger className="text-base">
-                        Appointment Details
-                      </AccordionTrigger>
-                      <AccordionContent className="text-base">
-                        {notification?.data?.apointment?.description}
-                      </AccordionContent>
-                      <AccordionContent className="text-sm">
-                        Schedule For: &nbsp;
-                        {formatDate(
-                          notification?.data?.apointment?.prefared_date
-                        )}
-                      </AccordionContent>
+                      {notification?.data?.user ? (
+                        <AccordionTrigger className="text-base">
+                          📘 Assignmnets Details
+                        </AccordionTrigger>
+                      ) : (
+                        <AccordionTrigger className="text-base">
+                          📅 Appointment Details
+                        </AccordionTrigger>
+                      )}
+
+                      {notification?.data?.user ? (
+                        <AccordionContent className="text-base">
+                          Assignment Name: &nbsp;
+                          {notification?.data?.assigment_title}
+                        </AccordionContent>
+                      ) : (
+                        <AccordionContent className="text-sm">
+                          Schedule For: &nbsp;
+                          {formatDate(
+                            notification?.data?.apointment?.prefared_date
+                          )}
+                        </AccordionContent>
+                      )}
                     </AccordionItem>
                   </Accordion>
                 </CardContent>
