@@ -2,7 +2,6 @@ import { SubmitAssignments } from "@/components/assignments/SubmitAssignments";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/formatDate";
 import { CoursesType } from "@/types/types";
-import { fetchEnrollCourse } from "@/utils/fetchCourse";
 import axios from "axios";
 import { Tags } from "lucide-react";
 import Image from "next/image";
@@ -19,6 +18,17 @@ export const generateStaticParams = async () => {
   const data = await res.data;
 
   return data?.map((course: CoursesType) => ({ id: course.id.toString() }));
+};
+
+const fetchEnrollCourse = async (id: string) => {
+  try {
+    const response = await axios.get(`http://localhost:8000/api/courses/${id}`);
+    const data = await response.data;
+    // console.log("Course Data", data);
+    return data;
+  } catch (error) {
+    console.log("Error fetching enrollCourse:", error);
+  }
 };
 
 const EnrollCourseSinglePage = async ({

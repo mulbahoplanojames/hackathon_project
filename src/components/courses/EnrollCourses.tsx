@@ -5,16 +5,16 @@ import axios from "axios";
 import { CoursesType } from "@/types/types";
 import { getCookie } from "cookies-next";
 import { EnrolledCoursesCard } from "./EnrolledCourseCard";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "../ui/skeleton";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const user = getCookie("user");
 const currentUser = user ? JSON.parse(user as string) : null;
 
-const fetchCourses = async (limit: number, lastVisibleCourseId?: string) => {
+const fetchCourses = async () => {
   const response = await axios.get(
-    `http://localhost:8000/api/courses/user/${currentUser?.id}?limit=${limit}${lastVisibleCourseId ? `&lastVisibleCourse=${lastVisibleCourseId}` : ""}`,
+    `http://localhost:8000/api/courses/user/${currentUser?.id}}`,
     {
       headers: {
         "Access-Control-Allow-Origin": "*",
@@ -26,15 +26,21 @@ const fetchCourses = async (limit: number, lastVisibleCourseId?: string) => {
 };
 
 const EnrolledCourses = () => {
-  const {
-    data: courses,
-    error,
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data, error, isLoading, refetch } = useQuery({
     queryKey: ["enroll-courses", currentUser?.id],
-    queryFn: () => fetchCourses(8),
+    queryFn: () => fetchCourses(),
   });
+
+  const [courses, setCourses] = useState(data);
+  const [isVisible, setIsVisible] = useState(8);
+
+  const showMoreItems = () => {
+    setIsVisible((prev) => prev + 4);
+  };
+
+  useEffect(() => {
+    setCourses(data?.slice(0, isVisible));
+  }, [isVisible, data]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -43,17 +49,6 @@ const EnrolledCourses = () => {
 
     return () => clearInterval(interval);
   }, [refetch]);
-
-  const queryClient = useQueryClient();
-
-  const loadMoreCourses = async () => {
-    const lastVisibleCourse = courses?.[courses.length - 1];
-    const nextCourses = await fetchCourses(4, lastVisibleCourse?.id);
-    queryClient.setQueryData(
-      ["courses", currentUser?.id],
-      [...(courses || []), ...nextCourses]
-    );
-  };
 
   if (isLoading) {
     return (
@@ -95,17 +90,19 @@ const EnrolledCourses = () => {
       <section className="p-4 pt-3">
         <h1 className="text-3xl font-[600] py-6">Enrolled Courses</h1>
         <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
-          {courses.length > 0 ? (
-            courses?.map((course: CoursesType) => (
-              <EnrolledCoursesCard
-                key={course?.title}
-                avater={course?.avater}
-                id={course?.id}
-                title={course?.title}
-                description={course?.description}
-                created_at={course?.created_at}
-              />
-            ))
+          {courses?.length > 0 ? (
+            courses
+              ?.slice(0, isVisible)
+              ?.map((course: CoursesType) => (
+                <EnrolledCoursesCard
+                  key={course?.title}
+                  avater={course?.avater}
+                  id={course?.id}
+                  title={course?.title}
+                  description={course?.description}
+                  created_at={course?.created_at}
+                />
+              ))
           ) : (
             <div className="flex justify-center items-center py-5">
               <p className="text-red-500 text-2xl">
@@ -114,17 +111,17 @@ const EnrolledCourses = () => {
             </div>
           )}
         </div>
-        {courses?.length >= 8 && (
-          <section className="flex justify-center items-center pt-8">
-            200 in 249ms
+
+        <section className="flex justify-center items-center pt-8">
+          {data?.length > isVisible && (
             <Button
               className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"
-              onClick={loadMoreCourses}
+              onClick={showMoreItems}
             >
               Load More Courses
             </Button>
-          </section>
-        )}
+          )}
+        </section>
       </section>
     </>
   );
