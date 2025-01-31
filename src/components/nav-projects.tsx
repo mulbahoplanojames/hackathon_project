@@ -65,7 +65,7 @@ export function NavProjects({
               >
                 <Link href={item.url}>
                   {item.name === "Notifications" && (
-                    <p className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 bg-red-600 text-white text-sm p-1 font-bold rounded-full">
+                    <p className="absolute top-0 right-0 flex items-center justify-center w-4 h-4 bg-red-500 animate-pulse text-white text-sm p-1 font-bold rounded-full">
                       <span>{notificationCount}</span>
                     </p>
                   )}
