@@ -7,6 +7,7 @@ import { CircleArrowLeft, Tags } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CoursesType } from "@/types/types";
 import Link from "next/link";
+import { fetchCourse } from "@/utils/fetchCourse";
 
 type AssigmentType = {
   id: number;
@@ -24,18 +25,6 @@ export const generateStaticParams = async () => {
   const data = await res.data;
 
   return data?.map((course: CoursesType) => ({ id: course.id.toString() }));
-};
-
-const fetchCourse = async (id: string) => {
-  try {
-    const response = await axios.get(
-      `http:///localhost:8000/api/courses/${id}`
-    );
-    const data = await response.data;
-    return data;
-  } catch (error) {
-    console.log("Error fetching course:", error);
-  }
 };
 
 const SingleCoursePage = async ({

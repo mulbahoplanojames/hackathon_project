@@ -1,36 +1,38 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { CoursesType } from "@/types/types";
 import { CoursesCard } from "./CourseCard";
 import { Skeleton } from "../ui/skeleton";
 
-const getAllCourses = async (limit: number, lastVisibleCourseId?: string) => {
+const getAllCourses = async () => {
   try {
-    const response = await axios.get(
-      `http://localhost:8000/api/courses?limit=${limit}${lastVisibleCourseId ? `&lastVisibleCourse=${lastVisibleCourseId}` : ""}`
-    );
+    const response = await axios.get(`http://localhost:8000/api/courses`);
     return response.data;
   } catch (error) {
     console.log("Error fetching courses:", error);
     return [];
   }
 };
-
 const AllCourses = () => {
-  const queryClient = useQueryClient();
-  const {
-    data: courses = [],
-    isLoading,
-    error,
-    refetch,
-  } = useQuery({
-    queryKey: ["all-courses", { limit: 8 }],
-    queryFn: () => getAllCourses(8),
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["all-lecturer-courses"],
+    queryFn: () => getAllCourses(),
   });
+
+  const [courses, setCourses] = useState(data);
+  const [isVisible, setIsVisible] = useState(8);
+
+  const showMoreItems = () => {
+    setIsVisible((prev) => prev + 4);
+  };
+
+  useEffect(() => {
+    setCourses(data?.slice(0, isVisible));
+  }, [isVisible, data]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,13 +41,6 @@ const AllCourses = () => {
 
     return () => clearInterval(interval);
   }, [refetch]);
-
-  const loadMoreCourses = async () => {
-    if (!courses.length) return;
-    const lastVisibleCourse = courses[courses.length - 1];
-    const nextCourses = await getAllCourses(8, lastVisibleCourse.id);
-    queryClient.setQueryData(["all-courses"], [...courses, ...nextCourses]);
-  };
 
   if (isLoading) {
     return (
@@ -86,27 +81,30 @@ const AllCourses = () => {
     <section className="md:py-14 py-8">
       <h1 className="text-3xl font-[600] py-6">View All Courses</h1>
       <div className="grid auto-rows-min gap-4 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
-        {courses.map((course: CoursesType) => (
-          <CoursesCard
-            key={course.id}
-            avater={course.avater}
-            id={course.id}
-            title={course.title}
-            description={course.description}
-            created_at={course.created_at}
-          />
-        ))}
+        {courses
+          ?.slice(0, isVisible)
+          ?.map((course: CoursesType) => (
+            <CoursesCard
+              key={course.id}
+              avater={course.avater}
+              id={course.id}
+              title={course.title}
+              description={course.description}
+              created_at={course.created_at}
+            />
+          ))}
       </div>
-      {courses.length % 8 === 0 && (
-        <section className="flex justify-center items-center pt-8">
+
+      <section className="flex justify-center items-center pt-8">
+        {data?.length > isVisible && (
           <Button
             className="bg-[#064E3B] text-lg dark:text-white dark:hover:text-black py-6 rounded-lg"
-            onClick={loadMoreCourses}
+            onClick={showMoreItems}
           >
             Load More Courses
           </Button>
-        </section>
-      )}
+        )}
+      </section>
     </section>
   );
 };
