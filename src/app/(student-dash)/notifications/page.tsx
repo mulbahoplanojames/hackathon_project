@@ -32,17 +32,13 @@ type AppointmentCreatedType = {
       firstName: string;
       lastName: string;
       email: number;
-      gender: string;
-      phone: string;
+      hospital: string;
       user_id: number;
     };
     assigment_title: string;
     user: {
-      description?: string;
-      email: number;
+      created_at: string;
       firstName: string;
-      lastName: string;
-      rollNumber: string;
     };
   };
 };
@@ -56,7 +52,7 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Student notification: ", data);
+    // console.log("Student notification: ", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -77,15 +73,15 @@ const NotificationsPage = () => {
     queryFn: () => fetchNotifications(currentUser?.id),
   });
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     refetch();
-  //   }, 3000);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 3000);
 
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [refetch]);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -137,17 +133,29 @@ const NotificationsPage = () => {
                       )}
 
                       {notification?.data?.user ? (
-                        <AccordionContent className="text-base">
-                          Assignment Name: &nbsp;
-                          {notification?.data?.assigment_title}
-                        </AccordionContent>
+                        <>
+                          <AccordionContent className="text-base">
+                            Assignment Name: &nbsp;
+                            {notification?.data?.assigment_title}
+                          </AccordionContent>
+                          <AccordionContent className="text-sm">
+                            Assigned On: &nbsp;
+                            {formatDate(notification?.data?.user?.created_at)}
+                          </AccordionContent>
+                        </>
                       ) : (
-                        <AccordionContent className="text-sm">
-                          Schedule For: &nbsp;
-                          {formatDate(
-                            notification?.data?.apointment?.prefared_date
-                          )}
-                        </AccordionContent>
+                        <>
+                          <AccordionContent className="text-sm">
+                            Hospital: &nbsp;
+                            {notification?.data?.doctor?.hospital}
+                          </AccordionContent>
+                          <AccordionContent className="text-sm">
+                            Schedule For: &nbsp;
+                            {formatDate(
+                              notification?.data?.apointment?.prefared_date
+                            )}
+                          </AccordionContent>
+                        </>
                       )}
                     </AccordionItem>
                   </Accordion>
