@@ -10,11 +10,12 @@ export type DoctorType = {
   email?: string;
 };
 
-export type ReportCardsType = {
-  id: number;
-  description: string;
-  booking: number;
-};
+// export type ReportCardsType = {
+//   id: number;
+//   description: string;
+//   booking: number;
+//   icon?: string;
+// };
 
 export type UserType = {
   id: string;

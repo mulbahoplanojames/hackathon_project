@@ -69,15 +69,15 @@ const TeacherNotificationsPage = () => {
     document.body.removeChild(link);
   };
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     refetch();
-  //   }, 3000);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 3000);
 
-  //   return () => {
-  //     clearInterval(intervalId);
-  //   };
-  // }, [refetch]);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
 
   if (isLoading) {
     return <h1>Loading...</h1>;
@@ -92,6 +92,7 @@ const TeacherNotificationsPage = () => {
       <section className="p-4 pt-3">
         <h1 className="text-3xl text-primary_Clr pb-4 ">Notifications</h1>
         <div className="">
+          
           {notification?.length > 0 ? (
             notification?.map((notification: AppointmentCreatedType) => (
               <Card

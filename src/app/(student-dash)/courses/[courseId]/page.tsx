@@ -68,7 +68,7 @@ const SingleCoursePage = async ({
             : "No Assignments Available"}
         </h2>
         <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-6 pb-8">
-          {course.assigments.map((assignment: AssigmentType) => (
+          {course?.assigments?.map((assignment: AssigmentType) => (
             <Card className="" key={assignment?.id}>
               <CardContent className="p-3 text-center">
                 <Tags

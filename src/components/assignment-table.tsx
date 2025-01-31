@@ -31,7 +31,7 @@ const fecthAllAssignments = async () => {
   try {
     const res = await axios.get("http://localhost:8000/api/all-assignments");
     const data = await res.data;
-    console.log(data);
+    // console.log("Data", data);
     return data;
   } catch (error) {
     console.log("Error fetching All Assignments", error);
@@ -57,7 +57,15 @@ const AssignmentTable = () => {
 
   useEffect(() => {
     setFilteredAssignment(assignmentDataMain);
-  }, [assignmentDataMain]);
+
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [assignmentDataMain, refetch]);
 
   const handleSearch = (e: { target: { value: string } }) => {
     const value = e.target.value.toLowerCase();
@@ -110,7 +118,7 @@ const AssignmentTable = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-52 w-full">
+      <div className="grid col-span-12 place-items-center h-72  w-[100%]">
         <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-blue-500"></div>
       </div>
     );
@@ -118,7 +126,7 @@ const AssignmentTable = () => {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-52 w-full text-center bg-red-400">
+      <div className="grid col-span-12 place-items-center h-72  w-full text-center bg-red-400">
         <div className="flex flex-col items-center w-full">
           <h1 className="text-5xl font-bold text-red-500">Oops!</h1>
           <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">

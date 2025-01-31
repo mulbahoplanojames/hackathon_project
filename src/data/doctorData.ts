@@ -1,25 +1,32 @@
-import { ReportCardsType } from "@/types/type2";
+// import { ReportCardsType } from "@/types/type2";
+import { Calendar } from "lucide-react";
+import { IoMailUnreadOutline, IoBookmarksOutline } from "react-icons/io5";
+import { FaUserDoctor } from "react-icons/fa6";
 
-export const ReportsData: ReportCardsType[] = [
+export const ReportsData = [
   {
     id: 1,
     description: "Total Books",
     booking: 8,
+    icon: IoBookmarksOutline,
   },
   {
     id: 2,
     description: "Appointments",
     booking: 3,
+    icon: Calendar,
   },
   {
     id: 3,
     description: "Unread Messages",
     booking: 13,
+    icon: IoMailUnreadOutline,
   },
   {
     id: 4,
     description: "Doctors",
     booking: 6,
+    icon: FaUserDoctor,
   },
 ];
 

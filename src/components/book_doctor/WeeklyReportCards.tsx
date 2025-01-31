@@ -1,20 +1,36 @@
 import React from "react";
-import { ReportsCards } from "../doctor_teamCards";
 import { ReportsData } from "@/data/doctorData";
-import { ReportCardsType } from "@/types/type2";
+import NumberTicker from "../ui/number-ticker";
+import { Card } from "../ui/card";
+// import { ReportCardsType } from "@/types/type2";
 
 const WeeklyReportCards = () => {
   return (
     <>
       <section className="mt-8">
         <h1 className="text-[35px] font-semibold py-4">Weekly Reports</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4  gap-[2.5rem]">
-          {ReportsData.map((card: ReportCardsType) => (
-            <ReportsCards
-              key={card.id}
-              description={card.description}
-              booking={card.booking}
-            />
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4  md:gap-8 gap-4">
+          {ReportsData.map((item) => (
+            <Card
+              key={item.id}
+              className="grid grid-rows-1 py-3 justify-items-center rounded-[15px] overflow-hidden dark:bg-sidebar shadow-md"
+            >
+              {/* <div className="mx-auto w-16 h-10 border p-2 rounded-lg overflow-hidden relative">
+                <Image src="/Group.png" alt="" className="w-full h-full" fill />
+              </div> */}
+              <div className="flex items-center justify-center w-10 h-10  mx-auto mt-6 mb-2">
+                {typeof item.icon === "string" ? (
+                  item.icon
+                ) : (
+                  <item.icon className="size-14" />
+                )}
+              </div>
+              <h1 className="text-[18px] mt-2">{item.description}</h1>
+              <NumberTicker
+                value={item.booking}
+                className="mt-4 text-2xl font-bold"
+              />
+            </Card>
           ))}
         </div>
       </section>

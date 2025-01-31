@@ -1,21 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { ReportCardsType, TeamMembersType } from "@/types/types";
-
-const ReportsCards: React.FC<ReportCardsType> = ({ description, booking }) => {
-  return (
-    <div className="grid grid-rows-1 py-8 justify-items-center rounded-[15px] overflow-hidden dark:bg-sidebar shadow-md">
-      <div className="mx-auto w-16 h-10 border p-2 rounded-lg overflow-hidden relative">
-        <Image src="/Group.png" alt="" className="w-full h-full" fill />
-      </div>
-      <h1 className="text-[18px] mt-2">{description}</h1>
-      <button className="bg-[#F3F4F6]  hover:bg-[#064e3b] dark:hover:bg-slate-500 text-black hover:text-white font-semibold px-[3rem] py-2 rounded-[12px] mt-2 ">
-        {booking}
-      </button>
-    </div>
-  );
-};
-export { ReportsCards };
+import { TeamMembersType } from "@/types/types";
 
 const OurTeamCard = ({ image }: TeamMembersType) => {
   return (

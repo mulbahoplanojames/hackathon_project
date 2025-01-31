@@ -36,8 +36,9 @@ const Chat = () => {
           <CardContent className="pt-4">
             <ScrollArea className="h-[400px] md:p-6 p-2 bg-primary_Clr rounded-lg ">
               {messages?.length == 0 && (
-                <div className="flex justify-center items-center w-full mt-32 gap-3 text-slate-500">
-                  No message yet
+                <div className="flex text-white md:px-32 px-2 justify-center w-full text-2xl items-center w-full mt-32  text-center gap-3 text-slate-500">
+                  Hi, I am an AI assistent, and I am here to help you with your
+                  Study Guide and Assignments.
                 </div>
               )}
               {messages?.map((message: Message, index: number) => (
@@ -103,7 +104,7 @@ const Chat = () => {
                 </div>
               )}
               {error && (
-                <div className="w-full items-center flex  justify-center gap-3">
+                <div className="w-full text-xl text-white items-center flex  justify-center gap-3">
                   <h1>An error occurred</h1>
                   <button className="underline" onClick={() => reload()}>
                     Retry

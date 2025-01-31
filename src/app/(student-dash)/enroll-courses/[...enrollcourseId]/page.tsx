@@ -24,7 +24,7 @@ const fetchEnrollCourse = async (id: string) => {
   try {
     const response = await axios.get(`http://localhost:8000/api/courses/${id}`);
     const data = await response.data;
-    // console.log(data);
+    console.log("Course Data",data);
     return data;
   } catch (error) {
     console.log("Error fetching enrollCourse:", error);

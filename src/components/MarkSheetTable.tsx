@@ -13,6 +13,7 @@ import { FolderUp, Printer } from "lucide-react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { getCookie } from "cookies-next";
+import { useEffect } from "react";
 
 type MarksType = {
   id: number;
@@ -33,7 +34,7 @@ const fetchMarks = async () => {
       `http://localhost:8000/api/marks/${currentUser?.id}`
     );
     const data = await res.data;
-    console.log("Marks Data", data);
+    // console.log("Marks Data", data);
     return data;
   } catch (error) {
     console.log("Error fetching All Marks", error);
@@ -79,19 +80,31 @@ const MarkSheetTable = () => {
     window.print();
   };
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-52 w-full">
-        <div className="animate-spin rounded-full h-20 w-20 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-28 w-28 border-b-2 border-blue-500"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center h-52 w-full text-center bg-red-400">
-        <div className="flex flex-col items-center w-full">
-          <h1 className="text-5xl font-bold text-red-500">Oops!</h1>
+      <div className="flex items-center justify-center h-52 w-full text-center ">
+        <div className="flex flex-col gap-6 items-center w-full">
+          <h1 className="text-5xl font-bold text-red-500">
+            <span>😞</span>Oops!
+          </h1>
           <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">
             Something went wrong.
           </p>
