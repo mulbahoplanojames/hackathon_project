@@ -15,9 +15,6 @@ const WeeklyReportCards = () => {
               key={item.id}
               className="grid grid-rows-1 py-3 justify-items-center rounded-[15px] overflow-hidden dark:bg-sidebar shadow-md"
             >
-              {/* <div className="mx-auto w-16 h-10 border p-2 rounded-lg overflow-hidden relative">
-                <Image src="/Group.png" alt="" className="w-full h-full" fill />
-              </div> */}
               <div className="flex items-center justify-center w-10 h-10  mx-auto mt-6 mb-2">
                 {typeof item.icon === "string" ? (
                   item.icon

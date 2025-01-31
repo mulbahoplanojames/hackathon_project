@@ -1,11 +1,12 @@
 "use client";
 
 // import { doctorData } from "@/data/doctorData";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import DoctorsCard from "./DoctorCard";
 import { DoctorType } from "@/types/type2";
+import { Button } from "../ui/button";
 
 const fetchDoctors = async (): Promise<DoctorType[]> => {
   try {
@@ -23,14 +24,47 @@ const DoctorList = () => {
     data: doctors,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["doctors"],
     queryFn: fetchDoctors,
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      refetch();
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [refetch]);
+
   const doctorsList = doctors || [];
-  if (error) return <div>Error fetching doctors</div>;
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-52 w-full">
+        <div className="animate-spin rounded-full h-28 w-28 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-52 w-full text-center ">
+        <div className="flex flex-col gap-6 items-center w-full">
+          <h1 className="text-5xl font-bold text-red-500">
+            <span>😞</span>Oops!
+          </h1>
+          <p className="text-2xl font-medium text-gray-700 dark:text-gray-200">
+            Something went wrong.
+          </p>
+          <Button onClick={() => refetch}>Try again</Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
