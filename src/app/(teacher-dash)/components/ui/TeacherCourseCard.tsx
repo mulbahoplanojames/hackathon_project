@@ -5,8 +5,6 @@ import { formatDate } from "@/lib/formatDate";
 import Image from "next/image";
 
 export const TeacherCoursesCard = (props: CoursesType) => {
-  console.log(props.avater);
-  console.log(props.title);
   return (
     <Card className="p-2 rounded-lg shadow-lg h-fit">
       <CardContent className="p-0 h-fit">

@@ -36,7 +36,7 @@ const AddCoursePage = () => {
 
   const onSubmit = async (data: z.infer<typeof addCoursesSchema>) => {
     const { title, description, file } = data;
-    console.log(data);
+    // console.log(data);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/courses/create",
