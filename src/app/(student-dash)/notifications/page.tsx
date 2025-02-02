@@ -48,7 +48,7 @@ type AppointmentCreatedType = {
 const fetchNotifications = async (id: string) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/api/notifications/user/${id}`
+      `${process.env.NEXT_PUBLIC_LARAVEL_BASE_API_URL}/api/notifications/user/${id}`
     );
     if (!response.data) {
       console.warn("No notifications found, using default data");

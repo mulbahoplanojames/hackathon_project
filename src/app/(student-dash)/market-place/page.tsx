@@ -7,7 +7,6 @@ import AnimatedGradientText from "@/components/ui/animated-gradient-text";
 import { cn } from "@/lib/utils";
 import { ChevronRight, ListOrdered } from "lucide-react";
 import Link from "next/link";
-import { Toaster } from "react-hot-toast";
 
 const MarketPlace = () => {
   return (
@@ -27,16 +26,6 @@ const MarketPlace = () => {
             </span>
           </Link>
         </div>
-        <Toaster
-          position="top-right"
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: "black",
-              color: "#fff",
-            },
-          }}
-        />
       </section>
     </>
   );

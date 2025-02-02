@@ -28,7 +28,7 @@ type AppointmentCreatedType = {
 const fetchNotifications = async (id: string) => {
   try {
     const response = await axios.get(
-      `http://localhost:8000/api/notifications/user/${id}`
+      `${process.env.NEXT_PUBLIC_LARAVEL_BASE_API_URL}/api/notifications/user/${id}`
     );
     if (!response.data) {
       console.warn("No notifications found, using default data");
@@ -45,7 +45,7 @@ const fetchNotifications = async (id: string) => {
 const TeacherNotificationsPage = () => {
   const user = getCookie("user");
   const currentUser = user ? JSON.parse(user as string) : null;
-  console.log("Current", currentUser?.id);
+  // console.log("Current", currentUser?.id);
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["lecturer-notifications"],
