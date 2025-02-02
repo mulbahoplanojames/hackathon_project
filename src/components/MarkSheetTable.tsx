@@ -120,7 +120,7 @@ const MarkSheetTable = () => {
         <div className="p-4 sm:p-6">
           <div className="mb-6 flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
             <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-              Assignment List
+              Marks Sheet
             </h1>
             <div className="flex gap-4">
               <Button
@@ -197,7 +197,7 @@ const MarkSheetTable = () => {
                           colSpan={5}
                           className="text-center py-3 px-4 text-gray-500"
                         >
-                          No Marks found.
+                          No Marks Avaliable Yet.
                         </TableCell>
                       </TableRow>
                     )}
@@ -206,46 +206,6 @@ const MarkSheetTable = () => {
               </div>
             </div>
           </div>
-
-          {/* {filteredAssignments?.length > 0 && (
-            <div className="flex items-center justify-between mt-4 px-4">
-              <div className="text-sm text-gray-700 dark:text-gray-300">
-                Showing {startIndex + 1} to &nbsp;
-                {Math.min(endIndex, filteredAssignments.length)} of &nbsp;
-                {filteredAssignments.length} Assignments
-              </div>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  Previous
-                </Button>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                  (pageNum) => (
-                    <Button
-                      key={pageNum}
-                      variant={pageNum === currentPage ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => handlePageChange(pageNum)}
-                    >
-                      {pageNum}
-                    </Button>
-                  )
-                )}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          )} */}
         </div>
       </section>
     </>

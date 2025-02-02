@@ -20,7 +20,7 @@ const fetchDoctorInfo = async (id: string) => {
   try {
     const response = await axios.get(`http://localhost:8000/api/doctor/${id}`);
     const data = await response.data;
-    console.log("Doctor:", data);
+    // console.log("Doctor:", data);
     return data;
   } catch (error) {
     console.log("Error fetching doctorInfo:", error);

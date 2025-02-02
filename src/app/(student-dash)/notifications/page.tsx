@@ -54,7 +54,7 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    // console.log("Student notification: ", data);
+    console.log("Student notification: ", data);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
@@ -155,12 +155,16 @@ const NotificationsPage = () => {
                             {notification?.data?.assigment_title}
                           </AccordionContent>
                           <AccordionContent className="text-sm">
-                            Assigned On: &nbsp;
+                            Submitted On: &nbsp;
                             {formatDate(notification?.data?.user?.created_at)}
                           </AccordionContent>
                         </>
                       ) : (
                         <>
+                          <AccordionContent className="text-sm">
+                            Message: &nbsp;
+                            {notification?.data?.apointment.description}
+                          </AccordionContent>
                           <AccordionContent className="text-sm">
                             Hospital: &nbsp;
                             {notification?.data?.doctor?.hospital}
