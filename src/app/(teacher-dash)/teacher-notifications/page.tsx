@@ -34,8 +34,8 @@ const fetchNotifications = async (id: string) => {
       console.warn("No notifications found, using default data");
     }
     const data = await response.data;
-    console.log("Lecturer notification: ", data);
-    console.log("response notification: ", response);
+    // console.log("Lecturer notification: ", data);
+    // console.log("response notification: ", response);
     return data;
   } catch (error) {
     console.log("Error fetching notifications:", error);
