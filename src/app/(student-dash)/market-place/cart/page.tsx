@@ -13,12 +13,20 @@ import {
 } from "@/components/ui/tooltip";
 import useCartStore from "@/ProductStore";
 import { urlFor } from "@/sanity/lib/image";
+import { getCookie } from "cookies-next";
 import { Heart, ShoppingBag, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 const CartPage = () => {
+  const user = getCookie("user");
+  const currentUser = user ? JSON.parse(user as string) : null;
+
+  console.log("currentUser", currentUser);
+
+  const [loading, setLoading] = useState(false);
   const {
     deleteCartProduct,
     getTotalPrice,
@@ -40,6 +48,16 @@ const CartPage = () => {
     if (confirm) {
       resetCart();
       toast.success("Cart cleared successfully");
+    }
+  };
+
+  const handleCheckOut = () => {
+    setLoading(true);
+    try {
+    } catch (error) {
+      console.log("Error creating Checkout", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -173,9 +191,10 @@ const CartPage = () => {
                 <Button
                   className="w-full tracking-wide rounded-full font-semibold my-3 dark:bg-black dark:text-white"
                   variant="default"
+                  onClick={handleCheckOut}
                   size="lg"
                 >
-                  Proceed to Checkout
+                  {loading ? "Loading..." : "Proceed to Checkout"}
                 </Button>
                 <Link
                   href="/"
