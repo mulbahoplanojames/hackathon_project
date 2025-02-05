@@ -183,9 +183,9 @@ const NotificationsPage = () => {
                     {notification?.data?.user ? (
                       <AccordionItem value="item-2">
                         <AccordionTrigger className="text-base">
-                          📧 Comment
+                          📧 Comments
                         </AccordionTrigger>
-                        <AccordionContent className="text-base">
+                        <AccordionContent className="text-base flex items-center gap-2">
                           <Input placeholder="type something..." />
                           <Button size="icon">
                             <Send />
@@ -195,38 +195,6 @@ const NotificationsPage = () => {
                     ) : (
                       <></>
                     )}
-
-                    {/* <AccordionItem value="item-2">
-                      {notification?.data?.user ? (
-                        <>
-                          <AccordionContent className="text-base">
-                            Assignment Name: &nbsp;
-                            {notification?.data?.assigment_title}
-                          </AccordionContent>
-                          <AccordionContent className="text-sm">
-                            Submitted On: &nbsp;
-                            {formatDate(notification?.data?.user?.created_at)}
-                          </AccordionContent>
-                        </>
-                      ) : (
-                        <>
-                          <AccordionContent className="text-sm">
-                            Message: &nbsp;
-                            {notification?.data?.apointment.description}
-                          </AccordionContent>
-                          <AccordionContent className="text-sm">
-                            Hospital: &nbsp;
-                            {notification?.data?.doctor?.hospital}
-                          </AccordionContent>
-                          <AccordionContent className="text-sm">
-                            Schedule For: &nbsp;
-                            {formatDate(
-                              notification?.data?.apointment?.prefared_date
-                            )}
-                          </AccordionContent>
-                        </>
-                      )}
-                    </AccordionItem> */}
                   </Accordion>
                 </CardContent>
               </Card>
