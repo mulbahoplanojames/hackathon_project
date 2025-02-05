@@ -132,5 +132,3 @@ To run this project:
 - [Daisy/ui](https://daisyui.com/) for beautiful, accessible components
 
 ## 🤝
-
-=======
