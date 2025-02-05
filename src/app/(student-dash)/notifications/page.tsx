@@ -9,11 +9,12 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { formatDate } from "@/lib/formatDate";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-import { Bell } from "lucide-react";
+import { Bell, Send } from "lucide-react";
 import { useEffect } from "react";
 
 type AppointmentCreatedType = {
@@ -178,6 +179,54 @@ const NotificationsPage = () => {
                         </>
                       )}
                     </AccordionItem>
+
+                    {notification?.data?.user ? (
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger className="text-base">
+                          📧 Comment
+                        </AccordionTrigger>
+                        <AccordionContent className="text-base">
+                          <Input placeholder="type something..." />
+                          <Button size="icon">
+                            <Send />
+                          </Button>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ) : (
+                      <></>
+                    )}
+
+                    {/* <AccordionItem value="item-2">
+                      {notification?.data?.user ? (
+                        <>
+                          <AccordionContent className="text-base">
+                            Assignment Name: &nbsp;
+                            {notification?.data?.assigment_title}
+                          </AccordionContent>
+                          <AccordionContent className="text-sm">
+                            Submitted On: &nbsp;
+                            {formatDate(notification?.data?.user?.created_at)}
+                          </AccordionContent>
+                        </>
+                      ) : (
+                        <>
+                          <AccordionContent className="text-sm">
+                            Message: &nbsp;
+                            {notification?.data?.apointment.description}
+                          </AccordionContent>
+                          <AccordionContent className="text-sm">
+                            Hospital: &nbsp;
+                            {notification?.data?.doctor?.hospital}
+                          </AccordionContent>
+                          <AccordionContent className="text-sm">
+                            Schedule For: &nbsp;
+                            {formatDate(
+                              notification?.data?.apointment?.prefared_date
+                            )}
+                          </AccordionContent>
+                        </>
+                      )}
+                    </AccordionItem> */}
                   </Accordion>
                 </CardContent>
               </Card>
