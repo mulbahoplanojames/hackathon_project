@@ -31,7 +31,7 @@ const CharacterSvg = () => {
 export default function NotFound() {
   return (
     <>
-      <section className="ezy__httpcodes6 light py-32 md:py-52 bg-white dark:bg-[#0b1727] text-[#04004d] dark:text-white relative overflow-hidden z-[1]">
+      <section className="ezy__httpcodes6 light py-28 md:py-[11rem] bg-white  text-primary_Clr  relative overflow-hidden z-[1]">
         <TopLeftSvg />
         <CharacterSvg />
 
@@ -44,7 +44,12 @@ export default function NotFound() {
               <p className="text-3xl opacity-80 md:text-5xl">
                 Page not Available!
               </p>
-              <Link href="/">Return Home</Link>
+              <Link
+                href="/"
+                className="text-lg bg-primary_Clr text-white rounded-md p-3 mt-6 inline-block"
+              >
+                Return Home
+              </Link>
             </div>
           </div>
         </div>
