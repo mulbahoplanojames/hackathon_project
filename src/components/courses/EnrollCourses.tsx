@@ -53,16 +53,16 @@ const EnrolledCourses = () => {
   if (isLoading) {
     return (
       <section className="pb-5 p-4 pt-3">
-        <Skeleton className="h-[30px] w-[250px] rounded-xl mb-4" />
+        <Skeleton className="h-[30px] md:w-[250px] w-full rounded-xl mb-4" />
         <div className="grid auto-rows-min gap-8 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2">
           {Array.from({ length: 8 }, (_, index) => (
             <div key={index}>
               <Skeleton className="h-[150px] w-[250px] rounded-xl" />
               <div className="space-y-3 mt-4">
-                <Skeleton className="h-4 w-[170px]" />
-                <Skeleton className="h-4 w-[200px]" />
-                <Skeleton className="h-4 w-[170px]" />
-                <Skeleton className="h-6 w-[250px]" />
+                <Skeleton className="h-4 md:w-[170px] w-full" />
+                <Skeleton className="h-4 md:w-[200px] w-full" />
+                <Skeleton className="h-4 md:w-[170px] w-full" />
+                <Skeleton className="h-6 md:w-[250px] w-full" />
               </div>
             </div>
           ))}
