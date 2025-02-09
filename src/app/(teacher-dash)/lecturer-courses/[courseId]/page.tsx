@@ -1,3 +1,6 @@
+// Don't need the page to be static because the assignments that the teacher can add for the student will be dynamic
+export const dynamic = "force-dynamic";
+
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import axios from "axios";
 

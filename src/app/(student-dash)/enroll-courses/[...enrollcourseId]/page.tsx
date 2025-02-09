@@ -1,3 +1,6 @@
+// Don't need the page to be static because the assignments for the student will be dynamic
+export const dynamic = "force-dynamic";
+
 import { SubmitAssignments } from "@/components/assignments/SubmitAssignments";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/formatDate";
