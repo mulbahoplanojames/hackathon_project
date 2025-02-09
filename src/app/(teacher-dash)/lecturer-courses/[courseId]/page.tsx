@@ -7,7 +7,7 @@ import axios from "axios";
 import Image from "next/image";
 import { formatDate } from "@/lib/formatDate";
 import { CircleArrowLeft, Tags } from "lucide-react";
-import { CoursesType } from "@/types/types";
+// import { CoursesType } from "@/types/types";
 import Link from "next/link";
 import AddAssignmentForm from "../../components/ui/AddAssignmentForm";
 
@@ -22,12 +22,12 @@ type AssigmentType = {
   updated_at: string;
 };
 
-export const generateStaticParams = async () => {
-  const res = await axios.get("http://localhost:8000/api/courses");
-  const data = await res.data;
+// export const generateStaticParams = async () => {
+//   const res = await axios.get("http://localhost:8000/api/courses");
+//   const data = await res.data;
 
-  return data?.map((course: CoursesType) => ({ id: course.id.toString() }));
-};
+//   return data?.map((course: CoursesType) => ({ id: course.id.toString() }));
+// };
 
 const fetchCourse = async (id: string) => {
   try {
